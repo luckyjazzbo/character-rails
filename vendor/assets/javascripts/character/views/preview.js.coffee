@@ -11,11 +11,10 @@ class PostPreviewView extends Backbone.View
   delete_post: (e) ->
     e.preventDefault()
     if confirm('Do you really want to remove this post?')
-      # call to backend to remove the post
-      #@model.destroy()
-      window.posts.remove(@model)
+      # this event could be probably tighted to collection event or model destory event
       window.app.index_view.item_views[@model.id].remove()
-      router.navigate('#/', {trigger: true})
+      @model.destroy()
+      router.navigate('#/', {trigger: true})      
 
 
   events:

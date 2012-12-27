@@ -3,7 +3,7 @@ class Character::Post
   include Mongoid::Timestamps
 
   field :title
-  filed :published, type: Boolean, default: false
+  field :published, type: Boolean, default: false
   field :date, type: Date
   field :slug
   field :md
@@ -12,4 +12,9 @@ class Character::Post
 
   #featured_image
   #category
+
+  default_scope order_by date: :desc
+
+  scope :drafts,    where(published: false)
+  scope :published, where(published: true)
 end

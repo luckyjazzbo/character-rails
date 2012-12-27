@@ -10,6 +10,7 @@ class PostIndexItemView extends Backbone.View
     id    = @model.id
     image = @model.featured_image()
     views = if post.published then post.views else ''
+    date  = @model.date_formatted()
 
     html = """<a href='#/preview/#{id}'>
                 <img class='featured' src='#{image}' />
@@ -18,7 +19,7 @@ class PostIndexItemView extends Backbone.View
                   <span class='meta'>#{@model.state()}</span>
                 </div>
                 <div class='right'>
-                  <span class='date'>#{post.date}</span>
+                  <span class='date'>#{date}</span>
                   <span class='views'>#{views}</span>
                 </div>
               </a>"""

@@ -31,36 +31,42 @@ class EditorView extends Backbone.View
     @convert_text()
 
 
-  update_post_attributes: ->
-    @model.set
+  update_or_create_post: (extra_attributes, callback) ->
+    attributes =
       title:  $(@title).val()
       md:     $(@markdown).val()
       html:   @html.innerHTML
       slug:   @slug.innerHTML
       date:   @settings.date()
+
+    _.extend attributes, extra_attributes
+
+    if @model
+      @model.save(attributes, {success: callback})
+    else
+      window.posts.create(attributes, {wait: true, success: callback})
+
     
-    if @model.isNew()
-      @model.set
-        id:     @model.cid
-        views:  0
-      window.posts.add(@model, {at: 0}) 
+    #if @model.isNew()
+    #  @model.set
+    #    id:     @model.cid
+    #    views:  0
+    #  @model.save()
+    #  window.posts.add(@model, {at: 0})
 
 
   save_draft: ->
-    @update_post_attributes()
-    @model.set('published', false)
-    @back_to_index()
+    @update_or_create_post {published: false}, =>    
+      @back_to_index()
 
 
   publish: ->
-    @update_post_attributes()
-    @model.set('published', true)
-    @back_to_index()
+    @update_or_create_post {published: true}, =>    
+      @back_to_index()
 
 
   back_to_index: ->
-    id = @model.id
-    path = if id then "#/preview/#{id}" else '#/'
+    path = if @model then "#/preview/#{@model.id}" else '#/'
     router.navigate(path, {trigger: true})
 
 
@@ -86,7 +92,8 @@ class EditorView extends Backbone.View
 
 
   render: ->
-    post = @model.toJSON()
+    post = if @model then @model.toJSON() else {title: 'Post Title', md: 'Post Text'}
+
     html = """<header>
                 <div class='title'>
                   <input type='text' placeholder='Title' value='#{post.title}' id='title'/>

@@ -15,7 +15,7 @@ class EditorSettingsView extends Backbone.View
 
 
   render: ->
-    date = @model.get('date')
+    date = @model?.get('date')
     html = """<div class='settings-box'>
                 Date: <input id='date' type='date' value='#{date}'>
               </div>

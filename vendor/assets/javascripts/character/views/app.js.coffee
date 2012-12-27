@@ -70,7 +70,7 @@ class AppView extends Backbone.View
   show_editor: (post_id) ->
     @clear_view()
 
-    post = if post_id then @find_post(post_id) else new Post({title: 'Post Title', md: 'Post Text', views: 0})
+    post = if post_id then @find_post(post_id) else null
 
     @editor_view = new EditorView model: post
 

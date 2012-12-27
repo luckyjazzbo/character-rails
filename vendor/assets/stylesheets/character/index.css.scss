@@ -1,8 +1,8 @@
 @import "base";
 @import "icons";
-@import "index";
-@import "preview";
-@import "editor";
+@import "view_index";
+@import "view_preview";
+@import "view_editor";
 
 body.active_admin.admin_character     { background:$GRAY;
   #main                               { @include global-reset;
