@@ -1,0 +1,32 @@
+@import "base";
+@import "icons";
+@import "index";
+@import "preview";
+@import "editor";
+
+body.active_admin.admin_character     { background:$GRAY;
+  #main                               { @include global-reset;
+                                        @include character_body;
+                                        @include character_index;
+                                        @include character_preview;
+                                        @include character_editor;
+                                        margin-top:40px;
+  }
+
+  // Disable page header and footer
+  #active_admin_content,
+  #title_bar,
+  .footer                             { display:none;
+  }
+
+  #header                             { padding:9px 0px;
+                                        position:fixed;
+                                        width:100%;
+    .site_title                       { margin-left:30px;
+    }
+    #utility_nav                      { margin-right:30px;
+    }
+  }
+}
+
+

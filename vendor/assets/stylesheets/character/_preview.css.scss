@@ -1,0 +1,49 @@
+@mixin character_preview              {  
+  //
+  // Active admin blog article styles
+  //
+  article                             { padding:0em 1em 5em 1em;
+  }
+
+
+  //
+  // Put in here your blog post styles
+  //
+  article                             {
+    // Define font size for blog post preview
+    // Add some responsiveness here, to make it look good on big screens
+    // Content element is used to render proper blog post in article container
+    .content                          { font-size:12px;
+    }
+
+    .content                          { max-width:700px;
+                                        margin:0 auto;
+                                        color:#333;
+                                        font-family: Times, sans-serif;
+
+      p, li                           { font-size:1.3em;
+                                        line-height:1.6em;
+      }
+
+      p                               { margin-bottom:0.2em;
+      }
+
+      li                              { padding-left:1em;
+        &:before                      { content:"— ";
+        }
+      }
+
+      p + p                           { text-indent: 2em;
+      }
+
+      h1                              { font-size: 1.75em;
+                                        line-height: 1.3em;
+                                        margin: 1em auto .5em;
+      }
+      h2                              { font-size: 1.65em;
+                                        line-height: 1.3em;
+                                        margin: 1em auto .5em;
+      }
+    }
+  }
+}

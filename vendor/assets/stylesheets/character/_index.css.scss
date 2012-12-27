@@ -1,0 +1,73 @@
+@mixin character_index                {
+  .index                              {
+    li                                { position:relative;
+      a                               { border-bottom:1px solid #f6f6f6;
+                                        border-top:1px solid #f6f6f6;
+                                        padding:1em 0;
+                                        height:6em;
+                                        display:block;
+                                        color:#444;
+                                        margin:0 1em;
+                                        margin-top:-1px;
+                                        position:relative;
+        &.active                      { margin-left:0;
+                                        margin-right:0;
+                                        padding-left:1em;
+                                        padding-right:1em;
+                                        z-index:10;
+                                        position:relative;
+                                        border-bottom:1px solid #ddd;
+                                        border-top:1px solid #ddd;
+
+          .views                      { opacity:1;
+          }
+          img                         { left:1em;
+          }                                        
+        }
+      }
+
+      &:last-child a                  { border-bottom:none;
+      }
+
+      img                             { width:4em;
+                                        height:4em;
+                                        @include border-radius(2em);
+                                        position:absolute;
+                                        left:0;
+      }
+      .meta, .date, .views            { color:#999;
+                                        display:block;
+      }
+      .left                           { float:left;
+                                        width:70%;
+                                        padding-left:5em;
+      }
+      .right                          { float:right;
+                                        width:30%;
+                                        text-align:right;
+      }
+      
+      .title                          { display:block;
+                                        font-weight:500;
+                                        line-height:1.2;
+      }
+      .date                           { font-size:0.85em;
+                                        padding-top:0.25em;
+      }
+      .meta                           { font-size:0.85em;
+                                        padding-top:0.5em;
+      }
+      .views                          { font-size:2.7em;
+                                        font-weight:500;
+                                        padding-top:0.15em;
+                                        opacity:0.5;
+      }
+    }
+    li.placeholder                    { text-align:center;
+                                        padding:2em 0;
+    }
+  }
+}
+
+
+
