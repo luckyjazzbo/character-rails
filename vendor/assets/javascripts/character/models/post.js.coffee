@@ -18,8 +18,7 @@ class Post extends Backbone.Model
 
 
   featured_image: ->
-    image_url = @get('featured_image_url')
-    if image_url then image_url else '/no-featured-image.jpg'
+    @get('featured_image_url')
   
 
   state: ->

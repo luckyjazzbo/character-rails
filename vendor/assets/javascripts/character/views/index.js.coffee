@@ -8,12 +8,14 @@ class PostIndexItemView extends Backbone.View
   render: ->
     post  = @model.toJSON()
     id    = @model.id
-    image = @model.featured_image()
     views = if post.published then post.views else ''
     date  = @model.date_formatted()
 
+    image   = @model.featured_image()
+    img_tag = if image then """<img class='featured' src='#{image}' />""" else ''
+
     html = """<a href='#/preview/#{id}'>
-                <img class='featured' src='#{image}' />
+                #{img_tag}
                 <div class='left'>
                   <span class='title'>#{post.title}</span>
                   <span class='meta'>#{@model.state()}</span>
