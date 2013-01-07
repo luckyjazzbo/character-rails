@@ -12,7 +12,7 @@ class PostIndexItemView extends Backbone.View
     date  = @model.date_formatted()
 
     image   = @model.featured_image()
-    img_tag = if image then """<img class='featured' src='#{image}' />""" else ''
+    img_tag = if image then """<img class='featured' src='#{image}' />""" else """<i class='featured no-image general foundicon-photo'></i>"""
 
     html = """<a href='#/preview/#{id}'>
                 #{img_tag}
@@ -40,8 +40,8 @@ class IndexView extends Backbone.View
                 <header>
                   <span class='title'>Posts</span>
                   <span class='buttons'>
-                    <a href='#/new' title='Create new post' class='foundicon-add-doc'></a>
-                    <!--<span class='split'></span><a href='#' title='Search for post' class='foundicon-search'></a>-->
+                    <a href='#/new' title='Create new post' class='general foundicon-add-doc'></a>
+                    <!--<span class='split'></span><a href='#' title='Search for post' class='general foundicon-search'></a>-->
                   </span>
                 </header>
                 <ul id='list'></ul>

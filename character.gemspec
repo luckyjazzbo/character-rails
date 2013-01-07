@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
   gem.rubyforge_project = 'nowarning'
 
   gem.add_runtime_dependency 'compass-rails'
+  gem.add_runtime_dependency 'foundation-icons-sass-rails'
 end

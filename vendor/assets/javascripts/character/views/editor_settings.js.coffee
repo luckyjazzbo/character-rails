@@ -17,9 +17,9 @@ class EditorSettingsView extends Backbone.View
   render: ->
     date = @model?.get('date')
     html = """<div class='settings-box'>
-                Date: <input id='date' type='date' value='#{date}'>
+                <i class='general foundicon-calendar' style='font-size:1.7em; position:absolute;'></i> <input id='date' type='date' value='#{date}' style='margin-left:3em;'>
               </div>
-              <button class='foundicon-settings' id='settings_btn'></button>"""
+              <button class='general foundicon-settings' id='settings_btn'></button>"""
     $(this.el).html html
     return this
 

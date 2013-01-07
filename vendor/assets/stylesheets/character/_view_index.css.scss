@@ -21,7 +21,7 @@
 
           .views                      { opacity:1;
           }
-          img                         { left:1em;
+          .featured                   { left:1em;
           }                                        
         }
       }
@@ -29,11 +29,18 @@
       &:last-child a                  { border-bottom:none;
       }
 
-      img                             { width:4em;
+      .featured                       { width:4em;
                                         height:4em;
-                                        @include border-radius(2em);
                                         position:absolute;
                                         left:0;
+                                        @include border-radius(2em);
+        &.no-image                    { font-size: 2.1em;
+                                        width: 1em;
+                                        height: 1em;
+                                        opacity: 0.2;
+                                        top: .8em;
+                                        left:.5em;
+        }
       }
       .meta, .date, .views            { color:#999;
                                         display:block;

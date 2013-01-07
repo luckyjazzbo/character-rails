@@ -29,11 +29,11 @@ class PostPreviewView extends Backbone.View
                 <header>
                   <span class='title'>#{state}</span>
                   <span class='buttons'>
-                    <a href='#' title='Delete this post' class='foundicon-trash' id='delete_post'></a>
+                    <a href='#' title='Delete this post' class='general foundicon-trash' id='delete_post'></a>
                     <span class='split'></span>
-                    <a href='#/edit/#{id}' title='Edit this post' class='foundicon-edit'></a>
+                    <a href='#/edit/#{id}' title='Edit this post' class='general foundicon-edit'></a>
                     <span class='split'></span>
-                    <a href='#/' title='Close Preview' class='foundicon-remove'></a>
+                    <a href='#/' title='Close Preview' class='general foundicon-remove'></a>
                   </span>
                 </header>
 
