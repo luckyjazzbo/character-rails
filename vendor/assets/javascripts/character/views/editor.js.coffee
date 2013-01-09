@@ -36,7 +36,7 @@ class EditorView extends Backbone.View
       title:  $(@title).val()
       md:     $(@markdown).val()
       html:   @html.innerHTML
-      slug:   @slug.innerHTML
+      slug:   Post.slugify($(@title).val())
       date:   @settings.date()
 
     _.extend attributes, extra_attributes
@@ -45,14 +45,6 @@ class EditorView extends Backbone.View
       @model.save(attributes, {success: callback})
     else
       window.posts.create(attributes, {wait: true, success: callback})
-
-    
-    #if @model.isNew()
-    #  @model.set
-    #    id:     @model.cid
-    #    views:  0
-    #  @model.save()
-    #  window.posts.add(@model, {at: 0})
 
 
   save_draft: ->

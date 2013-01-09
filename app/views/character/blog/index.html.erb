@@ -1,0 +1,9 @@
+<section class='character-blog'>
+  <ul class='index'>
+  <% @posts.each do |p| %>
+
+    <li> <%= link_to p.title, blog_post_path(p.slug) %> </li>
+
+  <% end %>
+  </ul>
+</section>

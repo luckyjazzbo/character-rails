@@ -4,6 +4,8 @@
 @import "view_preview";
 @import "view_editor";
 
+@import "compass/reset/utilities";
+
 body.admin_character                  { background:$GRAY;
   #main                               { @include global-reset;
                                         @include character_body;

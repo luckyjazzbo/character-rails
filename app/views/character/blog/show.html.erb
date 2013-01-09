@@ -1,0 +1,13 @@
+<section class='character-blog'>
+  <article>
+    <header>
+      <%= @post.title %>
+    </header>
+    
+    <section class='content'>
+      <%= @post.html.html_safe %>
+    </section>
+  </article>
+</section>
+
+<%= link_to 'Back to blog index', blog_index_path, class: 'blog-index-button' %>
