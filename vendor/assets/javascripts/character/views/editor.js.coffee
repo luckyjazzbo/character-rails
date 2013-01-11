@@ -32,12 +32,16 @@ class EditorView extends Backbone.View
 
 
   update_or_create_post: (extra_attributes, callback) ->
+    slug = Post.slugify($(@title).val())
+
     attributes =
-      title:  $(@title).val()
-      md:     $(@markdown).val()
-      html:   @html.innerHTML
-      slug:   Post.slugify($(@title).val())
-      date:   @settings.date()
+      title:    $(@title).val()
+      md:       $(@markdown).val()
+      html:     @html.innerHTML
+      slug:     slug
+      date:     @settings.date()
+      tags:     @settings.tags()
+      excerpt:  @settings.excerpt()
 
     _.extend attributes, extra_attributes
 

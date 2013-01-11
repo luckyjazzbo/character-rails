@@ -8,6 +8,9 @@ class Post extends Backbone.Model
   #date
   #views
   #published
+  #tags
+  #category
+  #excerpt
 
   idAttribute: '_id'
 

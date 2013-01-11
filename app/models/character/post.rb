@@ -9,6 +9,8 @@ class Character::Post
   field :md
   field :html
   field :views, type: Integer, default: 0
+  field :excerpt, default: ''
+  field :tags, default: ''
 
   #featured_image
   #category

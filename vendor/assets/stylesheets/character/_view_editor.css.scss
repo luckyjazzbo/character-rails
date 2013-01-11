@@ -108,6 +108,25 @@
                                         left: 50%;
                                         margin-left: 42px;
       }
+
+      label                           { display:block;
+                                        margin-top:0.5em;
+                                        font-size:0.85em;
+      }
+
+      .excerpt                        { padding:.5em;
+      }
+
+      .tags                           { width:100%;
+
+      }
+
+      .date                           { margin-left:2em;
+      }
+      .foundicon-calendar             { font-size:1.3em;
+                                        position:absolute;
+                                        margin-top:2px;
+      }
     }
   }
 

@@ -15,9 +15,16 @@ class EditorSettingsView extends Backbone.View
 
 
   render: ->
-    date = @model?.get('date')
+    date    = @model?.get('date')
+    excerpt = @model?.get('excerpt')
+    tags    = @model?.get('tags')
+
     html = """<div class='settings-box'>
-                <i class='general foundicon-calendar' style='font-size:1.7em; position:absolute;'></i> <input id='date' type='date' value='#{date}' style='margin-left:3em;'>
+                <i class='general foundicon-calendar'></i> <input id='date' type='date' value='#{date}' class='date'>
+                <label>Excerpt:</label>
+                <textarea id='excerpt' class='excerpt' rows=5>#{excerpt}</textarea>
+                <label>Tags splitted with comma:</label>
+                <input type='text' id='tags' class='tags' value='#{tags}'/>
               </div>
               <button class='general foundicon-settings' id='settings_btn'></button>"""
     $(this.el).html html
@@ -27,6 +34,11 @@ class EditorSettingsView extends Backbone.View
   date: ->
     $('#date').val()
   
+  excerpt: ->
+    $('#excerpt').val()
+
+  tags: ->
+    $('#tags').val()
 
   show_or_hide_settings_box: ->
     if @shown
