@@ -24,4 +24,7 @@ class Character::Post
 
   # Indexes
   index :slug rescue index slug: 1
+
+  # Pagination by Kaminari
+  paginates_per 6
 end
