@@ -81,7 +81,7 @@ class EditorView extends Backbone.View
   update_permalink: ->
     blog_url  = window.app.blog_url
     slug      = Post.slugify($(@title).val())
-    html      = """<strong>#{@model.state()}:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
+    html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
     $('#permalink').html html
 
 
@@ -113,7 +113,7 @@ class EditorView extends Backbone.View
               <div class='chr-panel right preview fixed'>
                 <section class='container'>
                   <header>
-                    <span class='title'>Preview</span>
+                    <span class='title'>#{@model.state()}</span>
                     <span class='info' id='word_counter'>549 words</span>
                   </header>
 

@@ -3,6 +3,7 @@ module ActionDispatch::Routing
     def mount_character_admin
       scope '/admin', :module => "Character" do
         scope 'character' do
+          put '/categories-reorder', to: 'categories#reorder'
           resources :posts,      only: [:index, :create, :update, :destroy]
           resources :categories, only: [:index, :create, :update, :destroy]
         end

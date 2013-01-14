@@ -20,6 +20,7 @@ class IndexCategoryItemView extends Backbone.View
               <a href='#/' title='Remove category' class='general foundicon-trash delete-category'></a>
               """
     $(this.el).html html
+    $(this.el).attr('data-id', @model.id)
     return this
 
 
@@ -39,8 +40,11 @@ class IndexCategoriesView extends Backbone.View
       if check_title
         alert 'Category with this title already exists. Please pick another title.'
       else
-        new_category = window.categories.create({ title: title }, { wait: true })
-        @render_item(new_category)
+        after_created = (category) =>
+          @render_item(category)
+
+        new_category = window.categories.create({ title: title }, { wait: true, success: after_created })
+        
 
 
   initialize: ->
@@ -55,6 +59,22 @@ class IndexCategoriesView extends Backbone.View
     @item_views  = {}
 
     @render_items()
+
+    sortable_options =
+      stop: (e, ui) ->
+        # we need to figure out the updated order of items
+        ids     = $('#categories_list li').map(-> $(this).attr('data-id')).get()
+
+        params  =
+          ids:                ids
+          _method:            'put'
+          authenticity_token: window.authenticity_token()
+        
+        $.post Categories.reorder_url(), params, (data) ->
+          if data != "ok"
+            alert 'Error happended. Please contact devs.'
+
+    $(@list).sortable(sortable_options).disableSelection()
 
 
   render_item: (category) ->

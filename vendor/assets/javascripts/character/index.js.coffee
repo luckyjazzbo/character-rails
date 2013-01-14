@@ -9,6 +9,10 @@
 #= require_tree ./
 
 
+window.authenticity_token = ->
+  $('meta[name=csrf-token]').attr('content')
+
+
 window.set_routes = ->
   Router = Backbone.Router.extend
     routes:
