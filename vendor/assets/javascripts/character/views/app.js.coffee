@@ -53,7 +53,6 @@ class AppView extends Backbone.View
     window.scroll(0, 0)
 
 
-
   close_preview: ->
     @index_view.unlock()
 
@@ -64,7 +63,6 @@ class AppView extends Backbone.View
 
     @index_view.unset_active()
     window.index_scroll_y = 0
-
 
 
   show_editor: (post_id) ->

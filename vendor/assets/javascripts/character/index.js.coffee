@@ -41,13 +41,20 @@ window.set_routes = ->
 
 
 window.initialize_character = (blog_url = 'http://this-is-blog.com/', app_container = '#wrapper') ->
-  window.posts = new Posts()
+  window.posts      = new Posts()
+  window.categories = new Categories()
 
-  window.posts.fetch success: ->
+  _data_is_ready = _.after 2, ->
     window.app = new AppView(blog_url, app_container)
     window.app.show_index()
-
     window.set_routes()
+
+  window.posts.fetch success: ->
+    _data_is_ready()
+
+  window.categories.fetch success: ->
+    _data_is_ready()
+
 
 
 

@@ -54,7 +54,7 @@ $GRAY: #E3E3E1;
     .container                        { background:#fff;
                                         padding-top:1em;
                                         @include shadow;
-      header                          { border-bottom:1px solid #f6f6f6;
+      & > header                      { border-bottom:1px solid #f6f6f6;
                                         padding-bottom:1em;
                                         font-size:0.85em;
                                         margin:0 1em;
@@ -67,9 +67,10 @@ $GRAY: #E3E3E1;
         }
         .buttons                      { float:right;
                                         font-size:1.2em;
-          a                           { padding:0.5em;
+          & > a,
+          & > span > a                { padding:0.5em;
                                         opacity:0.8;
-            &:hover                   { opacity:1;
+            &:hover,&.active          { opacity:1;
             }
             &:last-child              { padding-right:0;
             }

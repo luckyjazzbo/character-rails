@@ -1,7 +1,7 @@
 @mixin character_index                {
-  .index                              {
+  .posts-index                        {
     li                                { position:relative;
-      a                               { border-bottom:1px solid #f6f6f6;
+      &> a                            { border-bottom:1px solid #f6f6f6;
                                         border-top:1px solid #f6f6f6;
                                         padding:1em 0;
                                         height:6em;
@@ -26,7 +26,7 @@
         }
       }
 
-      &:last-child a                  { border-bottom:none;
+      &:last-child > a                { border-bottom:none;
       }
 
       .featured                       { width:4em;
@@ -73,6 +73,85 @@
     li.placeholder                    { text-align:center;
                                         padding:2em 0;
     }
+  }
+
+  .index                              {
+    .categories                       { 
+      .categories-box                 { display:none;
+      }
+      &.shown .categories-box         { display:block;
+      }
+    }
+
+    .categories-box                   { position:absolute;
+                                        background:#333;
+                                        border:4px solid #333;
+                                        z-index:20;
+                                        margin-top:7px;
+                                        margin-left:-85px;
+                                        width:260px;
+                                        text-align: left;
+                                        color:#fff;
+                                        padding:10px;
+                                        @include border-radius(6px);
+
+                                        //@include single-box-shadow(rgba(0,0,0,0.3), 0px, 1px, 4px, 0px, false);
+
+                                        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+                                         -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+                                                 filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+
+      &:after                         { bottom: 100%;
+                                        border: solid transparent;
+                                        content: " ";
+                                        height: 0;
+                                        width: 0;
+                                        position: absolute;
+                                        pointer-events: none;
+      }
+
+      &:after                         { border-color: rgba(51, 51, 51, 0);
+                                        border-bottom-color: #333;
+                                        border-width: 10px;
+                                        left: 50%;
+                                        margin-left: -10px;
+      }
+
+      header                          { font-size: 0.85em;
+                                        border-bottom: 1px solid;
+                                        padding-bottom: 0.8em;
+                                        color:#888;
+                                        margin-bottom: 1em;
+        span                          { line-height: 1;
+                                        text-transform: uppercase;
+                                        font-weight: 500;
+
+        }
+        & > a                         { float: right;
+                                        margin-top: -2px;
+                                        color:#eee;
+                                        opacity:0.8;
+          &:hover                     { opacity:1;
+          }
+        }
+      }
+
+      li                              { height: 1.5em;
+        &:hover a                     { opacity:0.8;
+        }
+        a                             { float:right;
+                                        opacity:0;
+                                        color:#eee;
+                                        font-size:0.85em;
+          &:hover                     { opacity:1;
+          }
+        }
+
+        &.placeholder                 { font-size: 0.8em;
+                                        text-align: center;
+                                        color: #dadada;}
+      }
+    }  
   }
 }
 

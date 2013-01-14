@@ -6,10 +6,13 @@ class PostIndexItemView extends Backbone.View
   tagName: 'li'
 
   render: ->
-    post  = @model.toJSON()
-    id    = @model.id
-    views = if post.published then post.views else ''
-    date  = @model.date_formatted()
+    post            = @model.toJSON()
+    id              = @model.id
+    views           = if post.published then post.views else ''
+    draft_or_date   = if post.published then @model.date_formatted() else @model.state()
+
+    category = @model.category()
+    category_title = if category then category.get('title') else 'Not set'
 
     image   = @model.featured_image()
     img_tag = if image then """<img class='featured' src='#{image}' />""" else """<i class='featured no-image general foundicon-photo'></i>"""
@@ -18,10 +21,10 @@ class PostIndexItemView extends Backbone.View
                 #{img_tag}
                 <div class='left'>
                   <span class='title'>#{post.title}</span>
-                  <span class='meta'>#{@model.state()}</span>
+                  <span class='meta'>#{category_title}</span>
                 </div>
                 <div class='right'>
-                  <span class='date'>#{date}</span>
+                  <span class='date'>#{draft_or_date}</span>
                   <span class='views'>#{views}</span>
                 </div>
               </a>"""
@@ -44,7 +47,7 @@ class IndexView extends Backbone.View
                     <!--<span class='split'></span><a href='#' title='Search for post' class='general foundicon-search'></a>-->
                   </span>
                 </header>
-                <ul id='list'></ul>
+                <ul id='list' class='posts-index'></ul>
               </section>"""
     $(this.el).html html
     return this
@@ -74,6 +77,8 @@ class IndexView extends Backbone.View
   initialize: ->
     html = @render().el
     $('#main').append(html)
+
+    @categories = new IndexCategoriesView
 
     @list        = document.getElementById('list')
     @item_views  = {}

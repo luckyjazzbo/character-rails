@@ -1,6 +1,3 @@
-###############################
-### CHARACTER :: EditorView ###
-###############################
 
 # Code is partly taken from:
 # - http://www.showdown.im/showdown/example/showdown-gui.js
@@ -35,20 +32,21 @@ class EditorView extends Backbone.View
     slug = Post.slugify($(@title).val())
 
     attributes =
-      title:    $(@title).val()
-      md:       $(@markdown).val()
-      html:     @html.innerHTML
-      slug:     slug
-      date:     @settings.date()
-      tags:     @settings.tags()
-      excerpt:  @settings.excerpt()
+      title:        $(@title).val()
+      md:           $(@markdown).val()
+      html:         @html.innerHTML
+      slug:         slug
+      date:         @settings.date()
+      tags:         @settings.tags()
+      excerpt:      @settings.excerpt()
+      category_id:  @settings.category_id()
 
     _.extend attributes, extra_attributes
 
     if @model
-      @model.save(attributes, {success: callback})
+      @model.save(attributes, { success: callback })
     else
-      window.posts.create(attributes, {wait: true, success: callback})
+      window.posts.create(attributes, { wait: true, success: callback })
 
 
   save_draft: ->
@@ -83,7 +81,7 @@ class EditorView extends Backbone.View
   update_permalink: ->
     blog_url  = window.app.blog_url
     slug      = Post.slugify($(@title).val())
-    html = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
+    html      = """<strong>#{@model.state()}:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
     $('#permalink').html html
 
 

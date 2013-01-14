@@ -9,15 +9,19 @@ class Post extends Backbone.Model
   #views
   #published
   #tags
-  #category
+  #category_id
   #excerpt
 
   idAttribute: '_id'
 
 
+  category: ->
+    window.categories.find (c) => c.id == @get('category_id')
+
+
   date_formatted: ->
     date = @get('date')
-    if date then date.replace(/-/g, '/') else "Date Not Set"
+    if date then date.replace(/-/g, '/') else 'Date Not Set'
 
 
   featured_image: ->
@@ -25,9 +29,7 @@ class Post extends Backbone.Model
   
 
   state: ->
-    if @get('published')
-      "Published"
-    else "Draft"
+    if @get('published') then 'Published' else 'Draft'
 
 
   @slugify: (text) ->
