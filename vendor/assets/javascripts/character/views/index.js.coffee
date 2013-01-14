@@ -62,7 +62,9 @@ class IndexView extends Backbone.View
     $(@list).append html    
 
   render_items: ->
-    posts = window.posts.toArray()
+    # drafts go first, then published posts
+    posts = window.posts.sortBy (p) -> p.get('published')
+
     if posts.length > 0
       @render_item(post) for post in posts
     else

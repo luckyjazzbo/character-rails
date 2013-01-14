@@ -16,8 +16,8 @@ class EditorSettingsView extends Backbone.View
 
   render: ->
     date    = @model?.get('date')
-    excerpt = @model?.get('excerpt')
-    tags    = @model?.get('tags')
+    excerpt = @model?.get('excerpt') ? ''
+    tags    = @model?.get('tags')    ? ''
 
     html = """<div class='settings-box'>
                 <i class='general foundicon-calendar'></i> <input id='date' type='date' value='#{date}' class='date'>
@@ -25,6 +25,12 @@ class EditorSettingsView extends Backbone.View
                 <textarea id='excerpt' class='excerpt' rows=5>#{excerpt}</textarea>
                 <label>Tags splitted with comma:</label>
                 <input type='text' id='tags' class='tags' value='#{tags}'/>
+                <label>Pick a category for this post:</label>
+                <select>
+                  <option>News</option>
+                  <option>Category 1</option>
+                  <option>Category 2</option>
+                </select>
               </div>
               <button class='general foundicon-settings' id='settings_btn'></button>"""
     $(this.el).html html
