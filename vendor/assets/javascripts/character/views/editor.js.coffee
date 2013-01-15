@@ -102,7 +102,7 @@ class EditorView extends Backbone.View
                   <header>
                     <span class='title'>Markdown</span>
                     <span class='buttons'>
-                      <a href='#' title='Markdown syntax' class='foundicon-help'></a>
+                      <a href='http://daringfireball.net/projects/markdown/syntax' title='Markdown syntax' class='general foundicon-idea' target=_blank></a>
                     </span>
                   </header>
                   <div>
