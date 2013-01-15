@@ -66,10 +66,24 @@ class EditorView extends Backbone.View
     router.navigate(path, {trigger: true})
 
 
+  upload_image: (e) ->
+    e.preventDefault()
+    
+    index           = _($('article .image-uploader').get()).indexOf e.currentTarget
+    md_text         = $(@markdown).val()
+    updated_md_text = md_text.replace_nth_occurrence("\n(image)\n", "\n![](http://placehold.it/600x400)\n", index)
+    
+    $(@markdown).val(updated_md_text)
+
+    @convert_text()
+
+
+
   events:
-    'click .save-draft':  'save_draft'
-    'click .publish':     'publish'
-    'click .cancel':      'back_to_index'
+    'click .save-draft':     'save_draft'
+    'click .publish':        'publish'
+    'click .cancel':         'back_to_index'
+    'click .image-uploader': 'upload_image'
 
 
   update_word_counter: ->

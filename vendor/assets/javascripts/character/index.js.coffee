@@ -1,6 +1,7 @@
 #= require ../lodash
 #= require ../underscore.string
 #= require ../backbone
+#= require ../replace_nth_occurrence
 #= require ../showdown
 #= require ../showdown.image_uploader
 #= require ../showdown.github

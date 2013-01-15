@@ -10,7 +10,7 @@ window.Showdown.extensions.imageuploader = (converter) ->
       # image uploader
       type:   'lang',
       filter: (text) ->
-        return text.replace(/\(image\)/g, """<a class='image-uploader general foundicon-photo' href='#'>Upload image</a>""")
+        return text.replace(/\n\(image\)\n/g, """<p><a class='image-uploader general foundicon-photo' href='#'>Upload image</a></p>""")
     }
   ]
 
