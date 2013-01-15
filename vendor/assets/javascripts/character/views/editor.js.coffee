@@ -34,14 +34,15 @@ class EditorView extends Backbone.View
     slug = Post.slugify($(@title).val())
 
     attributes =
-      title:        $(@title).val()
-      md:           $(@markdown).val()
-      html:         @html.innerHTML
-      slug:         slug
-      date:         @settings.date()
-      tags:         @settings.tags()
-      excerpt:      @settings.excerpt()
-      category_id:  @settings.category_id()
+      title:              $(@title).val()
+      md:                 $(@markdown).val()
+      html:               @html.innerHTML
+      slug:               slug
+      date:               @settings.date()
+      tags:               @settings.tags()
+      excerpt:            @settings.excerpt()
+      category_id:        @settings.category_id()
+      featured_image_id:  @settings.featured_image_id()
 
     _.extend attributes, extra_attributes
 
@@ -73,7 +74,7 @@ class EditorView extends Backbone.View
 
     form.ajaxForm
       success: (obj) =>
-        image_url       = obj.image.regular.url
+        image_url       = obj.image.common.url
 
         index           = _($('article .image-uploader').get()).indexOf e.currentTarget
         md_text         = $(@markdown).val()

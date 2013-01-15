@@ -2,7 +2,7 @@ class Post extends Backbone.Model
   #id
   #title
   #category
-  #featured_image
+  #featured_image_id
   #html
   #md
   #date
@@ -24,9 +24,13 @@ class Post extends Backbone.Model
     if date then date.replace(/-/g, '/') else 'Date Not Set'
 
 
-  featured_image: ->
-    @get('featured_image_url')
-  
+  featured_image_url: ->
+    @toJSON().featured_image.image.featured.url
+
+
+  thumb_image_url: ->  
+    @toJSON().featured_image.image.character_thumb.url
+
 
   state: ->
     if @get('published') then 'Published' else 'Draft'

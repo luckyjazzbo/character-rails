@@ -133,8 +133,13 @@
     }
   }
 
-.image-uploader                       { display:none;
-                                        width:100%;
+.featured-image-form                  { width:100%;
+                                        margin-bottom:0.5em;
+  .submit                             { float:right;
+  }
+}
+
+.image-uploader                       { width:100%;
                                         line-height: 5;
                                         background: #eee;
                                         border: 2px dashed #ddd;
@@ -143,14 +148,12 @@
                                         font-size: 0.8em;
                                         padding:0 1em;
 
-  &::before                           { position: relative;
-                                        left: -5px;
-                                        top: 1px;
-  }
-
   .submit                             { float: right;
                                         margin-top:1.4em;
   }
+}
+
+.image-uploader                       { display:none;
 }
 
 .editor article                       {

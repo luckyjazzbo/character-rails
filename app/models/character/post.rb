@@ -12,10 +12,9 @@ class Character::Post
   field :excerpt,                   default: ''
   field :tags,                      default: ''
 
-  mount_uploader :featured_image, Character::ImageUploader
-
   # Relations
-  belongs_to :category, :class_name => "Character::Category"
+  belongs_to :featured_image, class_name:'Character::Image'
+  belongs_to :category,     class_name: "Character::Category"
 
   default_scope order_by date: :desc
 
@@ -28,4 +27,10 @@ class Character::Post
 
   # Pagination by Kaminari
   paginates_per 6
+
+  def as_json(options = { })
+    super((options || { }).merge({
+        :methods => [:featured_image]
+    }))
+  end
 end

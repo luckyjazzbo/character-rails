@@ -14,8 +14,10 @@ class PostIndexItemView extends Backbone.View
     category = @model.category()
     category_title = if category then category.get('title') else 'Not set'
 
-    image   = @model.featured_image()
-    img_tag = if image then """<img class='featured' src='#{image}' />""" else """<i class='featured no-image general foundicon-photo'></i>"""
+    if post.featured_image_id
+      img_tag = """<img class='featured' src='#{ @model.thumb_image_url() }' />"""
+    else
+      img_tag = """<i class='featured no-image general foundicon-photo'></i>"""
 
     html = """<a href='#/preview/#{id}'>
                 #{img_tag}
