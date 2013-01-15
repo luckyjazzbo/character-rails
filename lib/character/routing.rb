@@ -6,6 +6,7 @@ module ActionDispatch::Routing
           put '/categories-reorder', to: 'categories#reorder'
           resources :posts,      only: [:index, :create, :update, :destroy]
           resources :categories, only: [:index, :create, :update, :destroy]
+          resources :images,     only: [:create]
         end
       end
     end

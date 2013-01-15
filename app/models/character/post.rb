@@ -11,7 +11,8 @@ class Character::Post
   field :views,     type: Integer,  default: 0
   field :excerpt,                   default: ''
   field :tags,                      default: ''
-  #featured_image
+
+  mount_uploader :featured_image, Character::ImageUploader
 
   # Relations
   belongs_to :category, :class_name => "Character::Category"
