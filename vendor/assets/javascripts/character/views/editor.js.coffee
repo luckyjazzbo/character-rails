@@ -86,7 +86,8 @@ class EditorView extends Backbone.View
 
 
   render: ->
-    post = if @model then @model.toJSON() else {title: 'Post Title', md: 'Post Text'}
+    post  = if @model then @model.toJSON() else {title: 'Post Title', md: 'Post Text'}
+    state = if @model then @model.state() else 'New'
 
     html = """<header>
                 <div class='title'>
@@ -113,7 +114,7 @@ class EditorView extends Backbone.View
               <div class='chr-panel right preview fixed'>
                 <section class='container'>
                   <header>
-                    <span class='title'>#{@model.state()}</span>
+                    <span class='title'>#{state}</span>
                     <span class='info' id='word_counter'>549 words</span>
                   </header>
 

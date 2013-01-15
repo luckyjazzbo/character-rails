@@ -4,11 +4,16 @@
 
 body.admin_character                  { background:#E3E3E1;
   #main                               { @include global-reset;
+
+                                        margin-top:40px;
+                                        font-family:'Helvetica Neue', Helvetica, Arial;
+                                        font-weight:300;
+                                        font-size:14px;
+                                        color:#444;
+
                                         @import "base";
                                         @import "view_index";
                                         @import "view_editor";
-
-                                        margin-top:40px;
   }
 
   // Active Admin fixes
