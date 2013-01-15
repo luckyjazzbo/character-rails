@@ -133,3 +133,24 @@
     }
   }
 
+.image-uploader                       { display:none;
+                                        text-align: center;
+                                        line-height: 5;
+                                        background: #eee;
+                                        border: 2px dashed #ddd;
+                                        font-weight: 500;
+                                        text-transform: uppercase;
+                                        font-size: 0.8em;
+
+  &::before                           { position:absolute;
+                                        margin-left:-16px;
+  }
+}
+
+.editor article                       {
+  .image-uploader                     { display:block;
+  }
+}
+
+
+

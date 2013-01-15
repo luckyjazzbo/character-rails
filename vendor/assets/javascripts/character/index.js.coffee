@@ -2,6 +2,8 @@
 #= require ../underscore.string
 #= require ../backbone
 #= require ../showdown
+#= require ../showdown.image_uploader
+#= require ../showdown.github
 #= require ../jquery.smartresize
 
 #= require_tree ./models

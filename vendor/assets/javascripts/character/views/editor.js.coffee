@@ -13,7 +13,9 @@ class EditorView extends Backbone.View
 
     @settings = new EditorSettingsView model: @model
 
-    @converter  = new Showdown.converter()
+    @converter  = new Showdown.converter
+      extensions: ['github', 'image_uploader'] #window.Showdown.extensions
+
     @last_text  = null
     @title      = document.getElementById('title')
     @update_permalink()
