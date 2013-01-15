@@ -1,0 +1,12 @@
+
+@mixin guidelines                     {
+  
+}
+
+body.admin_character #main            {
+  article                             { padding:0em 1em 5em 1em;
+  }
+
+  article.content                     { @include guidelines;
+  }
+}

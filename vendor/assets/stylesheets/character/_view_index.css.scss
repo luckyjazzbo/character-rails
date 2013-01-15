@@ -1,4 +1,4 @@
-@mixin character_index                {
+
   .posts-index                        {
     li                                { position:relative;
       &> a                            { border-bottom:1px solid #f6f6f6;
@@ -159,7 +159,6 @@
       }
     }  
   }
-}
 
 
 
