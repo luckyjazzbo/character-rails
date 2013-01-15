@@ -68,23 +68,21 @@ class EditorView extends Backbone.View
 
 
   upload_image: (e) ->
-    e.preventDefault()
-
     form = $(e.currentTarget).parent()
+
+    form_index = $('article .image-uploader').index(form) + 1
 
     form.ajaxForm
       success: (obj) =>
         image_url       = obj.image.common.url
 
-        index           = _($('article .image-uploader').get()).indexOf e.currentTarget
-        md_text         = $(@markdown).val()
-        updated_md_text = md_text.replace_nth_occurrence("\n(image)\n", "\n![](#{image_url})\n", index)
+        md_text         = "\n" + $(@markdown).val() + "\n" # edge cases workaround
+        updated_md_text = md_text.replace_nth_occurrence("\n(image)\n", "\n![](#{image_url})\n", form_index)
         
+        updated_md_text = updated_md_text.slice(1,updated_md_text.length - 1)
+
         $(@markdown).val(updated_md_text)
-
         @convert_text()
-
-    form.submit()
 
 
   events:
