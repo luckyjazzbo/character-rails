@@ -5,6 +5,7 @@
 #= require ../showdown
 #= require ../showdown.image_uploader
 #= require ../showdown.github
+#= require ../showdown.video
 #= require ../jquery.smartresize
 
 #= require_tree ./models

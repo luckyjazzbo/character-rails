@@ -14,7 +14,7 @@ class EditorView extends Backbone.View
     @settings = new EditorSettingsView model: @model
 
     @converter  = new Showdown.converter
-      extensions: ['github', 'image_uploader'] #window.Showdown.extensions
+      extensions: ['github', 'image_uploader', 'video']
 
     @last_text  = null
     @title      = document.getElementById('title')
