@@ -83,12 +83,12 @@ class Editor extends Character.Blog.Views.Base
 
   update_permalink: ->
     set_permalink = =>
-      blog_url  = 'http://test.com/' #@app().blog_url
+      blog_url  = @app().blog_url
       slug      = Character.Blog.Post.slugify($(@title).val())
       html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
       $('#permalink').html html
 
-    $(@title).keyup -> set_permalink()
+    $(@title).keyup => set_permalink()
     set_permalink()
 
 

@@ -21,7 +21,7 @@
 #= require ./pages
 
 
-Character = {}
+window.Character = {}
 
 
 window.authenticity_token = ->
@@ -30,6 +30,4 @@ window.authenticity_token = ->
 
 $ ->
   Character.Blog.init() if $('.admin_character').length > 0
-
-window.Character = Character
 
