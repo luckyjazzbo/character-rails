@@ -12,10 +12,11 @@ Character.Blog =
   options:
     blog_url:       'http://this-is-blog.com/'
     app_container:  '#wrapper'
+    edit_mode:      'markdown'
+    categories:     false
 
   init: ->
-    app = new Character.Blog.Views.App( Character.Blog.options.blog_url,
-                                        Character.Blog.options.app_container )
+    app = new Character.Blog.Views.App(Character.Blog.options)
 
     # render app after data is fetched
     _data_is_ready = _.after 2, ->

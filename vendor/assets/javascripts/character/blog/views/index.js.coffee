@@ -34,7 +34,8 @@ Character.Blog.Views.Base = Base
 
 class App extends Base
 
-  initialize: (@blog_url, @el) ->
+  initialize: (@options) ->
+    @el = @options.app_container
     @render()
     window.index_scroll_y = 0
 

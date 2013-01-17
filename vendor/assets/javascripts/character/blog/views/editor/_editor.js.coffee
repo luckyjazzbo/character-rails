@@ -12,7 +12,11 @@ class Editor extends Character.Blog.Views.Base
 
     
     @title  = document.getElementById('title')
-    @mode   = new Character.Blog.Views.Editor.Markdown model: @model
+    
+    if @app().options.edit_mode == 'redactor'
+      @mode = new Character.Blog.Views.Editor.Redactor model: @model
+    else
+      @mode = new Character.Blog.Views.Editor.Markdown model: @model
     
     @update_permalink()
 
@@ -63,7 +67,7 @@ class Editor extends Character.Blog.Views.Base
 
   update_permalink: ->
     set_permalink = =>
-      blog_url  = @app().blog_url
+      blog_url  = @app().options.blog_url
       slug      = Character.Blog.Post.slugify($(@title).val())
       html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
       $('#permalink').html html
