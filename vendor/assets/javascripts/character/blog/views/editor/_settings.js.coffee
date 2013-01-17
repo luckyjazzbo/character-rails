@@ -1,5 +1,4 @@
-
-class EditorSettingsView extends Backbone.View
+class Settings extends Character.Blog.Views.Base
   tagName:    'div'
   className:  'settings'
   id:         'settings'
@@ -36,7 +35,7 @@ class EditorSettingsView extends Backbone.View
                                    style='display:none; width:100%;' />"""    
     
     
-    window.categories.each (c) ->
+    @categories().each (c) ->
       if post_category and post_category.id == c.id
         category_options += """<option value='#{c.id}' selected>#{c.get('title')}</option>"""
       else
@@ -111,15 +110,13 @@ class EditorSettingsView extends Backbone.View
         $('#featured_image_demo').attr 'data-image-id', obj._id
         $('#featured_image_demo').show()
 
-    #form.submit()
-
 
   events:
     'click #settings_btn':                'show_or_hide_settings_box'
     'click .featured-image-form .submit': 'upload_featured_image'
 
 
-window.EditorSettingsView = EditorSettingsView
+Character.Blog.Views.Editor.Settings = Settings
 
 
 

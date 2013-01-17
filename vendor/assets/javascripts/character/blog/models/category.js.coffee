@@ -15,5 +15,6 @@ class Categories extends Backbone.Collection
     '/admin/character/categories-reorder'
 
 
-window.Categories  = Categories
-window.Category    = Category
+Character.Blog.Category   = Category
+Character.Blog.Categories = Categories
+

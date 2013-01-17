@@ -16,7 +16,7 @@ class Post extends Backbone.Model
 
 
   category: ->
-    window.categories.find (c) => c.id == @get('category_id')
+    Character.Blog.categories.find (c) => c.id == @get('category_id')
 
 
   date_formatted: ->
@@ -44,5 +44,7 @@ class Posts extends Backbone.Collection
   model: Post
   url: '/admin/character/posts'
 
-window.Posts  = Posts
-window.Post   = Post
+
+Character.Blog.Posts  = Posts
+Character.Blog.Post   = Post
+

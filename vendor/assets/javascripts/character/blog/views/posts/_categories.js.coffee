@@ -1,30 +1,4 @@
-class IndexCategoryItemView extends Backbone.View
-  tagName: 'li'
-
-
-  delete_category: (e) ->
-    e.preventDefault()
-    if confirm('Do you really want to remove this category?')
-      window.app.index_view.categories.item_views[@model.id].remove()
-      @model.destroy()
-
-
-  events:
-    'click .delete-category': 'delete_category'
-
-
-  render: ->
-    category = @model.toJSON()
-
-    html = """<span class='category'>#{ category.title }</span>
-              <a href='#/' title='Remove category' class='general foundicon-trash delete-category'></a>
-              """
-    $(this.el).html html
-    $(this.el).attr('data-id', @model.id)
-    return this
-
-
-class IndexCategoriesView extends Backbone.View
+class Categories extends Character.Blog.Views.Base
   tagName:    'span'
   className:  'categories'
   id:         'categories'
@@ -35,7 +9,7 @@ class IndexCategoriesView extends Backbone.View
     title = window.prompt('Please enter category title:', '')
 
     if title
-      check_title = window.categories.find (c) -> c.title == title
+      check_title = @categories().find (c) -> c.title == title
 
       if check_title
         alert 'Category with this title already exists. Please pick another title.'
@@ -43,7 +17,7 @@ class IndexCategoriesView extends Backbone.View
         after_created = (category) =>
           @render_item(category)
 
-        new_category = window.categories.create({ title: title }, { wait: true, success: after_created })
+        new_category = @categories().create({ title: title }, { wait: true, success: after_created })
         
 
 
@@ -70,7 +44,7 @@ class IndexCategoriesView extends Backbone.View
           _method:            'put'
           authenticity_token: window.authenticity_token()
         
-        $.post Categories.reorder_url(), params, (data) ->
+        $.post Character.Blog.Categories.reorder_url(), params, (data) ->
           if data != "ok"
             alert 'Error happended. Please contact devs.'
 
@@ -78,7 +52,7 @@ class IndexCategoriesView extends Backbone.View
 
 
   render_item: (category) ->
-    item = new IndexCategoryItemView model: category
+    item = new Character.Blog.Views.Posts.Category model: category
     html = item.render().el
     $(@list).append html
 
@@ -91,7 +65,7 @@ class IndexCategoriesView extends Backbone.View
 
 
   render_items: ->
-    categories = window.categories.toArray()
+    categories = @categories().toArray()
 
     if categories.length > 0
       @render_item(category) for category in categories
@@ -130,8 +104,7 @@ class IndexCategoriesView extends Backbone.View
     'click #categories_btn':  'show_or_hide_categories_box'
 
 
-window.IndexCategoriesView = IndexCategoriesView
-
+Character.Blog.Views.Posts.Categories = Categories
 
 
 

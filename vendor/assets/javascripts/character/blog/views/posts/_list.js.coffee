@@ -1,40 +1,4 @@
-##############################
-### CHARACTER :: IndexView ###
-##############################
-
-class PostIndexItemView extends Backbone.View
-  tagName: 'li'
-
-  render: ->
-    post            = @model.toJSON()
-    id              = @model.id
-    views           = if post.published then post.views else ''
-    draft_or_date   = if post.published then @model.date_formatted() else @model.state()
-
-    category = @model.category()
-    category_title = if category then category.get('title') else 'Not set'
-
-    if post.featured_image_id
-      img_tag = """<img class='featured' src='#{ @model.thumb_image_url() }' />"""
-    else
-      img_tag = """<i class='featured no-image general foundicon-photo'></i>"""
-
-    html = """<a href='#/preview/#{id}'>
-                #{img_tag}
-                <div class='left'>
-                  <span class='title'>#{post.title}</span>
-                  <span class='meta'>#{category_title}</span>
-                </div>
-                <div class='right'>
-                  <span class='date'>#{draft_or_date}</span>
-                  <span class='views'>#{views}</span>
-                </div>
-              </a>"""
-    $(this.el).html html
-    return this
-
-
-class IndexView extends Backbone.View
+class List extends Character.Blog.Views.Base
   tagName:    'div'
   className:  'chr-panel left index'
   id:         'blog_index'
@@ -56,19 +20,21 @@ class IndexView extends Backbone.View
 
 
   render_item: (post) ->
-    item = new PostIndexItemView model: post
+    item = new Character.Blog.Views.Posts.Post model: post
     html = item.render().el
     $(@list).append html
 
     @item_views[post.id] = item
 
+
   render_items_placeholder: ->
     html = """<li class='placeholder'>Hey there! You don't have any posts yet, so go ahead and create the first one!</li>"""
     $(@list).append html    
 
+
   render_items: ->
     # drafts go first, then published posts
-    posts = window.posts.sortBy (p) -> p.get('published')
+    posts = @posts().sortBy (p) -> p.get('published')
 
     if posts.length > 0
       @render_item(post) for post in posts
@@ -80,7 +46,7 @@ class IndexView extends Backbone.View
     html = @render().el
     $('#main').append(html)
 
-    @categories = new IndexCategoriesView
+    @categories = new Character.Blog.Views.Posts.Categories
 
     @list        = document.getElementById('list')
     @item_views  = {}
@@ -117,7 +83,7 @@ class IndexView extends Backbone.View
     window.scroll(0, window.index_scroll_y)
 
 
-window.IndexView = IndexView
+Character.Blog.Views.Posts.List = List
 
 
 

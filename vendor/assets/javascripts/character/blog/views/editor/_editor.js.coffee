@@ -1,8 +1,4 @@
-
-# Code is partly taken from:
-# - http://www.showdown.im/showdown/example/showdown-gui.js
-
-class EditorView extends Backbone.View
+class Editor extends Character.Blog.Views.Base
   tagName:    'div'
   className:  'editor'
 
@@ -11,31 +7,24 @@ class EditorView extends Backbone.View
     html = @render().el
     $('#main').append(html)
 
-    @settings = new EditorSettingsView model: @model
+    @settings   = new Character.Blog.Views.Editor.Settings model: @model
+    @converter  = new Showdown.converter { extensions: ['github', 'image_uploader', 'video'] }
 
-    @converter  = new Showdown.converter
-      extensions: ['github', 'image_uploader', 'video']
-
-    @last_text  = null
     @title      = document.getElementById('title')
-    @update_permalink()
-
-    @slug       = document.getElementById('slug')
-    @markdown   = document.getElementById('markdown')
     @html       = document.getElementById('html')
-    @max_delay  = 3000
     
+    @enable_codemirror()
     @resize_panels()
-    @typing_events()
-    @convert_text()
+    @update_permalink()
+    
 
 
   update_or_create_post: (extra_attributes, callback) ->
-    slug = Post.slugify($(@title).val())
+    slug = Character.Blog.Post.slugify($(@title).val())
 
     attributes =
       title:              $(@title).val()
-      md:                 $(@markdown).val()
+      md:                 @markdown()
       html:               @html.innerHTML
       slug:               slug
       date:               @settings.date()
@@ -49,7 +38,7 @@ class EditorView extends Backbone.View
     if @model
       @model.save(attributes, { success: callback })
     else
-      window.posts.create(attributes, { wait: true, success: callback })
+      @posts().create(attributes, { wait: true, success: callback })
 
 
   save_draft: ->
@@ -64,7 +53,7 @@ class EditorView extends Backbone.View
 
   back_to_index: ->
     path = if @model then "#/preview/#{@model.id}" else '#/'
-    router.navigate(path, {trigger: true})
+    @router().navigate(path, {trigger: true})
 
 
   upload_image: (e) ->
@@ -76,35 +65,31 @@ class EditorView extends Backbone.View
       success: (obj) =>
         image_url       = obj.image.common.url
 
-        md_text         = "\n" + $(@markdown).val() + "\n" # edge cases workaround
+        md_text         = "\n" + @markdown() + "\n" # edge cases workaround
         updated_md_text = md_text.replace_nth_occurrence("\n(image)\n", "\n![](#{image_url})\n", form_index)
         
         updated_md_text = updated_md_text.slice(1,updated_md_text.length - 1)
 
-        $(@markdown).val(updated_md_text)
+        @code_mirror.setValue(updated_md_text)
         @convert_text()
 
 
   events:
-    'click .save-draft':     'save_draft'
-    'click .publish':        'publish'
-    'click .cancel':         'back_to_index'
-    'click .image-uploader .submit': 'upload_image'
-
-
-  update_word_counter: ->
-    counter = 0
-    md_text = $(@markdown).val()
-    if md_text.length > 0
-      counter = md_text.match(/[^\s]+/g).length
-    $(document.getElementById('word_counter')).html "#{counter} words"
+    'click .save-draft':              'save_draft'
+    'click .publish':                 'publish'
+    'click .cancel':                  'back_to_index'
+    'click .image-uploader .submit':  'upload_image'
 
 
   update_permalink: ->
-    blog_url  = window.app.blog_url
-    slug      = Post.slugify($(@title).val())
-    html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
-    $('#permalink').html html
+    set_permalink = =>
+      blog_url  = 'http://test.com/' #@app().blog_url
+      slug      = Character.Blog.Post.slugify($(@title).val())
+      html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
+      $('#permalink').html html
+
+    $(@title).keyup -> set_permalink()
+    set_permalink()
 
 
   render: ->
@@ -137,7 +122,7 @@ class EditorView extends Backbone.View
                 <section class='container'>
                   <header>
                     <span class='title'>#{state}</span>
-                    <span class='info' id='word_counter'>549 words</span>
+                    <!--<span class='info' id='word_counter'>549 words</span>-->
                   </header>
 
                   <article>
@@ -155,90 +140,46 @@ class EditorView extends Backbone.View
     return this
 
 
-  on_input: (callback) ->
-    # In "delayed" mode, we do the conversion at pauses in input.
-    # The pause is equal to the last runtime, so that slow
-    # updates happen less frequently.
-    #
-    # Use a timer to schedule updates.  Each keystroke
-    # resets the timer.
-
-    # if we already have convertText scheduled, cancel it
-    if convert_text_timer
-      window.clearTimeout(convert_text_timer)
-      convert_text_timer = null
-
-    time_until_convert_text = 0
-
-    if time_until_convert_text > @max_delay
-      time_until_convert_text = @max_delay
-
-    # Schedule @convert_text().
-    # Even if we're updating every keystroke, use a timer at 0.
-    # This gives the browser time to handle other events.
-    convert_text_timer = window.setTimeout(callback, time_until_convert_text)
-
-
-  typing_events: ->
-    # First, try registering for keyup events
-    # (There's no harm in calling onInput() repeatedly)
-    @markdown.onkeyup = => @on_input(@convert_text)
-    @title.onkeyup    = => @on_input(@update_permalink)
-
-    # In case we can't capture paste events, poll for them
-    polling_fallback = window.setInterval ( => @on_input() if not @markdown.value == @last_text ), 1000
-
-    # Try registering for paste events
-    @markdown.onpaste = =>
-      # It worked! Cancel paste polling.
-      if polling_fallback
-        window.clearInterval(polling_fallback)
-        polling_fallback = null
-      @on_input()
-
-    # Try registering for input events (the best solution)
-    if @markdown.addEventListener
-      # Let's assume input also fires on paste.
-      # No need to cancel our keyup handlers;
-      # they're basically free.
-      @markdown.addEventListener('input', @markdown.onpaste, false)
-
-    @markdown.focus()
-
-
-  convert_text: =>
-    text = @markdown.value
-
-    return if text and text == @last_text
-
-    @last_text = text
-
-    # do the conversion
+  convert_text: ->
+    text = @markdown()
     @html.innerHTML = @converter.makeHtml(text)
-    @update_word_counter()
 
 
   resize_panels: ->
-    markdown      = $(@markdown)
     html          = $(@html).parent()
     window_height = $(window).height()
     footer_height = $('footer').outerHeight()
     
-    markdown.css 'height', window_height - markdown.offset().top - footer_height
     html.css     'height', window_height - html.offset().top - footer_height
+    $('.CodeMirror').css 'height', window_height - html.offset().top - footer_height
     
     $(window).smartresize =>
       @resize_panels()
 
 
-  destroy = ->
-    # clear smartresize event
+  destroy: ->
+    @code_mirror.off 'change'
     @markdown.onkeyup = null
     @title.onkeyup    = null
 
 
-window.EditorView = EditorView
+  enable_codemirror: ->
+    options =
+      mode:           'text/x-markdown'
+      lineWrapping:   true
+      autofocus:      true
 
+    markdown = document.getElementById('markdown')
+    @code_mirror = CodeMirror.fromTextArea(markdown, options)
+    @code_mirror.on 'change', => @convert_text()
+    @convert_text()
+
+
+  markdown: ->
+    @code_mirror.getValue()
+
+
+Character.Blog.Views.Editor.Editor = Editor
 
 
 

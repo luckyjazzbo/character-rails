@@ -14,7 +14,7 @@ class Character::Post
 
   # Relations
   belongs_to :featured_image, class_name:'Character::Image'
-  belongs_to :category,     class_name: "Character::Category"
+  belongs_to :category,       class_name: "Character::Category"
 
   default_scope order_by date: :desc
 

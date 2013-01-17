@@ -1,8 +1,4 @@
-####################################
-### CHARACTER :: PostPreviewView ###
-####################################
-
-class PostPreviewView extends Backbone.View
+class Preview extends Character.Blog.Views.Base
   tagName:    'div'
   className:  'chr-panel right quickview'
   id:         'blog_quickview'
@@ -12,13 +8,14 @@ class PostPreviewView extends Backbone.View
     e.preventDefault()
     if confirm('Do you really want to remove this post?')
       # this event could be probably tighted to collection event or model destory event
-      window.app.index_view.item_views[@model.id].remove()
+      @app().index_view.item_views[@model.id].remove()
       @model.destroy()
-      router.navigate('#/', {trigger: true})      
+      @router().navigate('#/', {trigger: true})      
 
 
   events:
     'click #delete_post': 'delete_post'
+
 
   render: ->
     post  = @model.toJSON()
@@ -46,4 +43,6 @@ class PostPreviewView extends Backbone.View
     $(this.el).html html
     return this
 
-window.PostPreviewView = PostPreviewView
+
+Character.Blog.Views.Posts.Preview = Preview
+
