@@ -34,7 +34,14 @@ class List extends Character.Blog.Views.Base
 
   render_items: ->
     # drafts go first, then published posts
-    posts = @posts().sortBy (p) -> p.get('published')
+    drafts    = @posts().filter (p) -> not p.get('published')
+    published = @posts().filter (p) -> p.get('published')
+
+    # then published sorted by date
+    reversed  = _(published).sortBy (p) -> p.get('date')
+    sorted    = reversed.reverse()
+
+    posts     = drafts.concat(sorted)
 
     if posts.length > 0
       @render_item(post) for post in posts

@@ -1,6 +1,8 @@
 @import "foundation-icons";
 @import "compass/css3";
 @import "compass/reset/utilities";
+@import "codemirror";
+
 
 body.admin_character                  { background:#E3E3E1;
   #main                               { @include global-reset;
@@ -15,6 +17,7 @@ body.admin_character                  { background:#E3E3E1;
                                         @import "view_index";
                                         @import "view_editor";
                                         @import "codemirror";
+
     .CodeMirror                       { margin-left:1em;
                                         font-size:0.9em;
     }
@@ -37,5 +40,4 @@ body.admin_character                  { background:#E3E3E1;
     }
   }
 }
-
 

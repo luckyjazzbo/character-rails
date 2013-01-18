@@ -34,11 +34,13 @@ class Redactor extends Character.Blog.Views.Base
 
 
   resize_panels: ->
+    
     window_height   = $(window).height()
     toolbar_height  = $('.redactor_toolbar').outerHeight()
     footer_height   = $('footer').outerHeight()
     
     $('.redactor_editor').css 'height', window_height - $('.redactor_box').offset().top - footer_height - 22
+    $('#html').css            'height', window_height - $('.redactor_box').offset().top - footer_height - 32
     
     $(window).smartresize =>
       @resize_panels()
