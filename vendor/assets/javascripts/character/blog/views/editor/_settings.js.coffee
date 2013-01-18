@@ -14,7 +14,7 @@ class Settings extends Character.Blog.Views.Base
 
 
   render: ->
-    date    = @model?.get('date')
+    date    = @model?.get('date')    ? ''
     excerpt = @model?.get('excerpt') ? ''
     tags    = @model?.get('tags')    ? ''
 
@@ -60,7 +60,7 @@ class Settings extends Character.Blog.Views.Base
                 <label>Excerpt:</label>
                 <textarea id=excerpt class=excerpt rows=5>#{excerpt}</textarea>
 
-                <label>Tags splitted with comma:</label>
+                <label>Keywords splitted with comma:</label>
                 <input type=text id=tags class=tags value='#{tags}'/>
 
                 <label>Pick a category for this post:</label>
