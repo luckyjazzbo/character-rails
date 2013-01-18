@@ -1,0 +1,25 @@
+body.admin_character_blog #main         {
+  .redactor                             {
+    .redactor_editor                    { //padding: 30px 1em 0;
+    }
+  }
+}
+
+body.admin_character_blog #main,
+body.admin_character_pages #main      { 
+  .redactor                           {
+    header                            { text-align:right;
+    }
+    .redactor_editor                  { padding: 0em 1em;
+    }
+    .redactor_toolbar                 { background: transparent;
+                                        position: absolute;
+                                        z-index: 2;
+                                        top: -33px;
+                                        padding-left: 10px!important;
+    }    
+  }
+}
+
+
+

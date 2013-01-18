@@ -3,19 +3,14 @@ class Editor extends Character.Pages.Views.Base
   className:  'editor'
 
 
-  initialize: (options) ->
-    @model = options.model
-
+  initialize: ->
     html = @render().el
     $('#main').append(html)
 
     @settings = new Character.Pages.Views.Editor.Settings model: @model
     @title    = document.getElementById('title')
     
-    if options.redactor
-      @mode = new Character.Pages.Views.Editor.Redactor model: @model
-    else
-      @mode = new Character.Pages.Views.Editor.Codemirror model: @model
+    @mode = new Character.Pages.Views.Editor.Redactor model: @model
     
     @update_permalink()
 

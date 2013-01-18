@@ -56,20 +56,19 @@ class App extends Base
     @index_view = new Character.Pages.Views.Pages.List()
     
 
-  show_editor: (page_id, redactor=false) ->
+  show_editor: (page_id) ->
     @clear_view()
 
     page = if page_id then @find_page(page_id) else null
 
-    @editor_view = new Character.Pages.Views.Editor.Editor redactor: redactor, model: page
+    @editor_view = new Character.Pages.Views.Editor.Editor model: page
 
 
   set_routes: ->
     Router = Backbone.Router.extend
       routes:
         'new':          'newPage'
-        'edit/:id':     'editPageContent'
-        'source/:id':   'editPageSource'
+        'edit/:id':     'editPage'
         '':             'showPages'
 
     @router = new Router
@@ -77,10 +76,7 @@ class App extends Base
     @router.on 'route:newPage', =>
       @show_editor()
 
-    @router.on 'route:editPageContent', (id) =>
-      @show_editor(id, redactor = true)
-
-    @router.on 'route:editPageSource', (id) =>
+    @router.on 'route:editPage', (id) =>
       @show_editor(id)
 
     @router.on 'route:showPages', (id) =>

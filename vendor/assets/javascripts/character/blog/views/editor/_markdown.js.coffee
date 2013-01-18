@@ -69,7 +69,7 @@ class Markdown extends Character.Blog.Views.Base
                     </span>
                   </header>
 
-                  <article>
+                  <article class='markdown-preview'>
                     <section class='content' id='html'></section>
                   </article>
                 </section>

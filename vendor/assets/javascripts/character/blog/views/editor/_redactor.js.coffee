@@ -10,15 +10,14 @@ class Redactor extends Character.Blog.Views.Base
     
     $(@html).redactor
       autoresize: false
-
-    @resize_panels()
+      callback: => @resize_panels()
 
 
   render: ->
     post  = if @model then @model.toJSON() else {title: 'Post Title', md: 'Post Text'}
     state = if @model then @model.state()  else 'New'
 
-    html = """<div class='chr-panel left fixed'>
+    html = """<div class='chr-panel center fixed'>
                 <section class='container'>
                   <header>
                     <span class='title'>#{state}</span>
@@ -34,7 +33,6 @@ class Redactor extends Character.Blog.Views.Base
 
 
   resize_panels: ->
-    
     window_height   = $(window).height()
     toolbar_height  = $('.redactor_toolbar').outerHeight()
     footer_height   = $('footer').outerHeight()

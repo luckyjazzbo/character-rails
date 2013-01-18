@@ -24,7 +24,7 @@
       }
     }
 
-    article                           { overflow-y:scroll;
+    .markdown-preview                 { overflow-y:scroll;
     }
 
     footer                            { width:100%;
@@ -162,30 +162,7 @@
 }
 
 
-// Redactor CSS config
 
-
-.redactor                             {
-  .redactor_toolbar                   { background:#fff;
-                                        //margin:0 1em!important;
-                                        position: absolute;
-                                        z-index: 2;
-                                        width: 623px;
-                                        margin: 0!important;
-                                        margin-left: 0.8em!important;
-  }
-
-  .redactor_box textarea              { margin-top: 30px;
-  }
-
-  .redactor_editor                    { padding: 30px 1em 0;
-  }
-
-  .left.fixed                         { left:50%;
-                                        margin-left:-335px;
-                                        min-width: 672px;
-  }
-}
 
 
 

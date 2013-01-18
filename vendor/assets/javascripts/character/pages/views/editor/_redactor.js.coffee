@@ -9,10 +9,13 @@ class Redactor extends Character.Pages.Views.Base
     @html = document.getElementById('html')
     
     $(@html).redactor
+      convertLinks: false
+      convertDivs: false
+      callback: => @resize_panels()
       #autoresize: false
       #air: true
 
-    @resize_panels()
+    
 
 
   render: ->

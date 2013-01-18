@@ -12,7 +12,7 @@ class Page extends Character.Pages.Views.Base
     else
       img_tag = """<i class='featured no-image general foundicon-photo'></i>"""
 
-    html = """<a href='#/source/#{id}'>
+    html = """<a href='#/edit/#{id}'>
                 #{img_tag}
                 <div class='left'>
                   <span class='title'>#{page.title}</span>

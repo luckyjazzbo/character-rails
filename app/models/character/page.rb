@@ -21,7 +21,7 @@ class Character::Page
   #validates_format_of :permalink, with: /\A\w+\Z/
 
   # Indexes
-  #index({ permalink: 1}, { unique: true })
+  index({ permalink: 1}, { unique: true })
 
   # Scope
   scope :published, where(published: true)

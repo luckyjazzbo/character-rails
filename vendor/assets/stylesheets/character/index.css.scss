@@ -40,6 +40,7 @@ body.admin_character_pages            { background:#E3E3E1;
                                         @import "list";
                                         @import "editor";
                                         @import "codemirror";
+                                        
 
     .CodeMirror                       { margin-left:1em;
                                         font-size:0.9em;
@@ -49,3 +50,4 @@ body.admin_character_pages            { background:#E3E3E1;
                                         @include remove_active_admin_header_and_footer;
 }
 
+@import "redactor";
