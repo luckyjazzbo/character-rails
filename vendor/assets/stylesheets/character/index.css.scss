@@ -4,28 +4,7 @@
 @import "codemirror";
 
 
-body.admin_character                  { background:#E3E3E1;
-  #main                               { @include global-reset;
-
-                                        margin-top:40px;
-                                        font-family:'Helvetica Neue', Helvetica, Arial;
-                                        font-weight:300;
-                                        font-size:14px;
-                                        color:#444;
-
-                                        @import "base";
-                                        @import "view_index";
-                                        @import "view_editor";
-                                        @import "codemirror";
-
-    .CodeMirror                       { margin-left:1em;
-                                        font-size:0.9em;
-    }
-  }
-
-  // Active Admin fixes
-
-  // Disable page header and footer
+@mixin remove_active_admin_header_and_footer {
   #active_admin_content,
   #title_bar,
   .footer, #footer                    { display:none;
@@ -39,5 +18,34 @@ body.admin_character                  { background:#E3E3E1;
     #utility_nav                      { margin-right:30px;
     }
   }
+}
+
+
+body.admin_character_blog,
+body.admin_character_pages            { background:#E3E3E1;
+  
+
+
+
+
+  #main                               { @include global-reset;
+
+                                        margin-top:40px;
+                                        font-family:'Helvetica Neue', Helvetica, Arial;
+                                        font-weight:300;
+                                        font-size:14px;
+                                        color:#444;
+
+                                        @import "base";
+                                        @import "list";
+                                        @import "editor";
+                                        @import "codemirror";
+
+    .CodeMirror                       { margin-left:1em;
+                                        font-size:0.9em;
+    }
+  }
+
+                                        @include remove_active_admin_header_and_footer;
 }
 

@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'kaminari'
   gem.add_runtime_dependency 'foundation-icons-sass-rails'
   gem.add_runtime_dependency 'codemirror-rails'
+  gem.add_runtime_dependency 'activeadmin-mongoid-reorder'
 
 #gem 'rmagick'
 #gem "carrierwave-mongoid",  require: "carrierwave/mongoid", git: "git://github.com/jnicklas/carrierwave-mongoid.git", branch: "mongoid-3.0"

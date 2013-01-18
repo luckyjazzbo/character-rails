@@ -24,10 +24,7 @@ class Character::CategoriesController < ApplicationController
   end
 
   def reorder
-    puts "\n\n\n\n"
-    puts params[:ids]
-    puts "\n\n\n\n"
-    Character::Category.reorder(params[:ids])
+    Character::Category.reorder_objects(params[:ids])
     render json: 'ok'
   end
 end

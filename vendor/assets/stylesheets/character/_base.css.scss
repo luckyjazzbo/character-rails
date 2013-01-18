@@ -42,6 +42,12 @@
                                         right:0;
       }
     }
+    &.center                          { width:100%;
+                                        padding:1em;
+      &.fixed                         { position:fixed;
+                                        right:0;
+      }
+    }
 
     .container                        { background:#fff;
                                         padding-top:1em;

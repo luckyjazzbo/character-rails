@@ -11,7 +11,7 @@ class Categories extends Backbone.Collection
   model: Category
   url: '/admin/character/categories'
 
-  @reorder_url: (text) ->
+  @reorder_url: ->
     '/admin/character/categories-reorder'
 
 

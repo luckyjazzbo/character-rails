@@ -29,5 +29,6 @@ window.authenticity_token = ->
 
 
 $ ->
-  Character.Blog.init() if $('.admin_character').length > 0
+  Character.Blog.init()  if $('.admin_character_blog').length > 0
+  Character.Pages.init() if $('.admin_character_pages').length > 0
 

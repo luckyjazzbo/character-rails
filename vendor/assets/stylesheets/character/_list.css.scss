@@ -1,7 +1,8 @@
 
-  .posts-index                        {
+  .posts-index,
+  .pages-index                        {
     li                                { position:relative;
-      &> a                            { border-bottom:1px solid #f6f6f6;
+      &> a, &>div                     { border-bottom:1px solid #f6f6f6;
                                         border-top:1px solid #f6f6f6;
                                         padding:1em 0;
                                         height:6em;
@@ -57,13 +58,17 @@
       .title                          { display:block;
                                         font-weight:500;
                                         line-height:1.2;
+        .permalink                    { font-weight:300;
+                                        opacity:0.8;
+                                        font-size:0.9em;
+        }
       }
-      .date                           { font-size:0.85em;
+      .date, .meta2                   { font-size:0.85em;
       }
       .meta                           { font-size:0.85em;
                                         padding-top:0.5em;
       }
-      .views                          { font-size:2.7em;
+      .views, .meta3                  { font-size:2.7em;
                                         font-weight:500;
                                         padding-top:0.15em;
                                         opacity:0.5;
