@@ -4,7 +4,7 @@
 
 
 class Blog extends Character.AppSkeleton
-  constructor: (@scope='blog', options={}) ->
+  constructor: (@scope='blog', @menu='Blog', options={}) ->
     @index_scroll_y = 0
     @options        = @override_default_options(options)
     @router         = workspace.router

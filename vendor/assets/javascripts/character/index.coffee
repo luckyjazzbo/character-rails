@@ -55,7 +55,7 @@ window.Character = CharacterWorkspace
 
 class AppSkeleton
   add_menu_item: ->
-    html = """<li><a href='#/#{ @scope }'>#{ @constructor.name }</a></li>"""
+    html = """<li><a href='#/#{ @scope }'>#{ @menu }</a></li>"""
     $('#main_menu').append html
 
   add_routes: ->
@@ -71,16 +71,4 @@ class AppSkeleton
 
 window.Character.AppSkeleton = AppSkeleton
 
-
-$ ->
-  # workspace is used as a shared space for app instances
-  # it's addressed in views and apps
-  window.workspace  = new CharacterWorkspace()
-  window.blog       = new Character.Blog()
-  window.pages      = new Character.Pages()
-
-  window.blog.fetch_data ->
-    window.pages.fetch_data ->
-      # Start Backbone history a necessary step for bookmarkable URL's
-      Backbone.history.start()
 

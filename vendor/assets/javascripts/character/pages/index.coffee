@@ -4,7 +4,7 @@
 
 
 class Pages extends Character.AppSkeleton
-  constructor: (@scope='pages', options={}) ->
+  constructor: (@scope='pages', @menu='Pages', options={}) ->
     @options        = @override_default_options(options)
     @router         = workspace.router
     
