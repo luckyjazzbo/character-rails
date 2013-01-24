@@ -16,7 +16,6 @@ require 'mongoid_slug'
 
 # uploads
 require 'carrierwave/mongoid'
-require 'Rmagick'
 
 #redactor
 require 'redactor'

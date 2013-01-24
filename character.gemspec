@@ -27,7 +27,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'jquery-ui-rails'
   gem.add_runtime_dependency 'foundation-icons-sass-rails'
   gem.add_runtime_dependency 'carrierwave-mongoid'
-  gem.add_runtime_dependency 'rmagick'
 
   # mongoid
   gem.add_runtime_dependency 'mongoid_slug'
