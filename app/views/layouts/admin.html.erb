@@ -10,9 +10,9 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>Admin</title>
+  <title><%= ENV['WEBSITE_NAME'] %> :: Admin</title>
 
-  <%= stylesheet_link_tag "character", :media => "all" %>
+  <%= stylesheet_link_tag 'admin', :media => 'all' %>
 
   <!-- Custom Modernizr for Foundation -->
   <%= javascript_include_tag "foundation/modernizr.foundation.js" %>
@@ -23,6 +23,6 @@
 <body>
   <%= yield %>
 
-  <%= javascript_include_tag "character" %>
+  <%= javascript_include_tag 'admin' %>
 </body>
 </html>

@@ -9,7 +9,7 @@ class BlogIndexShow extends Backbone.View
     state = @model.state()
     id    = @model.id
 
-    html = """<div class='container'>
+    html = """<div class='chr-container'>
                 <header>
                   <strong>#{state}</strong>
                   <span class='buttons'>

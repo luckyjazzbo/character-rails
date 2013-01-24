@@ -184,7 +184,7 @@ body                                  { background:$bodyBgColor;
 }
 
 
-.container                            { background:#fff;
+.chr-container                        { background:#fff;
                                         width:100%;
                                         @include shadow;
   & > header                          { font-size:.85em;
@@ -333,6 +333,9 @@ body                                  { background:$bodyBgColor;
 }
 
 .redactor_dropdown                    { margin-top: -40px;
+}
+
+.redactor_editor                      { @include global-reset();
 }
 
 

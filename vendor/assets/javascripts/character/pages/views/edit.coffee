@@ -14,7 +14,7 @@ class PagesEdit extends Backbone.View
                 <div class=permalink id=permalink></div>
               </header>
 
-              <footer>
+              <footer class='chr-footer'>
                 <button class='cancel btn'>Back to index</button>
                 <span class='right-buttons'>
                   <button class='save btn blue'>Save Hidden</button>

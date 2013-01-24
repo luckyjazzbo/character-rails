@@ -3,7 +3,7 @@ class BlogEditMarkdown extends Backbone.View
 
   render_markdown: (markdown) ->
     """<div class='six columns left-column'>
-         <section class='container'>
+         <section class='chr-container'>
            <header><strong>Markdown</strong></header>
            <div>
              <textarea id='markdown'>#{ markdown }</textarea>
@@ -14,7 +14,7 @@ class BlogEditMarkdown extends Backbone.View
 
   render_preview: (state) ->
     """<div class='six columns right-column'>
-          <div class='container'>
+          <div class='chr-container'>
             <header><strong>#{ state }</strong></header>
             <article class='item-preview'>
               <section class=content id=html></section>

@@ -6,7 +6,7 @@ class PagesEditRedactor extends Backbone.View
     state = if @model then @model.state()  else 'New Page'
 
     html = """<div class='twelve columns'>
-                <div class='container'>
+                <div class='chr-container'>
                   <header class='align-right'>
                     <strong>#{ state }</strong>
                   </header>

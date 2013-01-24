@@ -14,7 +14,7 @@ class PagesIndex extends Backbone.View
 
   render: ->
     html = """<div class='six columns left-column' id=index>
-                <section class='container'>
+                <section class='chr-container'>
                   <header>
                     <strong>Pages</strong>
                     <span class='buttons'>

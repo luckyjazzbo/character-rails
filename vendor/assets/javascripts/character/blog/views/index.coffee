@@ -5,7 +5,7 @@ class BlogIndex extends Backbone.View
 
   render: ->
     html = """<div class='six columns left-column' id=index>
-                <div class='container'>
+                <div class='chr-container'>
                   <header>
                     <strong>Posts</strong>
                     <span class='buttons'>
