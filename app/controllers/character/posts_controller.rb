@@ -1,27 +1,23 @@
 class Character::PostsController < ApplicationController
-  before_filter :authenticate_admin_user!
+  before_filter :load_all_categories
+
+  def load_all_categories
+    @categories = Character::Category.all
+  end
 
   def index
-    @posts = []
-    @posts += Character::Post.drafts.to_a
-    @posts += Character::Post.published.to_a
-    render json: @posts
+    @posts = Character::Post.published
+    #@posts = @posts.page params[:page]
   end
 
-  def create
-    @post = Character::Post.create params[:post]
-    render json: @post
-  end
+  def category
+    @category = Character::Category.find(params[:slug])
+    @posts    = @category.posts.published
+    #@posts    = @posts.page params[:page]
+    render 'index'
+  end  
 
-  def update
-    @post = Character::Post.find(params[:id])
-    @post.update_attributes params[:post]
-    render json: @post
-  end
-
-  def destroy
-    @post = Character::Post.find(params[:id])
-    @post.destroy
-    render json: 'ok'
+  def show
+    @post = Character::Post.published.find_by(slug:params[:slug])
   end
 end

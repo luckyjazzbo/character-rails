@@ -20,14 +20,22 @@ Gem::Specification.new do |gem|
   # Supress the warning about no rubyforge project
   gem.rubyforge_project = 'nowarning'
 
-  gem.add_runtime_dependency 'compass-rails'
-  gem.add_runtime_dependency 'mongoid_slug' #git: 'git://github.com/digitalplaywright/mongoid-slug.git'
-  gem.add_runtime_dependency 'kaminari'
-  gem.add_runtime_dependency 'foundation-icons-sass-rails'
+  # assets
   gem.add_runtime_dependency 'codemirror-rails'
-  gem.add_runtime_dependency 'activeadmin-mongoid-reorder'
+  gem.add_runtime_dependency 'compass-rails'
+  gem.add_runtime_dependency 'zurb-foundation'
+  gem.add_runtime_dependency 'jquery-ui-rails'
+  gem.add_runtime_dependency 'foundation-icons-sass-rails'
+  gem.add_runtime_dependency 'carrierwave-mongoid'
+  gem.add_runtime_dependency 'rmagick'
 
-#gem 'rmagick'
-#gem "carrierwave-mongoid",  require: "carrierwave/mongoid", git: "git://github.com/jnicklas/carrierwave-mongoid.git", branch: "mongoid-3.0"
+  # mongoid
+  gem.add_runtime_dependency 'mongoid_slug'
 
+  #gem.add_runtime_dependency 'mongoid_slug' #git: 'git://github.com/digitalplaywright/mongoid-slug.git'
+  #gem.add_runtime_dependency 'kaminari'
+  #gem.add_runtime_dependency 'activeadmin-mongoid-reorder'
+
+  #gem 'rmagick'
+  #gem "carrierwave-mongoid",  require: "carrierwave/mongoid", git: "git://github.com/jnicklas/carrierwave-mongoid.git", branch: "mongoid-3.0"
 end

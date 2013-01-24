@@ -14,19 +14,22 @@ class Character::Post
 
   # Relations
   belongs_to :featured_image, class_name:'Character::Image'
-  belongs_to :category,       class_name: "Character::Category"
+  belongs_to :category,       class_name:'Character::Category'
 
-  default_scope order_by date: :desc
 
   # Scope
+  default_scope     order_by date: :desc
   scope :drafts,    where(published: false)
   scope :published, where(published: true)
+
 
   # Indexes
   index :slug rescue index slug: 1
 
+
   # Pagination by Kaminari
-  paginates_per 6
+  #paginates_per 6
+
 
   def as_json(options = { })
     super((options || { }).merge({

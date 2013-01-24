@@ -1,7 +1,22 @@
+require 'mongoid/reorder'
+
 require 'character/version'
 require 'character/engine'
 require 'character/routing'
 
-require 'foundation-icons-sass-rails'
+# assets
 require 'codemirror-rails'
-require 'activeadmin-mongoid-reorder'
+require 'compass-rails'
+require 'zurb-foundation'
+require 'foundation-icons-sass-rails'
+require 'jquery-ui-rails'
+
+# mongoid
+require 'mongoid_slug'
+
+# uploads
+require 'carrierwave/mongoid'
+require 'rmagick'
+
+#redactor
+require 'redactor'

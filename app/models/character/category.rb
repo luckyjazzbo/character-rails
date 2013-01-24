@@ -15,5 +15,4 @@ class Character::Category
 
   # Indexes
   index :slug rescue index slug: 1
-
 end
