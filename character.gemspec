@@ -31,6 +31,9 @@ Gem::Specification.new do |gem|
   # mongoid
   gem.add_runtime_dependency 'mongoid_slug'
 
+  # browserid auth
+  gem.add_runtime_dependency 'browserid-rails'
+
   #gem.add_runtime_dependency 'mongoid_slug' #git: 'git://github.com/digitalplaywright/mongoid-slug.git'
   #gem.add_runtime_dependency 'kaminari'
   #gem.add_runtime_dependency 'activeadmin-mongoid-reorder'

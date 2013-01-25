@@ -3,7 +3,7 @@ class PagesIndexPage extends Backbone.View
 
   render: ->
     id        = @model.id
-    title     = @model.get('title')
+    title     = @model.get('menu_title')
     permalink = @model.get('permalink')
     
     published_or_hidden = @model.state()

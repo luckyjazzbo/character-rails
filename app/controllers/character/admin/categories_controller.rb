@@ -1,6 +1,4 @@
-class Character::Admin::CategoriesController < ApplicationController
-  #before_filter :authenticate_admin_user!
-
+class Character::Admin::CategoriesController < Character::Admin::ApplicationController
   def index
     @objects = Character::Category.all
     render json: @objects

@@ -1,6 +1,4 @@
-class Character::Admin::PostsController < ApplicationController
-  #before_filter :authenticate_admin_user!
-
+class Character::Admin::PostsController < Character::Admin::ApplicationController
   def index
     @posts = []
     @posts += Character::Post.drafts.to_a

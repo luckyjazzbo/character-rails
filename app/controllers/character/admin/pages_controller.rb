@@ -1,6 +1,4 @@
-class Character::Admin::PagesController < ApplicationController
-  #before_filter :authenticate_admin_user!, except: [:home, :show]
-
+class Character::Admin::PagesController < Character::Admin::ApplicationController
   def index
     @pages = Character::Page.all
     render json: @pages

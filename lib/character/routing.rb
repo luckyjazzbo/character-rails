@@ -3,7 +3,11 @@ module ActionDispatch::Routing
 
     def mount_character_admin
       scope '/admin', :module => "Character::Admin" do
-        match '/', to: 'app#index'
+        # BrowserId Auth
+        match '/login',   to: 'sessions#create'
+        match '/logout',  to: 'sessions#destroy'
+
+        match '/', to: 'admin#index'
 
         scope 'character' do
           put '/categories-reorder',  to: 'categories#reorder'

@@ -26,7 +26,7 @@
 #= require codemirror/modes/markdown
 
 #= require redactor
-
+#= require browserid
 
 #= require_self
 
@@ -70,5 +70,6 @@ class AppSkeleton
 
 
 window.Character.AppSkeleton = AppSkeleton
+
 
 

@@ -1,6 +1,4 @@
-class Character::Admin::ImagesController < ApplicationController
-  #before_filter :authenticate_admin_user!
-
+class Character::Admin::ImagesController < Character::Admin::ApplicationController
   def create
     @object = Character::Image.new
 

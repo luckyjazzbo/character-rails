@@ -43,7 +43,7 @@ class Character::Page
 
   def as_json(options = { })
     super((options || { }).merge({
-        :methods => [:featured_image]
+        :methods => [:featured_image, :menu_title]
     }))
   end  
 end
