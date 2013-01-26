@@ -26,22 +26,24 @@
 <body>
 
 <% if authenticated? %>
-  <div class='fixed'>
-    <nav class='top-bar'>
-      <ul>
-        <li class='name'><h1><a href='/' target=_blank><%= ENV['WEBSITE_NAME'] %></a></h1></li>
-        <li class='toggle-topbar'><a href="#"></a></li>
-      </ul>
-      <section>
-        <ul class='left' id='main_menu'>
+  <header class='chr-header'>
+    <div class='fixed'>
+      <nav class='top-bar'>
+        <ul>
+          <li class='name'><h1><a href='/' target=_blank><%= ENV['WEBSITE_NAME'] %></a></h1></li>
+          <li class='toggle-topbar'><a href="#"></a></li>
         </ul>
+        <section>
+          <ul class='left' id='main_menu'>
+          </ul>
 
-        <ul class='right'>
-          <li><%= logout_link %></li>
-        </ul>
-      </section>
-    </nav>
-  </div>
+          <ul class='right'>
+            <li><%= logout_link %></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+  </header>
 
   <div id='character'></div>
 <% else %>

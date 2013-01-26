@@ -4,16 +4,16 @@ class BlogIndex extends Backbone.View
 
 
   render: ->
-    html = """<div class='six columns left-column' id=index>
-                <div class='chr-container'>
+    html = """<div class='chr-panel left' id=index>
+                <section>
                   <header>
                     <strong>Posts</strong>
-                    <span class='buttons'>
-                      <a href='#/blog/new' title='Create new post' class='icon-btn general foundicon-add-doc '></a>
-                    </span>
+                    <aside>
+                      <a href='#/blog/new' title='Create new post' class='general foundicon-add-doc '></a>
+                    </aside>
                   </header>
-                  <ul id='list' class='items-list no-bullets'></ul>
-                </div>
+                  <ul class='chr-index' id=list></ul>
+                </section>
               </div>"""
     $(this.el).html html
     return this
@@ -89,7 +89,7 @@ class BlogIndex extends Backbone.View
     app_top_padding = parseInt($('#character').css('padding-top'))
 
     $('#index').css('top', -window.scrollY + top_bar_height + app_top_padding)
-               .addClass('fixed-position')
+               .addClass('fixed')
 
 
   unlock: ->

@@ -1,7 +1,6 @@
 class BlogIndexShow extends Backbone.View
   tagName:    'div'
-  className:  'six columns right-column'
-  id:         'preview'
+  className:  'chr-panel right'
 
 
   render: ->
@@ -9,22 +8,20 @@ class BlogIndexShow extends Backbone.View
     state = @model.state()
     id    = @model.id
 
-    html = """<div class='chr-container'>
+    html = """<section>
                 <header>
                   <strong>#{state}</strong>
-                  <span class='buttons'>
-                    <a href='#' title='Delete this post' class='icon-btn general foundicon-trash' id='delete_post'></a>
-                    <span class='split'></span>
-                    <a href='#/blog/edit/#{id}' title='Edit this post' class='icon-btn general foundicon-edit'></a>
-                    <span class='split'></span>
-                    <a href='#/blog' title='Close Preview' class='icon-btn general foundicon-remove'></a>
-                  </span>
+                  <aside>
+                    <a href='#' title='Delete this post' class='general foundicon-trash' id='delete_post'></a>
+                    <a href='#/blog/edit/#{id}' title='Edit this post' class='general foundicon-edit'></a>
+                    <a href='#/blog' title='Close Preview' class='general foundicon-remove'></a>
+                  </aside>
                 </header>
 
-                <article class='item-preview'>
+                <article class='chr-blog-post-preview' id=preview>
                   #{post.html}
                 </article>
-              </div>"""
+              </section>"""
     $(this.el).html html
     return this
 

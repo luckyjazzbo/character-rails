@@ -1,6 +1,5 @@
 class BlogEditSettings extends Backbone.View
-  tagName:    'div'
-  className:  'settings'
+  tagName:    'span'
   id:         'settings'
 
 
@@ -63,7 +62,7 @@ class BlogEditSettings extends Backbone.View
     featured_image_form_tag = @render_featured_image_form()
     category_options_tag    = if blog.options.categories then @category_options() else ''
     
-    html = """<div class='dialog' id=settings_dlg style='display:none;'>
+    html = """<div class='chr-settings chr-form' id=settings_dlg style='display:none;'>
                 #{ featured_image_form_tag }
 
                 <input id=date class=datepicker type=text value='#{date}' placeholder='Date'>
@@ -72,7 +71,7 @@ class BlogEditSettings extends Backbone.View
 
                 #{ category_options_tag }
               </div>
-              <button id=settings_btn class=btn><i class='general foundicon-settings' /></button>"""
+              <button id=settings_btn class=chr-btn><i class='general foundicon-settings' /></button>"""
               
     $(this.el).html html
     return this
@@ -81,7 +80,7 @@ class BlogEditSettings extends Backbone.View
   initialize: ->
     html = @render().el
     $(html).attr('href', '#')
-    $('footer .right-buttons').prepend(html)
+    $('#footer aside').prepend(html)
 
     @settings_btn = document.getElementById('settings_btn')
     @settings_dlg = document.getElementById('settings_dlg')

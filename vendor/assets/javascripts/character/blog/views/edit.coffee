@@ -1,25 +1,24 @@
 class BlogEdit extends Backbone.View
   tagName:    'div'
-  className:  'edit'
 
 
   render: ->
     title = if @model then @model.get('title') else 'The New Post'
-    html = """<header class='twelve columns'>
-                <input  type=text
+    html = """<header class='chr-panel' id=header>
+                <input  id=title
+                        class=chr-editor-title
+                        type=text
                         placeholder='Post Title'
-                        value='#{title}'
-                        id=title
-                        class=title />
-                <div class=permalink id=permalink></div>
+                        value='#{title}' />
+                <div class=chr-editor-permalink id=permalink></div>
               </header>
 
-              <footer class='chr-footer'>
-                <button class='cancel btn'>Back to index</button>
-                <span class='right-buttons'>
-                  <button class='save-draft btn blue'>Save Draft</button>
-                  <button class='publish btn red'>Publish</button>
-                </span>
+              <footer class='chr-footer' id=footer>
+                <button class='chr-btn cancel'>Back to index</button>
+                <aside>
+                  <button class='chr-btn blue save-draft'>Save Draft</button>
+                  <button class='chr-btn red publish'>Publish</button>
+                </aside>
               </footer>"""
     $(this.el).html html
     return this
@@ -74,9 +73,9 @@ class BlogEdit extends Backbone.View
 
 
   events:
-    'click .save-draft':              'save_draft'
-    'click .publish':                 'publish'
-    'click .cancel':                  'back_to_index'
+    'click .save-draft': 'save_draft'
+    'click .publish':    'publish'
+    'click .cancel':     'back_to_index'
 
 
   update_permalink: ->

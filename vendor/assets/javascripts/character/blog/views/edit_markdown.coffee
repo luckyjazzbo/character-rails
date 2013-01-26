@@ -2,8 +2,8 @@ class BlogEditMarkdown extends Backbone.View
   tagName:    'div'
 
   render_markdown: (markdown) ->
-    """<div class='six columns left-column'>
-         <section class='chr-container'>
+    """<div class='chr-panel left'>
+         <section>
            <header><strong>Markdown</strong></header>
            <div>
              <textarea id='markdown'>#{ markdown }</textarea>
@@ -13,13 +13,13 @@ class BlogEditMarkdown extends Backbone.View
 
 
   render_preview: (state) ->
-    """<div class='six columns right-column'>
-          <div class='chr-container'>
+    """<div class='chr-panel right'>
+          <section>
             <header><strong>#{ state }</strong></header>
-            <article class='item-preview'>
-              <section class=content id=html></section>
+            <article class='chr-blog-post-preview scroll'>
+              <div id=html></div>
             </article>
-          </div>
+          </section>
         </div>"""
   
 
@@ -35,7 +35,7 @@ class BlogEditMarkdown extends Backbone.View
 
   initialize: ->
     html = @render().el
-    $('.edit header').after(html)
+    $('#header').after(html)
 
     @converter  = new Showdown.converter { extensions: ['github', 'image_uploader', 'video'] }
     @html       = document.getElementById('html')
@@ -58,7 +58,7 @@ class BlogEditMarkdown extends Backbone.View
   upload_image: (e) ->
     form = $(e.currentTarget).parent()
 
-    form_index = $('article .image-uploader').index(form) + 1
+    form_index = $('#preview .image-uploader').index(form) + 1
 
     form.ajaxForm
       success: (obj) =>
@@ -89,7 +89,7 @@ class BlogEditMarkdown extends Backbone.View
   resize_panels: ->
     article       = $(@html).parent()
 
-    article_top_offset  = 153 #article.offset().top
+    article_top_offset  = 156 #article.offset().top
     window_height       = $(window).height()
     footer_height       = $('footer').outerHeight()
     
