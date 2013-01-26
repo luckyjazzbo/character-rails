@@ -53,7 +53,7 @@ class BlogIndex extends Backbone.View
 
   initialize: ->
     html = @render().el
-    $('#app').append(html)
+    $('#character').append(html)
 
     if blog.options.categories
       @categories = new Character.Blog.Views.BlogCategories
@@ -86,7 +86,7 @@ class BlogIndex extends Backbone.View
     blog.index_scroll_y = window.scrollY
 
     top_bar_height  = $('.top-bar').height()
-    app_top_padding = parseInt($('#app').css('padding-top'))
+    app_top_padding = parseInt($('#character').css('padding-top'))
 
     $('#index').css('top', -window.scrollY + top_bar_height + app_top_padding)
                .addClass('fixed-position')

@@ -1,4 +1,4 @@
-class Character::Admin::ImagesController < Character::Admin::ApplicationController
+class Character::Admin::ImagesController < Character::Admin::BaseController
   def create
     @object = Character::Image.new
 

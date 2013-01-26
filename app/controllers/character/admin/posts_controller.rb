@@ -1,4 +1,4 @@
-class Character::Admin::PostsController < Character::Admin::ApplicationController
+class Character::Admin::PostsController < Character::Admin::BaseController
   def index
     @posts = []
     @posts += Character::Post.drafts.to_a

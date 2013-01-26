@@ -16,7 +16,6 @@ class Blog extends Character.AppSkeleton
   override_default_options: (options) ->
     _({
         blog_url:       'http://this-is-blog.com/',
-        app_container:  '#app',
         categories:     false,
       }).extend options
 

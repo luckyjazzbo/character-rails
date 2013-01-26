@@ -1,12 +1,17 @@
+//= require_self
 //= require jquery.ui.datepicker
+//= require redactor
+//= require codemirror
+
+
+
+@charset "UTF-8";
 
 // http://patorjk.com/software/taag/#p=display&f=Banner3&t=posts
 
 @import "compass/css3";
 @import "compass/reset/utilities";
 @import "foundation-icons";
-@import "codemirror";
-@import "redactor";
 
 
 
@@ -130,6 +135,11 @@ $topBarBtmMargin: 0px;
 @import "foundation";
 
 
+
+
+
+
+
 // Character Settings
 
 $iconBtnColor: $topBarBgColor;
@@ -138,6 +148,11 @@ $txtColor2: #888;
 $bodyBgColor: #E3E3E1;
 $redColor: #a71820;
 $blueColor: #2763a5;
+
+
+
+
+
 
 
 // Charcter Mixins
@@ -164,7 +179,7 @@ $blueColor: #2763a5;
 body                                  { background:$bodyBgColor;
 }
 
-#app                                  { margin-top:$topBarHeight;
+#character                            { margin-top:$topBarHeight;
                                         padding-top:1em;
 }
 

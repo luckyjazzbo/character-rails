@@ -4,6 +4,10 @@ require 'compass-rails'
 require 'zurb-foundation'
 require 'foundation-icons-sass-rails'
 require 'jquery-ui-rails'
+require 'redactor'
+require 'showdown'
+require 'lodash-rails'
+require 'underscore-string-rails'
 
 # mongoid
 require 'mongoid_slug'
@@ -11,9 +15,6 @@ require 'mongoid/reorder'
 
 # uploads
 require 'carrierwave/mongoid'
-
-#redactor
-require 'redactor'
 
 # browserid-rails
 require 'browserid-rails'

@@ -4,5 +4,7 @@ class Character::Admin::AdminController < ActionController::Base
 
   def index
     authenticated?
+
+    render 'character/admin'
   end
 end

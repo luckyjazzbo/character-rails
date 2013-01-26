@@ -47,7 +47,7 @@ class PagesIndex extends Backbone.View
 
   initialize: ->
     html = @render().el
-    $('#app').append(html)
+    $('#character').append(html)
 
     @list        = document.getElementById('list')
     @item_views  = {}

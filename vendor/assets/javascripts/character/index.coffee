@@ -3,20 +3,17 @@
 #= require jquery.ui.sortable
 #= require jquery.ui.datepicker
 
-#= require ./_lib/replace_nth_occurrence
-#= require ./_lib/jquery.smartresize
-#= require ./_lib/jquery.form
+#= require ./plugins/replace_nth_occurrence
+#= require ./plugins/jquery.smartresize
+#= require ./plugins/jquery.form
 
-#= require ./_lib/lodash
-#= require ./_lib/underscore.string
-#= require ./_lib/backbone
-
-#= require ./_lib/showdown
-#= require ./_lib/showdown.image_uploader
-#= require ./_lib/showdown.github
-#= require ./_lib/showdown.video
-
-# require foundation
+#= require lodash
+#= require underscore.string
+#= require ./plugins/underscore.string.slugify
+#= require backbone
+#= require redactor
+#= require showdown
+#= require browserid
 
 #= require codemirror
 #= require codemirror/modes/javascript
@@ -25,8 +22,7 @@
 #= require codemirror/modes/htmlmixed
 #= require codemirror/modes/markdown
 
-#= require redactor
-#= require browserid
+# require foundation
 
 #= require_self
 

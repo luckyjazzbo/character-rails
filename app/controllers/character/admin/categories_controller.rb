@@ -1,4 +1,4 @@
-class Character::Admin::CategoriesController < Character::Admin::ApplicationController
+class Character::Admin::CategoriesController < Character::Admin::BaseController
   def index
     @objects = Character::Category.all
     render json: @objects

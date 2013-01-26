@@ -1,4 +1,4 @@
-class Character::Admin::PagesController < Character::Admin::ApplicationController
+class Character::Admin::PagesController < Character::Admin::BaseController
   def index
     @pages = Character::Page.all
     render json: @pages

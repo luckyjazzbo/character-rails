@@ -1,3 +1,8 @@
+//= require_self
+//= require ./image_uploader
+//= require ./github
+//= require ./video
+
 //
 // showdown.js -- A javascript port of Markdown.
 //

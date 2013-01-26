@@ -3839,8 +3839,9 @@ var RLANG = {
 
         // ==========================================
         // SLATE FIX: Rails workaround
-        $('input[name="utf8"]').clone().appendTo(this.form);
-        $('input[name="authenticity_token"]').clone().appendTo(this.form);
+        // This is not required when jquery_ujs is included
+        //$('input[name="utf8"]').clone().appendTo(this.form);
+        //$('input[name="authenticity_token"]').clone().appendTo(this.form);
 
         this.form.submit();
       }

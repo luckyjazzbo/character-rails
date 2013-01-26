@@ -27,7 +27,7 @@ class BlogEdit extends Backbone.View
 
   initialize: ->
     html = @render().el
-    $('#app').append(html)
+    $('#character').append(html)
 
     @title    = document.getElementById('title')    
     @mode     = new Character.Blog.Views.BlogEditMarkdown model: @model

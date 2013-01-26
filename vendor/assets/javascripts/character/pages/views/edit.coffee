@@ -27,7 +27,7 @@ class PagesEdit extends Backbone.View
 
   initialize: ->
     html = @render().el
-    $('#app').append(html)
+    $('#character').append(html)
 
     @title = document.getElementById('title')
     @settings = new Character.Pages.Views.PagesEditSettings model: @model
