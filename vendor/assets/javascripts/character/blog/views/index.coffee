@@ -3,33 +3,18 @@ class BlogIndex extends Character.IndexView
   new_item_url:   '#/blog/new'
   new_item_hint:  'Create new post'
 
+
   render_item: (model) ->
-    id              = model.id
-    line1_left      = model.get('title')
-    line1_right     = model.draft_or_date()
-    line2_left      = ''
-    line2_right     = ''
-    thumb_image_url = model.thumb_image_url()
+    params =
+      action_url:   "#/blog/show/#{ model.id }"
+      image_url:    model.thumb_image_url()
+      line1_left:   model.get('title')
+      line1_right:  model.draft_or_date()
+      line2_left:   ''
+      line2_right:  ''
     
-    img_tag = if thumb_image_url then "<img src='#{ thumb_image_url }' />" else ''
+    @default_item_template(params)
 
-    # refactor this!
-    #category_title = ''
-    #if blog.options.categories
-    #  category = @model.category()
-    #  category_title = if category then category.get('title') else 'Not set'
-
-    """ <a href='#/blog/show/#{id}'>
-          #{ img_tag }
-          <div>
-            <strong>#{ line1_left }</strong>
-            <aside><small>#{ line1_right }</small></aside>
-          </div>
-          <div>
-            <small><em>#{ line2_left }</em></small>
-            <aside>#{ line2_right }</aside>
-          </div>
-        </a>"""    
 
   items: ->
     # drafts go first, then published posts

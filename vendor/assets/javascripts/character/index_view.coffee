@@ -39,6 +39,22 @@ class IndexView extends Backbone.View
     return this
 
 
+  default_item_template: (params) ->
+    image = if params.image_url then "<img src='#{ params.image_url }' />" else ''
+
+    """ <a href='#{ params.action_url }'>
+          #{ image }
+          <div>
+            <strong>#{ params.line1_left }</strong>
+            <aside><small>#{ params.line1_right }</small></aside>
+          </div>
+          <div>
+            <small><em>#{ params.line2_left }</em></small>
+            <aside>#{ params.line2_right }</aside>
+          </div>
+        </a>"""    
+  
+
   render_item: (obj) ->
     console.error 'IMPORTANT: "render_item" method is not implemented!'
     ""

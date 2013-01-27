@@ -15,11 +15,8 @@ class BlogEditSettings extends Backbone.View
 
   render_featured_image_form: ->
     featured_img_tag    = @render_featured_image()
-    #authenticity_token  = workspace.authenticity_token()
-    #      <input name=authenticity_token type=hidden value="#{ authenticity_token }">
 
     """<form  id=featured_image
-              class='featured-image-form'
               method=post
               action='/admin/character/images'
               enctype='multipart/form-data'>
@@ -28,7 +25,7 @@ class BlogEditSettings extends Backbone.View
           
           <input name=_method type=hidden value=post>
           <input type=file id=image_uploader_input name='image' />
-          <button class='submit' style='float:right;'>Upload</button>
+          <button style='float:right;'>Upload</button>
         </form>"""
 
 
