@@ -164,6 +164,8 @@ body                                  { background:$bodyBgColor;
   &.scroll                            { overflow-y:scroll;
                                         margin-right: 1px;
   }
+  ul                                  { padding-left:30px;
+  }
 }
 
 
