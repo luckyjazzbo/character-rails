@@ -1,26 +1,27 @@
 class PagesEdit extends Backbone.View
   tagName:    'div'
-  className:  'edit'
 
 
   render: ->
-    page = if @model then @model.toJSON() else { title: 'Page Title', html: 'Page Sources' }
-    html = """<header class='twelve columns'>
-                <input  type=text
+    title = @model?.get('title') ? 'Page Title'
+
+    html = """<header class='chr-panel' id=header>
+                <input  id=title
+                        class=chr-editor-title
+                        type=text
                         placeholder='Page Title'
-                        value='#{ page.title }'
-                        id=title
-                        class=title />
-                <div class=permalink id=permalink></div>
+                        value='#{ title }' />
+                <div class=chr-editor-permalink id=permalink></div>
               </header>
 
-              <footer class='chr-footer'>
-                <button class='cancel btn'>Back to index</button>
-                <span class='right-buttons'>
-                  <button class='save btn blue'>Save Hidden</button>
-                  <button class='publish btn red'>Publish</button>
-                </span>
+              <footer class='chr-footer' id=footer>
+                <button class='chr-btn cancel'>Back to index</button>
+                <aside>
+                  <button class='chr-btn blue save'>Save Hidden</button>
+                  <button class='chr-btn red publish'>Publish</button>
+                </aside>
               </footer>"""
+
     $(this.el).html html
     return this
 
@@ -29,10 +30,9 @@ class PagesEdit extends Backbone.View
     html = @render().el
     $('#character').append(html)
 
-    @title = document.getElementById('title')
+    @title    = document.getElementById('title')
     @settings = new Character.Pages.Views.PagesEditSettings model: @model
-    
-    @mode = new Character.Pages.Views.PagesEditRedactor model: @model
+    @mode     = new Character.Pages.Views.PagesEditRedactor model: @model
     
     @update_permalink()
 
@@ -59,11 +59,11 @@ class PagesEdit extends Backbone.View
 
 
   save_hidden: ->
-    @update_or_create {published: false}
+    @update_or_create { published: false }
 
 
   publish: ->
-    @update_or_create {published: true}, =>    
+    @update_or_create { published: true }, =>
       @back_to_index()
 
 
@@ -79,7 +79,7 @@ class PagesEdit extends Backbone.View
 
   get_permalink: ->
     permalink = @settings.permalink()
-    permalink = '/' + Character.Pages.Page.slugify($(@title).val()) if permalink == ''
+    permalink = '/' + _.string.slugify($(@title).val()) if permalink == ''
     permalink
 
 

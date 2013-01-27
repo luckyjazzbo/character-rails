@@ -4,21 +4,19 @@ class BlogEditSettings extends Backbone.View
 
 
   render_featured_image: ->
-    post = @model?.toJSON()
+    image_id  = @model?.get('featured_image_id')  ? ''
+    image_url = @model?.featured_image_url()      ? ''
 
-    if post and post.featured_image_id
-      """<img  id=featured_image_demo
-               data-image-id='#{ post.featured_image_id }'
-               src='#{@model.featured_image_url()}'
-               style='width:100%;' />"""    
-    else
-      """<img  id=featured_image_demo
-               style='display:none; width:100%;' />"""   
+    """<img  id=featured_image_demo
+             data-image-id='#{ image_id }'
+             src='#{ image_url }'
+             style='width:100%;' />"""    
 
 
   render_featured_image_form: ->
     featured_img_tag    = @render_featured_image()
-    authenticity_token  = workspace.authenticity_token()
+    #authenticity_token  = workspace.authenticity_token()
+    #      <input name=authenticity_token type=hidden value="#{ authenticity_token }">
 
     """<form  id=featured_image
               class='featured-image-form'
@@ -29,7 +27,6 @@ class BlogEditSettings extends Backbone.View
           #{ featured_img_tag }
           
           <input name=_method type=hidden value=post>
-          <input name=authenticity_token type=hidden value="#{ authenticity_token }">
           <input type=file id=image_uploader_input name='image' />
           <button class='submit' style='float:right;'>Upload</button>
         </form>"""

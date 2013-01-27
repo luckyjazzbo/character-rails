@@ -37,7 +37,7 @@ class BlogEdit extends Backbone.View
 
   update_or_create_post: (extra_attributes, callback) ->
     title = $(@title).val()
-    slug  = Character.Blog.Post.slugify(title)
+    slug  = _.string.slugify(title)
 
     attributes =
       title:              title
@@ -81,7 +81,7 @@ class BlogEdit extends Backbone.View
   update_permalink: ->
     set_permalink = =>
       blog_url  = blog.options.blog_url
-      slug      = Character.Blog.Post.slugify($(@title).val())
+      slug      = _.string.slugify($(@title).val())
       html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
       $('#permalink').html html
 

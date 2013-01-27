@@ -17,25 +17,24 @@ class Post extends Backbone.Model
   featured_image_url: ->
     @get('featured_image')?.image.featured.url
 
-  thumb_image_url: -> 
+  thumb_image_url: ->
     @get('featured_image')?.image.character_thumb.url
+
+  date_formatted: ->
+    date = @get('date')
+    if date then date.replace(/-/g, '/') else ''
+
+  state: ->
+    if @get('published') then 'Published' else 'Draft'
+
+  draft_or_date: ->
+    if @get('published') then @date_formatted() else @state()
 
 
   category: ->
     Character.Blog.categories.find (c) => c.id == @get('category_id')
 
 
-  date_formatted: ->
-    date = @get('date')
-    if date then date.replace(/-/g, '/') else 'Date Not Set'
-
-
-  state: ->
-    if @get('published') then 'Published' else 'Draft'
-
-
-  @slugify: (text) ->
-    _.string.slugify(text)
 
 
 class Posts extends Backbone.Collection

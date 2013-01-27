@@ -3,7 +3,7 @@
 #= require_tree ./views
 
 
-class Pages extends Character.AppSkeleton
+class Pages extends Character.App
   constructor: (@scope='pages', @menu='Pages') ->
     @router         = workspace.router
     

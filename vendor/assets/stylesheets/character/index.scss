@@ -26,21 +26,6 @@ body                                  { background:$bodyBgColor;
   }
 }
 
-/*
-.empty-list-msg                       { margin:1em;
-}
-
-
-.fixed-position                       { position:fixed;
-}
-
-.center-text                          { text-align:center;
-}
-
-.align-right                          { text-align:right;
-}
-*/
-
 
 /*
 ##     ## ########    ###    ########  ######## ########  
@@ -154,6 +139,13 @@ body                                  { background:$bodyBgColor;
                                         float:left;
                                         margin-right:.7em;
     }
+
+    aside                             { float:right;
+    }
+
+    &.chr-placeholder                 { text-align:center;
+                                        line-height:3em;
+    }
   }
 }
 
@@ -221,6 +213,7 @@ body                                  { background:$bodyBgColor;
                                         position:fixed;
                                         bottom:0;
                                         padding:5px 1em;
+                                        z-index:2000;
   aside                               { float:right;
   }
 }
@@ -300,31 +293,19 @@ body                                  { background:$bodyBgColor;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-######## ########  #### ######## 
-##       ##     ##  ##     ##    
-##       ##     ##  ##     ##    
-######   ##     ##  ##     ##    
-##       ##     ##  ##     ##    
-##       ##     ##  ##     ##    
-######## ########  ####    ##    
+########  ######## ########     ###     ######  ########  #######  ########  
+##     ## ##       ##     ##   ## ##   ##    ##    ##    ##     ## ##     ## 
+##     ## ##       ##     ##  ##   ##  ##          ##    ##     ## ##     ## 
+########  ######   ##     ## ##     ## ##          ##    ##     ## ########  
+##   ##   ##       ##     ## ######### ##          ##    ##     ## ##   ##   
+##    ##  ##       ##     ## ##     ## ##    ##    ##    ##     ## ##    ##  
+##     ## ######## ########  ##     ##  ######     ##     #######  ##     ## 
 */
 
-.edit                                 {
+.chr-redactor                         {
+  & > section > header                { text-align:right;
+  }
   .redactor_toolbar                   { position: absolute;
                                         width: 100%;
                                         top: -33px;
@@ -335,23 +316,14 @@ body                                  { background:$bodyBgColor;
                                         opacity:0;
     }
   }
+
   .redactor_box                       { border:none;
                                         padding:0 1em;
-  } 
+  }
 }
 
 .redactor_dropdown                    { margin-top: -40px;
 }
-
-.redactor_editor                      { @include global-reset();
-}
-
-
-
-
-
-
-
 
 
 

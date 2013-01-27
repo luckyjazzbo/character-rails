@@ -22,19 +22,13 @@ class Page extends Backbone.Model
     if @get('published') then 'Published' else 'Hidden'
 
 
-  @slugify: (text) ->
-    _.string.slugify(text)
-
-
 Character.Pages.Page   = Page
+
 
 
 class Pages extends Backbone.Collection
   model: Page
   url: '/admin/character/pages'
-
-  @reorder_url: ->
-    '/admin/character/pages-reorder'
 
 
 Character.Pages.Pages  = Pages

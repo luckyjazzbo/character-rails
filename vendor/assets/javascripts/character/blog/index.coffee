@@ -3,7 +3,7 @@
 #= require_tree ./views
 
 
-class Blog extends Character.AppSkeleton
+class Blog extends Character.App
   constructor: (@scope='blog', @menu='Blog', options={}) ->
     @index_scroll_y = 0
     @options        = @override_default_options(options)

@@ -1,6 +1,5 @@
 class PagesEditSettings extends Backbone.View
-  tagName:    'div'
-  className:  'settings'
+  tagName:    'span'
   id:         'settings'
 
 
@@ -16,7 +15,8 @@ class PagesEditSettings extends Backbone.View
 
   render_featured_image_form: ->
     featured_img_tag    = @render_featured_image()
-    authenticity_token  = workspace.authenticity_token()
+    #authenticity_token  = workspace.authenticity_token()
+    #      <input name=authenticity_token type=hidden value="#{ authenticity_token }">
 
     """<form  id=featured_image
               class='featured-image-form'
@@ -27,7 +27,6 @@ class PagesEditSettings extends Backbone.View
           #{ featured_img_tag }
           
           <input name=_method type=hidden value=post>
-          <input name=authenticity_token type=hidden value="#{ authenticity_token }">
           <input type=file id=image_uploader_input name='image' />
           <button class='submit' style='float:right;'>Upload</button>
         </form>"""
@@ -41,7 +40,7 @@ class PagesEditSettings extends Backbone.View
 
     featured_image_form_tag = @render_featured_image_form()
     
-    html = """<div class='dialog' id=settings_dlg style='display:none;'>
+    html = """<div class='chr-settings chr-form' id=settings_dlg style='display:none;'>
                 #{ featured_image_form_tag }
 
                 <input type=text id=menu value='#{ menu }' placeholder='Menu name' />
@@ -49,7 +48,7 @@ class PagesEditSettings extends Backbone.View
                 <textarea id=description rows=5 placeholder='Description'>#{ description }</textarea>
                 <input type=text id=keywords value='#{ keywords }' placeholder='Keywords splitted with comma' />
               </div>
-              <button id=settings_btn class=btn><i class='general foundicon-settings' /></button>"""
+              <button id=settings_btn class=chr-btn><i class='general foundicon-settings' /></button>"""
               
     $(this.el).html html
     return this
@@ -58,7 +57,7 @@ class PagesEditSettings extends Backbone.View
   initialize: ->
     html = @render().el
 
-    $('footer .right-buttons').prepend(html)
+    $('#footer aside').prepend(html)
 
     @settings_btn = document.getElementById('settings_btn')
     @settings_dlg = document.getElementById('settings_dlg')

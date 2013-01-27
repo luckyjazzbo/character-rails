@@ -2,18 +2,18 @@ class PagesEditRedactor extends Backbone.View
   tagName:    'div'
 
   render: ->
-    post  = if @model then @model.toJSON() else { html: ''}
-    state = if @model then @model.state()  else 'New Page'
+    html  = @model?.get('html') ? ''
+    state = @model?.state()     ? 'New Page'
 
-    html = """<div class='twelve columns'>
-                <div class='chr-container'>
-                  <header class='align-right'>
+    html = """<div class='chr-panel chr-redactor'>
+                <section>
+                  <header>
                     <strong>#{ state }</strong>
                   </header>
                   <div>
-                    <textarea id='html'>#{post.html}</textarea>
+                    <textarea id='html'>#{ html }</textarea>
                   </div>
-                </div>
+                </section>
               </div>"""
 
     $(this.el).html html
@@ -22,20 +22,19 @@ class PagesEditRedactor extends Backbone.View
 
   initialize: ->
     html = @render().el
-    $('.edit header').after(html)
+    $('#header').after(html)
 
     @html = document.getElementById('html')
     
     $(@html).redactor
       convertLinks: false
       convertDivs: false
+      buttons: ['html', '|', 'bold', 'italic', 'deleted', '|', 'image', '|', 'link' ]
       callback: => @resize_panels()
-      #autoresize: false
-      #air: true
 
 
   resize_panels: ->
-    top_offset    = 153 # top offset
+    top_offset    = 156
     window_height = $(window).height()
     footer_height = $('footer').outerHeight()
     
@@ -43,10 +42,6 @@ class PagesEditRedactor extends Backbone.View
     
     $(window).smartresize =>
       @resize_panels()
-
-
-  destroy: ->
-    # remove redactor
 
 
   get_html: ->
