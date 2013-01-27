@@ -1,20 +1,3 @@
-class IndexItemView extends Backbone.View
-  tagName: 'li'
-
-  render: ->
-    $(this.el).html @html
-    $(this.el).attr('data-id', @model.id)
-    return this
-
-  initialize: (@model, @html)->
-    @listenTo(@model, 'destroy', @remove)
-    @render()
-
-
-Character.IndexItemView = IndexItemView
-
-
-
 class IndexView extends Backbone.View
   tagName:    'div'
   id:         'index_view'
@@ -86,12 +69,8 @@ class IndexView extends Backbone.View
   enable_sorting: ->
     options =
       stop: (e, ui) =>
-        params  =
-          _method:            'put'
-          ids:                this.$('li').map(-> $(this).attr('data-id')).get()
-        
-        $.post @reorder_url, params, (data) ->
-          console.error 'Sorting backend function returned an error.' if data != 'ok'
+        ids = this.$('li').map(-> $(this).attr('data-id')).get()        
+        $.post @reorder_url, { _method: 'put', ids: ids }
 
     $(@items_el).sortable(options).disableSelection()
 
@@ -105,11 +84,26 @@ class IndexView extends Backbone.View
 
     @render_items()
 
-    #if blog.options.categories
-    #  @categories = new Character.Blog.Views.BlogCategories
-
     @enable_sorting() if @reorder_url
 
 
 Character.IndexView = IndexView
+
+
+
+class IndexItemView extends Backbone.View
+  tagName: 'li'
+
+  render: ->
+    $(this.el).html @html
+    $(this.el).attr('data-id', @model.id)
+    return this
+
+  initialize: (@model, @html)->
+    @listenTo(@model, 'destroy', @remove)
+    @render()
+
+
+Character.IndexItemView = IndexItemView
+
 
