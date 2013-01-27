@@ -24,7 +24,7 @@ class BlogEditSettings extends Backbone.View
           #{ featured_img_tag }
           
           <input name=_method type=hidden value=post>
-          <input type=file id=image_uploader_input name='image' />
+          <input type=file id=image_uploader_input name=file />
           <button class=submit style='float:right;'>Upload</button>
         </form>"""
 

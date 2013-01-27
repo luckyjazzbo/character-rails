@@ -23,10 +23,14 @@ class Character::Image
     src.thumb.url
   end
 
+  def filelink
+    image
+  end
+
 
   def as_json(options = {})
     super((options || {}).merge({
-      :methods => %w( thumb image common featured )
+      :methods => %w( thumb image common featured filelink )
     }))
   end
 end

@@ -13,7 +13,7 @@ window.Showdown.extensions.imageuploader = (converter) ->
         widget_html = """<p>
                            <form class='image-uploader' method=post action='/admin/character/images' enctype='multipart/form-data'>
                              <input name=_method type=hidden value=post>
-                             <input type=file id=image_uploader_input name='image' />
+                             <input type=file id=image_uploader_input name=file />
                              <button class='submit'>Upload</button>
                            </form>
                          </p>"""

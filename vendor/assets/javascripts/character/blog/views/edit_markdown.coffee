@@ -62,7 +62,7 @@ class BlogEditMarkdown extends Backbone.View
 
     form.ajaxForm
       success: (obj) =>
-        image_url       = obj.image.common.url
+        image_url       = obj.common
 
         md_text         = "\n" + @get_markdown() + "\n" # edge cases workaround
         updated_md_text = md_text.replace_nth_occurrence("\n(image)\n", "\n![](#{image_url})\n", form_index)
