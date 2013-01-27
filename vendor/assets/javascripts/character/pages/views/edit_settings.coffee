@@ -25,7 +25,7 @@ class PagesEditSettings extends Backbone.View
           
           <input name=_method type=hidden value=post>
           <input type=file id=image_uploader_input name='image' />
-          <button style='float:right;'>Upload</button>
+          <button class=submit style='float:right;'>Upload</button>
         </form>"""
 
 
@@ -73,14 +73,14 @@ class PagesEditSettings extends Backbone.View
     form = $('#featured_image')
     form.ajaxForm
       success: (obj) =>
-        $('#featured_image_demo').attr 'src', obj.image.featured.url
+        $('#featured_image_demo').attr 'src', obj.featured
         $('#featured_image_demo').attr 'data-image-id', obj._id
         $('#featured_image_demo').show()
 
 
   events:
-    'click #settings_btn':                'show_or_hide_settings_box'
-    'click .featured-image-form .submit': 'upload_featured_image'
+    'click #settings_btn':  'show_or_hide_settings_box'
+    'click .submit':        'upload_featured_image'
 
 
   description: ->

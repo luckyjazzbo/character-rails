@@ -12,6 +12,7 @@ class Character::Post
   field :excerpt,                   default: ''
   field :tags,                      default: ''
 
+
   # Relations
   belongs_to :featured_image, class_name:'Character::Image'
   belongs_to :category,       class_name:'Character::Category'
@@ -25,10 +26,6 @@ class Character::Post
 
   # Indexes
   index :slug rescue index slug: 1
-
-
-  # Pagination by Kaminari
-  #paginates_per 6
 
 
   def as_json(options = { })

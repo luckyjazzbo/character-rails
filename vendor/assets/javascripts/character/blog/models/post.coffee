@@ -15,10 +15,10 @@ class Post extends Backbone.Model
   idAttribute: '_id'
 
   featured_image_url: ->
-    @get('featured_image')?.image.featured.url
+    @get('featured_image')?.src.featured.url
 
   thumb_image_url: ->
-    @get('featured_image')?.image.character_thumb.url
+    @get('featured_image')?.src.thumb.url
 
   date_formatted: ->
     date = @get('date')

@@ -1,8 +1,13 @@
 class Character::Admin::ImagesController < Character::Admin::BaseController
+  def index
+    @objects = Character::Image.all
+    render :json => @objects
+  end
+
   def create
     @object = Character::Image.new
 
-    @object.image = params[:image]
+    @object.src = params[:image]
     
     if @object.save
       render json: @object

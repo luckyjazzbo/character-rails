@@ -154,12 +154,9 @@ var RLANG = {
       autosaveCallback: false, // function
       interval: 60, // seconds
 
-      // =================================================================================
-      // SLATE FIX: Activeadmin integration
-      imageGetJson: '/admin/redactor/pictures', // url (ex. /folder/images.json ) or false
+      imageGetJson: false, // url (ex. /folder/images.json ) or false
 
-      imageUpload: '/admin/redactor/pictures', // url   
-      // =================================================================================
+      imageUpload: false, // url
       imageUploadCallback: false, // function
       imageUploadErrorCallback: false, // function
 
@@ -185,12 +182,9 @@ var RLANG = {
 
       buttonsCustom: {},
       buttonsAdd: [],
-      
-      //===========================================
-      // SLATE FIX: fontcolor and backcolor removed
       buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
           'image', 'video', 'file', 'table', 'link', '|',
-          'alignment', '|', 'horizontalrule'], // 'underline', 'alignleft', 'aligncenter', 'alignright', 'justify'
+          'fontcolor', 'backcolor', '|', 'alignment', '|', 'horizontalrule'], // 'underline', 'alignleft', 'aligncenter', 'alignright', 'justify'
 
       airButtons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'fontcolor', 'backcolor'],
 
@@ -3836,12 +3830,6 @@ var RLANG = {
         $(this.form).css('top', '-2000px');
         $(this.form).css('left', '-2000px');
         $(this.form).appendTo('body');
-
-        // ==========================================
-        // SLATE FIX: Rails workaround
-        // This is not required when jquery_ujs is included
-        //$('input[name="utf8"]').clone().appendTo(this.form);
-        //$('input[name="authenticity_token"]').clone().appendTo(this.form);
 
         this.form.submit();
       }

@@ -28,8 +28,10 @@ class PagesEditRedactor extends Backbone.View
     
     $(@html).redactor
       convertLinks: false
-      convertDivs: false
-      buttons: ['html', '|', 'bold', 'italic', 'deleted', '|', 'image', '|', 'link' ]
+      convertDivs:  false
+      buttons:      ['html', '|', 'bold', 'italic', 'deleted', '|', 'image', '|', 'link' ]
+      imageGetJson: '/admin/character/images'
+      imageUpload:  '/admin/character/images'
       callback: => @resize_panels()
 
 

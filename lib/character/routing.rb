@@ -14,7 +14,7 @@ module ActionDispatch::Routing
           put '/pages-reorder',       to: 'pages#reorder'
           resources :posts,      only: [:index, :create, :update, :destroy]
           resources :categories, only: [:index, :create, :update, :destroy]
-          resources :images,     only: [:create]
+          resources :images,     only: [:index, :create]
           resources :pages,      only: [:index, :create, :update, :destroy]
         end
       end
