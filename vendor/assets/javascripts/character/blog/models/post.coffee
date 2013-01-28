@@ -12,7 +12,10 @@ class Post extends Backbone.Model
   #category_id
   #excerpt
 
-  idAttribute: '_id'
+  idAttribute:  '_id'
+
+  toJSON: ->
+    return { post: _.clone( @attributes ) }
 
   featured_image_url: ->
     @get('featured_image')?.src.featured.url

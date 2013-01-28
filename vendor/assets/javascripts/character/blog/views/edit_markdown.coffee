@@ -1,33 +1,28 @@
 class BlogEditMarkdown extends Backbone.View
   tagName:    'div'
 
+
   render_markdown: (markdown) ->
-    """<div class='chr-panel left'>
-         <section>
-           <header><strong>Markdown</strong></header>
-           <div>
-             <textarea id='markdown'>#{ markdown }</textarea>
-           </div>
-         </section>
-       </div>"""
+    Character.Templates.Panel
+      classes:  'left'
+      title:    'Markdown'
+      actions:  ''
+      content:  """<div><textarea id=markdown>#{ markdown }</textarea></div>"""
 
 
   render_preview: (state) ->
-    """<div class='chr-panel right'>
-          <section>
-            <header><strong>#{ state }</strong></header>
-            <article class='chr-blog-post-preview scroll'>
-              <div id=html></div>
-            </article>
-          </section>
-        </div>"""
+    Character.Templates.Panel
+      classes:  'right'
+      title:    state
+      actions:  ''
+      content:  """<article class='chr-blog-post-preview scroll'><div id=html></div></article>"""
   
 
   render: ->
-    post  = if @model then @model.toJSON() else { md: 'Post Text' }
-    state = if @model then @model.state()  else 'New'
+    markdown = @model?.get('md') ? 'Post Text'
+    state    = @model?.state()   ? 'New Post'
 
-    html = @render_markdown(post.md) + @render_preview(state)
+    html = @render_markdown(markdown) + @render_preview(state)
 
     $(this.el).html html
     return this

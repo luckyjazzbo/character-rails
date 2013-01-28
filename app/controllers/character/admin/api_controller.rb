@@ -23,7 +23,8 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def update
     @object = @model_class.find(params[:id])
-    @object.update_attributes params[@namespace]
+    @object.update_attributes! params[@namespace]
+
     render json: @object
   end
 

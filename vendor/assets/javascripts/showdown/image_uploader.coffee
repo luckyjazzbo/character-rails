@@ -8,12 +8,21 @@ window.Showdown.extensions.imageuploader = (converter) ->
     {
       type:   'lang',
       filter: (text) ->
-        #authenticity_token = workspace.authenticity_token()
-        #                     <input name=authenticity_token type=hidden value="#{ authenticity_token }">
+        url         = '/admin/api/images'
         widget_html = """<p>
-                           <form class='image-uploader' method=post action='/admin/character/images' enctype='multipart/form-data'>
-                             <input name=_method type=hidden value=post>
-                             <input type=file id=image_uploader_input name=file />
+                           <form  class=image-uploader
+                                  method=post
+                                  action='#{ url }'
+                                  enctype='multipart/form-data'>
+                             
+                             <input name=_method
+                                    type=hidden
+                                    value=post />
+                             
+                             <input name=file
+                                    type=file
+                                    id=image_uploader_input />
+                             
                              <button class='submit'>Upload</button>
                            </form>
                          </p>"""

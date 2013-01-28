@@ -11,12 +11,14 @@ class Page extends Backbone.Model
 
   idAttribute: '_id'
 
+  toJSON: ->
+    return { page: _.clone( @attributes ) }
+
   featured_image_url: ->
     @get('featured_image')?.src.featured.url
 
   thumb_image_url: ->
     @get('featured_image')?.src.thumb.url
-
 
   state: ->
     if @get('published') then 'Published' else 'Hidden'

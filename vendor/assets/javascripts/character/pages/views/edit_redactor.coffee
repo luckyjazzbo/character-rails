@@ -5,16 +5,11 @@ class PagesEditRedactor extends Backbone.View
     html  = @model?.get('html') ? ''
     state = @model?.state()     ? 'New Page'
 
-    html = """<div class='chr-panel chr-redactor'>
-                <section>
-                  <header>
-                    <strong>#{ state }</strong>
-                  </header>
-                  <div>
-                    <textarea id='html'>#{ html }</textarea>
-                  </div>
-                </section>
-              </div>"""
+    html = Character.Templates.Panel
+      classes: 'chr-redactor'
+      title:   state
+      actions: ''
+      content: """<div><textarea id='html'>#{ html }</textarea></div>"""
 
     $(this.el).html html
     return this
@@ -30,8 +25,8 @@ class PagesEditRedactor extends Backbone.View
       convertLinks: false
       convertDivs:  false
       buttons:      ['html', '|', 'bold', 'italic', 'deleted', '|', 'image', '|', 'link' ]
-      imageGetJson: '/admin/character/images'
-      imageUpload:  '/admin/character/images'
+      imageGetJson: '/admin/api/images'
+      imageUpload:  '/admin/api/images'
       callback: => @resize_panels()
 
 

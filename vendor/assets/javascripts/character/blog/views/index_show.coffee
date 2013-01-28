@@ -1,27 +1,19 @@
 class BlogIndexShow extends Backbone.View
   tagName:    'div'
-  className:  'chr-panel right'
 
 
   render: ->
-    post  = @model.toJSON()
-    state = @model.state()
     id    = @model.id
+    html  = @model.get('html')
 
-    html = """<section>
-                <header>
-                  <strong>#{state}</strong>
-                  <aside>
-                    <a href='#' title='Delete this post' class='general foundicon-trash' id='delete_post'></a>
-                    <a href='#/blog/edit/#{id}' title='Edit this post' class='general foundicon-edit'></a>
-                    <a href='#/blog' title='Close Preview' class='general foundicon-remove'></a>
-                  </aside>
-                </header>
+    html = Character.Templates.Panel 
+      classes:  'right'
+      title:    @model.state()
+      actions:  """<a href='#' title='Delete this post' class='general foundicon-trash' id='delete_post'></a>
+                   <a href='#/blog/edit/#{ id }' title='Edit post' class='general foundicon-edit'></a>
+                    <a href='#/blog' title='Close Preview' class='general foundicon-remove'></a>"""
+      content:  """<article class='chr-blog-post-preview' id=preview>#{ html }</article>"""
 
-                <article class='chr-blog-post-preview' id=preview>
-                  #{post.html}
-                </article>
-              </section>"""
     $(this.el).html html
     return this
 
