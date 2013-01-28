@@ -3,39 +3,12 @@ class IndexView extends Backbone.View
   id:         'index_view'
 
   render: ->
-    title         = @title
-    new_item_link = if @new_item_url then "<a href='#{ @new_item_url }'
-                                              title='#{ @new_item_hint }'
-                                              class='general foundicon-add-doc'></a>" else ''
-    html = """<div class='chr-panel left'>
-                <section>
-                  <header>
-                    <strong>#{ title }</strong>
-                    <aside>
-                      #{ new_item_link }
-                    </aside>
-                  </header>
-                  <ul class='chr-index'></ul>
-                </section>
-              </div>"""
+    html = Character.Templates.Index
+      title:        @title
+      new_item_url: @new_item_url
+
     $(this.el).html html
     return this
-
-
-  default_item_template: (params) ->
-    image = if params.image_url then "<img src='#{ params.image_url }' />" else ''
-
-    """ <a href='#{ params.action_url }'>
-          #{ image }
-          <div>
-            <strong>#{ params.line1_left }</strong>
-            <aside><small>#{ params.line1_right }</small></aside>
-          </div>
-          <div>
-            <small><em>#{ params.line2_left }</em></small>
-            <aside>#{ params.line2_right }</aside>
-          </div>
-        </a>"""    
   
 
   render_item: (obj) ->

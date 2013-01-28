@@ -1,19 +1,16 @@
 class BlogIndex extends Character.IndexView
   title:          'Posts'
   new_item_url:   '#/blog/new'
-  new_item_hint:  'Create new post'
 
 
   render_item: (model) ->
-    params =
+    Character.Templates.IndexItem
       action_url:   "#/blog/show/#{ model.id }"
       image_url:    model.thumb_image_url()
       line1_left:   model.get('title')
       line1_right:  model.draft_or_date()
       line2_left:   ''
       line2_right:  ''
-    
-    @default_item_template(params)
 
 
   items: ->

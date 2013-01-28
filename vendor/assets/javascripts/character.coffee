@@ -25,6 +25,7 @@
 # require foundation
 
 #= require character/workspace
+#= require character/templates
 #= require character/app
 #= require character/index_view
 #= require character/blog
