@@ -26,7 +26,8 @@
 
 #= require character/workspace
 #= require character/templates
-#= require character/app
 #= require character/index_view
+#= require character/settings_view
+#= require character/app
 #= require character/blog
 #= require character/pages

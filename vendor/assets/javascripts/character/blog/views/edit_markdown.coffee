@@ -2,6 +2,10 @@ class BlogEditMarkdown extends Backbone.View
   tagName:    'div'
 
 
+  events:
+    'click .image-uploader .submit':  'upload_image'
+
+
   render_markdown: (markdown) ->
     Character.Templates.Panel
       classes:  'left'
@@ -66,10 +70,6 @@ class BlogEditMarkdown extends Backbone.View
 
         @code_mirror.setValue(updated_md_text)
         @convert_text()
-
-
-  events:
-    'click .image-uploader .submit':  'upload_image'
 
 
   convert_text: ->
