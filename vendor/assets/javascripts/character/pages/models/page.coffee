@@ -1,18 +1,19 @@
 class Page extends Backbone.Model
-  #id
-  #title
-  #featured_image_id
-  #html
-  #views
-  #published
-  #keywords
-  #description
 
+  idAttribute:  '_id'
 
-  idAttribute: '_id'
+  update_attributes: [
+    'title',
+    'pemalink',
+    'html',
+    'keywords',
+    'description',
+    'featured_image_id' ]
 
   toJSON: ->
-    return { page: _.clone( @attributes ) }
+    attributes = {}
+    attributes[a] = @get(a) for a in @update_attributes
+    return { page: attributes }
 
   featured_image_url: ->
     @get('featured_image')?.src.featured.url
@@ -24,7 +25,7 @@ class Page extends Backbone.Model
     if @get('published') then 'Published' else 'Hidden'
 
 
-Character.Pages.Page   = Page
+Character.Pages.Page = Page
 
 
 
@@ -33,5 +34,5 @@ class Pages extends Backbone.Collection
   url: '/admin/api/Character-Page'
 
 
-Character.Pages.Pages  = Pages
+Character.Pages.Pages = Pages
 

@@ -1,21 +1,21 @@
 class Post extends Backbone.Model
-  #id
-  #title
-  #category
-  #featured_image_id
-  #html
-  #md
-  #date
-  #views
-  #published
-  #tags
-  #category_id
-  #excerpt
-
   idAttribute:  '_id'
 
+  update_attributes: [
+    'title',
+    'slug',
+    'md',
+    'html',
+    'date',
+    'tags',
+    'excerpt',
+    'category_id',
+    'featured_image_id' ]
+
   toJSON: ->
-    return { post: _.clone( @attributes ) }
+    attributes = {}
+    attributes[a] = @get(a) for a in @update_attributes
+    return { post: attributes }
 
   featured_image_url: ->
     @get('featured_image')?.src.featured.url
@@ -36,8 +36,6 @@ class Post extends Backbone.Model
 
   category: ->
     Character.Blog.categories.find (c) => c.id == @get('category_id')
-
-
 
 
 class Posts extends Backbone.Collection

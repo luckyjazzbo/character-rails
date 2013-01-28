@@ -23,7 +23,14 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def update
     @object = @model_class.find(params[:id])
-    @object.update_attributes! params[@namespace]
+    
+
+    puts "\n\n\n\n\n"
+    puts params#[@namespace]
+    puts "\n\n\n\n\n"
+
+
+    @object.update_attributes params[@namespace]
 
     render json: @object
   end
