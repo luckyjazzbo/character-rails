@@ -9,10 +9,7 @@ class Category extends Backbone.Model
 
 class Categories extends Backbone.Collection
   model: Category
-  url: '/admin/character/categories'
-
-  @reorder_url: ->
-    '/admin/character/categories-reorder'
+  url: '/admin/api/Character-Category'
 
 
 Character.Blog.Category   = Category

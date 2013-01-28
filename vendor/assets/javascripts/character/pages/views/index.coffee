@@ -2,7 +2,7 @@ class PagesIndex extends Character.IndexView
   title:          'Pages'
   new_item_url:   '#/pages/new'
   new_item_hint:  'Create new page'
-  reorder_url:    '/admin/character/pages-reorder'
+  reorder_url:    '/admin/api/Character-Page/reorder'
 
 
   render_item: (model) ->

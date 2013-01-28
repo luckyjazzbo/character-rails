@@ -70,7 +70,7 @@ class IndexView extends Backbone.View
     options =
       stop: (e, ui) =>
         ids = this.$('li').map(-> $(this).attr('data-id')).get()        
-        $.post @reorder_url, { _method: 'put', ids: ids }
+        $.post @reorder_url, { _method: 'post', ids: ids }
 
     $(@items_el).sortable(options).disableSelection()
 

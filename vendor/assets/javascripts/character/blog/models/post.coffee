@@ -39,7 +39,7 @@ class Post extends Backbone.Model
 
 class Posts extends Backbone.Collection
   model: Post
-  url: '/admin/character/posts'
+  url: '/admin/api/Character-Post'
 
 
 Character.Blog.Posts  = Posts

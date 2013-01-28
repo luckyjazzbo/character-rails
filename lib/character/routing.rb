@@ -3,19 +3,18 @@ module ActionDispatch::Routing
 
     def mount_character_admin
       scope '/admin', :module => "Character::Admin" do
-        # BrowserId Auth
+        match '/',        to: 'admin#index'
         match '/login',   to: 'sessions#create'
         match '/logout',  to: 'sessions#destroy'
 
-        match '/', to: 'admin#index'
+        scope 'api' do
+          resources :images, only: [:index, :create]
 
-        scope 'character' do
-          put '/categories-reorder',  to: 'categories#reorder'
-          put '/pages-reorder',       to: 'pages#reorder'
-          resources :posts,      only: [:index, :create, :update, :destroy]
-          resources :categories, only: [:index, :create, :update, :destroy]
-          resources :images,     only: [:index, :create]
-          resources :pages,      only: [:index, :create, :update, :destroy]
+          get     '/:model_slug(.:format)',         to: 'api#index'
+          post    '/:model_slug(.:format)',         to: 'api#create'
+          post    '/:model_slug/reorder(.:format)', to: 'api#reorder'
+          put     '/:model_slug/:id(.:format)',     to: 'api#update'
+          delete  '/:model_slug/:id(.:format)',     to: 'api#destroy'
         end
       end
     end

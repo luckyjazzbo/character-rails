@@ -28,7 +28,7 @@ Character.Pages.Page   = Page
 
 class Pages extends Backbone.Collection
   model: Page
-  url: '/admin/character/pages'
+  url: '/admin/api/Character-Page'
 
 
 Character.Pages.Pages  = Pages
