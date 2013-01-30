@@ -10,6 +10,7 @@ class Post extends Backbone.Model
     'tags',
     'excerpt',
     'category_id',
+    'published',
     'featured_image_id' ]
 
   toJSON: ->

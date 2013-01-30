@@ -59,7 +59,8 @@ class BlogEdit extends Backbone.View
 
 
   save_draft: ->
-    @update_or_create_post {published: false}
+    @update_or_create_post {published: false}, =>
+      @back_to_index()
 
 
   publish: ->

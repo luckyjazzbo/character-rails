@@ -8,6 +8,7 @@ class Page extends Backbone.Model
     'html',
     'keywords',
     'description',
+    'published',
     'featured_image_id' ]
 
   toJSON: ->

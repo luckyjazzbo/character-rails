@@ -1,7 +1,6 @@
 # Character
 
-**Character** is a **Rails**/**CoffeeScript**/**SASS** administration library build with **Backbone.js** and **Foundation**.
-
+**Character** is an administration application build with **Backbone.js** and **Foundation** using **Rails** / **CoffeeScript** / **SASS**.
 
 ## What's inside?
 
