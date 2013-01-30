@@ -15,9 +15,7 @@ window.Showdown.extensions.video = (converter) ->
           m = url.match(youtube)
           if m and m[7].length == 11
             video_id = m[7]
-            """<iframe  width="600"
-                        height="340"
-                        src="http://www.youtube.com/embed/#{video_id}?rel=0"
+            """<iframe  src="http://www.youtube.com/embed/#{video_id}?rel=0"
                         frameborder="0" allowfullscreen></iframe>"""
           else
             match

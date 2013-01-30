@@ -1,13 +1,9 @@
-<section class='character-blog'>
-  <article>
-    <header>
-      <%= @post.title %>
-    </header>
-    
-    <section class='content'>
-      <%= @post.html.html_safe %>
-    </section>
-  </article>
-</section>
+<% content_for :title do %><%= @post.title + " - " + ENV['WEBSITE_NAME'] %><% end %>
 
-<%= link_to 'Back to blog index', blog_index_path, class: 'blog-index-button' %>
+<article class='chr-post'>
+  <header>
+    <h1><%= @post.title %></h1>
+  </header>
+  
+  <%= @post.html.html_safe %>
+</article>

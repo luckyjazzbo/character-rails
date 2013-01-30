@@ -9,7 +9,7 @@ class BlogIndex extends Character.IndexView
       image_url:    model.thumb_image_url()
       line1_left:   model.get('title')
       line1_right:  model.draft_or_date()
-      line2_left:   ''
+      line2_left:   model.get('excerpt')
       line2_right:  ''
 
 

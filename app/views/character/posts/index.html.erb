@@ -1,9 +1,9 @@
-<section class='character-blog'>
-  <ul class='index'>
-  <% @posts.each do |p| %>
-
-    <li> <%= link_to p.title, blog_post_path(p.slug) %> </li>
-
+<% @posts.each do |p| %>
+  <%= link_to blog_post_path(p.slug), class:'chr-post-link' do %>
+    <header>
+      <aside><em><%= p.date.strftime('%a, %d %b %Y') %></em></aside>
+      <strong><%= p.title %></strong><br/>
+    </header>
+    <p><%= p.excerpt %></p>
   <% end %>
-  </ul>
-</section>
+<% end %>
