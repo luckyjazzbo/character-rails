@@ -46,4 +46,8 @@ class Character::Page
         :methods => [:featured_image, :menu_title]
     }))
   end  
+
+  def featured_image_url
+    featured_image.try(:featured)
+  end
 end

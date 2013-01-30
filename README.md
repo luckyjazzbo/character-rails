@@ -40,7 +40,24 @@ Add pages, blog and admin app routes to the ```config/routes.rb``` file:
 Remove ```public/index.html``` file.
 
 
-Add website name to the development and production environment using **WEBSITE_NAME** setting.
+Add meta tags support to apps main layout (```views/layouts/application.html.erb```): 
+
+    <head>
+      ...
+      <%= display_meta_tags site:        ENV['WEBSITE_NAME'],
+                            description: ENV['WEBSITE_DESCRIPTION'],
+                            keywords:    ENV['WEBSITE_KEYWORDS'],
+                            canonical:   "http://#{ ENV['WEBSITE_URL'] }",
+                            # https://developers.facebook.com/docs/technical-guides/opengraph/built-in-objects/#website
+                            open_graph:  { type:        'website',
+                                           title:       ENV['WEBSITE_NAME'],
+                                           description: ENV['WEBSITE_DESCRIPTION'],
+                                           url:         "http://#{ ENV['WEBSITE_URL'] }"
+                                           # app_id: '' <-- if required
+                                           # image:  '' <-- if required
+                                         } %>
+      ...
+    </head>
 
 Add first admin user via console: ```Character::AdminUser.create! email:'santyor@gmail.com'``` 
 

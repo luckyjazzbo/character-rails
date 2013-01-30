@@ -16,9 +16,11 @@ require 'mongoid/reorder'
 # uploads
 require 'carrierwave/mongoid'
 
-# browserid-rails
+# other
 require 'browserid-rails'
-    
+require 'meta_tags'
+
+# character
 require 'character/version'
 require 'character/engine'
 require 'character/routing'

@@ -1,4 +1,18 @@
-<% content_for :title do %><%= @post.title + " - " + ENV['WEBSITE_NAME'] %><% end %>
+<% set_meta_tags  title:        @post.title,
+                  description:  @post.excerpt,
+                  keywords:     @post.tags,
+                  canonical:    "http://#{ ENV['WEBSITE_URL'] }#{ blog_post_path(@post.slug) }",
+                  open_graph:   { type:           'article',
+                                  url:            "http://#{ ENV['WEBSITE_URL'] }#{ blog_post_path(@post.slug) }",
+                                  site_name:      ENV['WEBSITE_NAME'],
+                                  image:          @post.featured_image_url,
+                                  title:          @post.title,
+                                  description:    @post.excerpt,
+                                  published_time: @post.date,
+                                  modified_time:  @post.updated_at,
+                                  #author:  URL to Author object
+                                  #section: Section of article
+                                  tag:            @post.tags } %>
 
 <article class='chr-post'>
   <header>

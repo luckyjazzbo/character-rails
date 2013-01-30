@@ -5,6 +5,6 @@ class Character::Admin::AdminController < ActionController::Base
   def index
     authenticated?
 
-    render 'character/admin'
+    render 'character/admin/index'
   end
 end

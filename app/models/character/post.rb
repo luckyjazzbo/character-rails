@@ -33,4 +33,8 @@ class Character::Post
         :methods => [:featured_image]
     }))
   end
+
+  def featured_image_url
+    featured_image.try(:featured)
+  end
 end

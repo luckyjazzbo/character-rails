@@ -1,15 +1,13 @@
-<% content_for :title do %>
-  <%= @page.title %>
-<% end %>
-
-<% content_for :description do %>
-  <%= @page.description %>
-<% end %>
-
-<% content_for :keywords do %>
-  <%= @page.keywords %>
-<% end %>
-
-<%# content_for :opengraph_meta_tags, opengraph_meta_tags_for(@page) %>
+<% set_meta_tags  title:        @page.title,
+                  description:  @page.description,
+                  keywords:     @page.keywords,
+                  canonical:    "http://#{ ENV['WEBSITE_URL'] }#{ @page.permalink }",
+                  open_graph:   { type:        'article',
+                                  url:         "http://#{ ENV['WEBSITE_URL'] }#{ @page.permalink }",
+                                  site_name:   ENV['WEBSITE_NAME'],
+                                  image:       @page.featured_image_url,
+                                  title:       @page.title,
+                                  description: @page.description,
+                                } %>
 
 <%= @page.html.html_safe %>
