@@ -33,9 +33,9 @@ Generate admin assets to be used in the new projects:
 
 Add pages, blog and admin app routes to the ```config/routes.rb``` file:
 
-  mount_character_admin()
-  mount_character_pages()
-  mount_character_blog_at('/blog')
+    mount_character_admin()
+    mount_character_pages()
+    mount_character_blog_at('/blog')
 
 Remove ```public/index.html``` file.
 
@@ -83,7 +83,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
 
 **Features:**
  - Select image size (checkbox if scaled version should be used) when uploading image (redactor/markdown)
- - Open Graph support out of the box
  - Set page _position when creating new
  - Remove page function
  - Moving page element
