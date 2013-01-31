@@ -25,6 +25,7 @@ module ActionDispatch::Routing
         get '/'                 => 'posts#index',    as: :blog_index
         get '/posts/:slug'      => 'posts#show',     as: :blog_post
         get '/categories/:slug' => 'posts#category', as: :blog_category
+        get '/feed(.:format)'   => 'posts#feed',     as: :blog_feed
       end
     end
 

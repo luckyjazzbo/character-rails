@@ -126,6 +126,7 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
 
 ## How to?
 
+### Images
 
 ## Credentials
 
@@ -148,6 +149,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
  - Isolate browserid
  - Add filters/categories for the blog
  - Filter which converts local images paths to S3 hosted
- - integrate fitvids into markdown editor
+ - Integrate fitvids into markdown editor
 
 

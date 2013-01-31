@@ -20,4 +20,13 @@ class Character::PostsController < ApplicationController
   def show
     @post = Character::Post.published.find_by(slug:params[:slug])
   end
+
+  def feed
+    @posts = Character::Post.published
+
+    respond_to do |format|
+      format.rss { render :layout => false }
+      format.all { head :not_found }
+    end
+  end
 end
