@@ -2,10 +2,15 @@ class IndexView extends Backbone.View
   tagName:    'div'
   id:         'index_view'
 
+  # @title
+  # @scope
+  # @reorderable
+  # @model_slug
+
   render: ->
     html = Character.Templates.Index
       title:        @title
-      new_item_url: @new_item_url
+      new_item_url: "#/#{ @scope }/new"
 
     $(this.el).html html
     return this
@@ -43,12 +48,14 @@ class IndexView extends Backbone.View
     options =
       stop: (e, ui) =>
         ids = this.$('li').map(-> $(this).attr('data-id')).get()        
-        $.post @reorder_url, { _method: 'post', ids: ids }
+        $.post "/admin/api/#{ @model_slug }/reorder", { _method: 'post', ids: ids }
 
     $(@items_el).sortable(options).disableSelection()
 
 
-  initialize: ->
+  initialize: (config) ->
+    _.extend(@, config) if config
+
     html = @render().el
     $('#character').append(html)
 
@@ -57,7 +64,7 @@ class IndexView extends Backbone.View
 
     @render_items()
 
-    @enable_sorting() if @reorder_url
+    @enable_sorting() if @reorderable
 
 
 Character.IndexView = IndexView
@@ -67,10 +74,12 @@ Character.IndexView = IndexView
 class IndexItemView extends Backbone.View
   tagName: 'li'
 
+
   render: ->
     $(this.el).html @html
     $(this.el).attr('data-id', @model.id)
     return this
+
 
   initialize: (@model, @html)->
     @listenTo(@model, 'destroy', @remove)

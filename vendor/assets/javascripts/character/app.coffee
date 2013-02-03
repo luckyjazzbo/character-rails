@@ -1,9 +1,12 @@
 class CharacterApp
-  add_menu_item: ->
+  add_menu_item: (menu) ->
+    @menu = menu if menu
     html = """<li><a href='#/#{ @scope }'>#{ @menu }</a></li>"""
     $('#main_menu').append html
 
-  add_routes: ->
+
+  add_routes: (scope) ->
+    @scope = scope if scope
     if @action_index
       @router.route "#{ @scope }",          "#{ @scope }_index",     => @action_index()
     if @action_new

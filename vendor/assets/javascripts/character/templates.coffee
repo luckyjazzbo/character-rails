@@ -38,14 +38,17 @@ Templates =
       content: """<ul class='chr-index'></ul>"""
 
 
-  IndexItem: (params) ->
-    # --------------------------
-    # params =
-    #   action_url
-    #   image_url
-    #   line1_left, line1_right
-    #   line2_left, line2_right
-    # --------------------------
+  IndexItem: (context) ->
+    params =
+      action_url:   ''
+      image_url:    ''
+      line1_left:   ''
+      line1_right:  ''
+      line2_left:   ''
+      line2_right:  ''
+
+    _.extend(params, context)
+
     image = if params.image_url then "<img src='#{ params.image_url }' />" else ''
 
     """ <a href='#{ params.action_url }'>

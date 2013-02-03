@@ -138,6 +138,7 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
  - Image uploader style for markdown editor
 
 **Features:**
+ - Make RSS pass validation: http://webdesign.about.com/od/validators/l/bl_validation.htm#rssvalidator
  - Select image size (checkbox if scaled version should be used) when uploading image (redactor/markdown)
  - Set page _position when creating new
  - Remove page function

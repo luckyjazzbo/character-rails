@@ -39,16 +39,19 @@ class Blog extends Character.App
     if workspace.current_view_is('BlogIndex')
       workspace.current_view.close_preview()
     else
-      workspace.set_current_view -> new Character.Blog.Views.BlogIndex()
+      index_view = new Character.Blog.Views.BlogIndex()
+      workspace.set_current_view(index_view)
 
 
   action_new: ->
-    workspace.set_current_view -> new Character.Blog.Views.BlogEdit()
+    edit_view = new Character.Blog.Views.BlogEdit()
+    workspace.set_current_view(edit_view)
 
 
   action_edit: (id) ->
     post = @posts.get(id)
-    workspace.set_current_view -> new Character.Blog.Views.BlogEdit model: post
+    edit_view = new Character.Blog.Views.BlogEdit model: post
+    workspace.set_current_view(edit_view)
 
 
   action_show: (id) ->

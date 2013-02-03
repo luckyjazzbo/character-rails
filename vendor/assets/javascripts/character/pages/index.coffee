@@ -18,16 +18,19 @@ class Pages extends Character.App
 
 
   action_index: ->
-    workspace.set_current_view -> new Character.Pages.Views.PagesIndex()
+    index_view = new Character.Pages.Views.PagesIndex()
+    workspace.set_current_view(index_view)
 
 
   action_new: ->
-    workspace.set_current_view -> new Character.Pages.Views.PagesEdit()
+    edit_view = new Character.Pages.Views.PagesEdit()
+    workspace.set_current_view(edit_view)
 
 
   action_edit: (id) ->
     page = @pages.get(id)
-    workspace.set_current_view -> new Character.Pages.Views.PagesEdit model: page
+    edit_view = new Character.Pages.Views.PagesEdit model: page
+    workspace.set_current_view(edit_view)
 
 
 Character.Pages = Pages

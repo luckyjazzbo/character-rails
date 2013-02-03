@@ -16,9 +16,16 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     render json: @objects
   end
 
+  def new
+  end  
+
   def create
     @object = @model_class.create params[@namespace]
     render json: @object
+  end
+
+  def edit
+    @object = @model_class.find(params[:id])
   end
 
   def update
@@ -42,7 +49,10 @@ class Character::Admin::ApiController < Character::Admin::BaseController
   end
 
   def reorder
+    # need to add reordarable check
     @model_class.reorder(params[:ids])
     render json: 'ok'
   end  
 end
+
+

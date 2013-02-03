@@ -31,3 +31,4 @@
 #= require character/app
 #= require character/blog
 #= require character/pages
+#= require character/generic_app
