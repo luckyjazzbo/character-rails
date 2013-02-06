@@ -86,6 +86,7 @@ class App extends Character.App
       scope:      _.string.slugify(@config.title)
       model_slug: @config.model_name.replace('::', '-')
       items:      => @collection.toArray()
+      collection: => @collection
 
     @add_routes(@config.scope)
     @add_menu_item(@config.title)
@@ -108,11 +109,8 @@ class App extends Character.App
     if not (workspace.current_view and workspace.current_view.model_name == @config.model_model)
       @action_index()
     
-    form = new Character.FormView(@config)
-    
-    $.get "/admin/api/#{ @config.model_slug }/new", (form_html) ->
-      html = form.render(form_html).el
-      $(workspace.current_view.el).append(html)
+    $.get "/admin/api/#{ @config.model_slug }/new", (form_html) =>
+      new Character.FormView(@config, workspace.current_view.el, form_html)
 
 
   action_edit: (id) ->
@@ -124,11 +122,8 @@ class App extends Character.App
     config_with_model = { model: doc }
     _.extend(config_with_model, @config)
 
-    form = new Character.FormView(config_with_model)
-    
     $.get "/admin/api/#{ @config.model_slug }/#{ id }/edit", (form_html) ->
-      html = form.render(form_html).el
-      $(workspace.current_view.el).append(html)
+      new Character.FormView(config_with_model, workspace.current_view.el, form_html)
 
 
 Character.Generic.App = App

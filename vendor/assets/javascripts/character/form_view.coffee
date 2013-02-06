@@ -20,8 +20,27 @@ class FormView extends Backbone.View
     return this
 
 
-  initialize: (config) ->
+  back_to_index: ->
+    workspace.router.navigate("#/#{ @scope }", { trigger: true })
+
+
+  create_model: (obj) ->
+    @collection().add(obj)
+    @back_to_index()
+  
+
+  update_model: ->
+    @model.fetch { success: => @back_to_index() }
+
+
+  initialize: (config, parent_el, form_html) ->
     _.extend(@, config) if config
+
+    html = @render(form_html).el
+    $(parent_el).append(html)
+
+    $('.chr-form form').ajaxForm
+      success: (obj) => if @model then @update_model() else @create_model(obj)
 
     @listenTo(@model, 'destroy', @remove) if @model
 

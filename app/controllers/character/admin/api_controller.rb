@@ -7,13 +7,18 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     # TODO: make a proper way of getting names out of url
     ### ============================================== ###
     @model_class = @model_slug.gsub('-', '::').constantize
-    @namespace   = @model_slug.split('-').last().downcase() # singularize or something similar should be here
+    @namespace   = @model_class.name.underscore.gsub('/', '_').to_sym
     ### ============================================== ###
   end
 
   def index
     @objects = @model_class.all
     render json: @objects
+  end
+
+  def show
+    @object = @model_class.find(params[:id])
+    render json: @object    
   end
 
   def new
@@ -29,18 +34,12 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def edit
     @object       = @model_class.find(params[:id])
-    @form_action  = "/admin/api/#{ @namespace }/#{ params[:id] }"
+    @form_action  = "/admin/api/#{ @model_slug }/#{ params[:id] }"
     render 'character/admin/forms/generic', layout: false
   end
 
   def update
     @object = @model_class.find(params[:id])
-    
-
-    puts "\n\n\n\n\n"
-    puts params#[@namespace]
-    puts "\n\n\n\n\n"
-
 
     @object.update_attributes params[@namespace]
 
