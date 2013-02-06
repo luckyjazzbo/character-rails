@@ -14,26 +14,14 @@ class Page extends Backbone.Model
   toJSON: ->
     attributes = {}
     attributes[a] = @get(a) for a in @update_attributes
-    return { page: attributes }
-
-  featured_image_url: ->
-    @get('featured_image')?.src.featured.url
-
-  thumb_image_url: ->
-    @get('featured_image')?.src.thumb.url
-
-  state: ->
-    if @get('published') then 'Published' else 'Hidden'
-
+    return { character_page: attributes }
 
 Character.Pages.Page = Page
-
 
 
 class Pages extends Backbone.Collection
   model: Page
   url: '/admin/api/Character-Page'
-
 
 Character.Pages.Pages = Pages
 

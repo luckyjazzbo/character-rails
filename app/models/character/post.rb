@@ -30,11 +30,28 @@ class Character::Post
 
   def as_json(options = { })
     super((options || { }).merge({
-        :methods => [:featured_image]
+        :methods => [:state, :date_formatted, :date_or_state, :featured_image_url, :thumb_image_url]
     }))
+  end
+
+  def state
+    published ? 'Published' : 'Draft'
+  end
+
+  def date_formatted
+    date ? date.to_s.gsub('-', '/') : ''
+  end
+
+  def date_or_state
+    published ? date_formatted : state
   end
 
   def featured_image_url
     featured_image.try(:featured)
   end
+
+  def thumb_image_url
+    featured_image.try(:thumb)
+  end
+
 end

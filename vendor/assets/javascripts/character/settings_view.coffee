@@ -5,7 +5,7 @@ class SettingsView extends Backbone.View
 
   render_featured_image: ->
     image_id  = @model?.get('featured_image_id')  ? ''
-    image_url = @model?.featured_image_url()      ? ''
+    image_url = @model?.get('featured_image_url') ? ''
 
     """<img  data-image-id='#{ image_id }'
              src='#{ image_url }'

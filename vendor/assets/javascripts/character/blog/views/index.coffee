@@ -1,32 +1,30 @@
 class BlogIndex extends Character.IndexView
-  title: 'Posts'
-  scope: 'blog'
+  options:
+    title:        'Posts'
+    scope:        'blog'
+    reorderable:  false
+    model_slug:   'Character-Post'
 
 
-  render_item: (model) ->
-    Character.Templates.IndexItem
-      action_url:   "#/#{ @scope }/show/#{ model.id }"
-      image_url:    model.thumb_image_url()
-      line1_left:   model.get('title')
-      line1_right:  model.draft_or_date()
-      line2_left:   model.get('excerpt')
-      line2_right:  ''
+    render_item_options:
+      action_name:  'show'
+      image_url:    'thumb_image_url'
+      line1_left:   'title'
+      line1_right:  'date_or_state'
+      line2_left:   'excerpt'
 
 
-  items: ->
-    # drafts go first, then published posts
-    drafts    = window.blog.posts.filter (p) -> not p.get('published')
-    published = window.blog.posts.filter (p) -> p.get('published')
+    items: ->
+      # drafts go first, then published posts
+      drafts    = window.blog.posts.filter (p) -> not p.get('published')
+      published = window.blog.posts.filter (p) -> p.get('published')
 
-    # then published sorted by date
-    reversed  = _(published).sortBy (p) -> p.get('date')
-    sorted    = reversed.reverse()
+      # then published sorted by date
+      reversed  = _(published).sortBy (p) -> p.get('date')
+      sorted    = reversed.reverse()
 
-    posts     = drafts.concat(sorted)
-    return posts
-
-
-
+      posts     = drafts.concat(sorted)
+      return posts
 
 
 

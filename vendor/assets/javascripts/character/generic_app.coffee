@@ -44,28 +44,6 @@ Character.Generic.Collection = Collection
 
 
 
-#   ##     ## #### ######## ##      ##  ######  
-#   ##     ##  ##  ##       ##  ##  ## ##    ## 
-#   ##     ##  ##  ##       ##  ##  ## ##       
-#   ##     ##  ##  ######   ##  ##  ##  ######  
-#    ##   ##   ##  ##       ##  ##  ##       ## 
-#     ## ##    ##  ##       ##  ##  ## ##    ## 
-#      ###    #### ########  ###  ###   ######  
-
-
-
-
-class IndexView extends Character.IndexView
-  render_item: (model) ->
-    config = { action_url: "#/#{ @scope }/edit/#{ model.id }" }    
-    _.each @render_item_options, (val, key) -> config[key] = model.get(val)
-    Character.Templates.IndexItem(config)
-
-
-Character.Generic.IndexView = IndexView
-
-
-
 
 #      ###    ########  ########  
 #     ## ##   ##     ## ##     ## 
@@ -79,20 +57,19 @@ Character.Generic.IndexView = IndexView
 
 
 class App extends Character.App
-  constructor: (@config) ->
+  constructor: (@options) ->
     @router = workspace.router
     
-    _.extend @config,
-      scope:      _.string.slugify(@config.title)
-      model_slug: @config.model_name.replace('::', '-')
+    _.extend @options,
+      scope:      _.string.slugify(@options.title)
+      model_slug: @options.model_name.replace('::', '-')
       items:      => @collection.toArray()
-      collection: => @collection
 
-    @add_routes(@config.scope)
-    @add_menu_item(@config.title)
+    @add_routes(@options.scope)
+    @add_menu_item(@options.title)
     
     @collection      = new Character.Generic.Collection()
-    @collection.url  = "/admin/api/#{ @config.model_slug }"
+    @collection.url  = "/admin/api/#{ @options.model_slug }"
 
 
   fetch_data: (callback) ->
@@ -101,28 +78,28 @@ class App extends Character.App
 
 
   action_index: ->
-    index_view = new Character.Generic.IndexView(@config)
+    index_view = new Character.IndexView(@options)
     workspace.set_current_view(index_view)
 
 
   action_new: ->
-    if not (workspace.current_view and workspace.current_view.model_name == @config.model_model)
+    if not (workspace.current_view and workspace.current_view.model_name == @options.model_model)
       @action_index()
     
-    $.get "/admin/api/#{ @config.model_slug }/new", (form_html) =>
-      new Character.FormView(@config, workspace.current_view.el, form_html)
+    $.get "/admin/api/#{ @options.model_slug }/new", (form_html) =>
+      new Character.FormView(@options, workspace.current_view.el, form_html)
 
 
   action_edit: (id) ->
-    if not (workspace.current_view and workspace.current_view.model_name == @config.model_model)
+    if not (workspace.current_view and workspace.current_view.options.model_name == @options.model_model)
       @action_index()
 
     doc = @collection.get(id)
     
     config_with_model = { model: doc }
-    _.extend(config_with_model, @config)
+    _.extend(config_with_model, @options)
 
-    $.get "/admin/api/#{ @config.model_slug }/#{ id }/edit", (form_html) ->
+    $.get "/admin/api/#{ @options.model_slug }/#{ id }/edit", (form_html) ->
       new Character.FormView(config_with_model, workspace.current_view.el, form_html)
 
 

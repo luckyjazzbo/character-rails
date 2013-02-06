@@ -23,8 +23,8 @@ class BlogEditMarkdown extends Backbone.View
   
 
   render: ->
-    markdown = @model?.get('md') ? 'Post Text'
-    state    = @model?.state()   ? 'New Post'
+    markdown = @model?.get('md')    ? 'Post Text'
+    state    = @model?.get('state') ? 'New Post'
 
     html = @render_markdown(markdown) + @render_preview(state)
 

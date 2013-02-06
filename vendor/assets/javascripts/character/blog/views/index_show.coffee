@@ -8,7 +8,7 @@ class BlogIndexShow extends Backbone.View
 
     html = Character.Templates.Panel 
       classes:  'right'
-      title:    @model.state()
+      title:    @model.get('state')
       actions:  """<a href='#' title='Delete this post' class='general foundicon-trash' id='delete_post'></a>
                    <a href='#/blog/edit/#{ id }' title='Edit post' class='general foundicon-edit'></a>
                     <a href='#/blog' title='Close Preview' class='general foundicon-remove'></a>"""

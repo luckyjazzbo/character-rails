@@ -2,8 +2,8 @@ class PagesEditRedactor extends Backbone.View
   tagName:    'div'
 
   render: ->
-    html  = @model?.get('html') ? ''
-    state = @model?.state()     ? 'New Page'
+    html  = @model?.get('html')  ? ''
+    state = @model?.get('state') ? 'New Page'
 
     html = Character.Templates.Panel
       classes: 'chr-redactor'

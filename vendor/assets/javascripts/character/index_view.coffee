@@ -14,23 +14,23 @@ class IndexView extends Backbone.View
   tagName:    'div'
   id:         'index_view'
 
-  # @title
-  # @scope
-  # @reorderable
-  # @model_slug
 
   render: ->
     html = Character.Templates.Index
-      title:        @title
-      new_item_url: "#/#{ @scope }/new"
+      title:        @options.title
+      new_item_url: "#/#{ @options.scope }/new"
 
     $(this.el).html html
     return this
   
 
-  render_item: (obj) ->
-    console.error 'IMPORTANT: "render_item" method is not implemented!'
-    ""
+  render_item: (model) ->
+    action_name = @options.render_item_options.action_name ? 'edit'
+    config      = { action_url: "#/#{ @options.scope }/#{ action_name }/#{ model.id }" }
+
+    _.each @options.render_item_options, (val, key) -> config[key] = model.get(val)
+    
+    Character.Templates.IndexItem(config)
 
 
   render_placeholder: ->
@@ -41,33 +41,39 @@ class IndexView extends Backbone.View
 
 
   render_items: ->
-    objects = @items()
+    if @options.items
+      objects = @options.items()
+    else
+      console.error 'IMPORTANT: index view options doesn\'t provide "collection" method!'
+      objects = []
 
     (@render_placeholder() ; return) if objects.length == 0
     
     _(objects).each (obj) =>
-      html = @render_item(obj)
-      item = new Character.IndexItemView obj, html
+      item = new Character.IndexItemView
+        model:  obj
+        html:   @render_item(obj)
+      
       $(@items_el).append item.el
 
 
-  items: ->
-    console.error 'IMPORTANT: "items" method is not implemented!'
-    []
-
-
   enable_sorting: ->
-    options =
+    sort_options =
       stop: (e, ui) =>
         ids = this.$('li').map(-> $(this).attr('data-id')).get()        
-        $.post "/admin/api/#{ @model_slug }/reorder", { _method: 'post', ids: ids }
+        $.post "/admin/api/#{ @options.model_slug }/reorder", { _method: 'post', ids: ids }
 
-    $(@items_el).sortable(options).disableSelection()
+    $(@items_el).sortable(sort_options).disableSelection()
 
 
-  initialize: (config) ->
-    _.extend(@, config) if config
+  # Options are:
+  #   @titlex
+  #   @scope
+  #   @reorderable
+  #   @model_slug
+  #   @items ->
 
+  initialize: ->
     html = @render().el
     $('#character').append(html)
 
@@ -76,7 +82,7 @@ class IndexView extends Backbone.View
 
     @render_items()
 
-    @enable_sorting() if @reorderable
+    @enable_sorting() if @options.reorderable
 
 
 Character.IndexView = IndexView
@@ -100,12 +106,12 @@ class IndexItemView extends Backbone.View
 
 
   render: ->
-    $(this.el).html @html
+    $(this.el).html @options.html
     $(this.el).attr('data-id', @model.id)
     return this
 
 
-  initialize: (@model, @html)->
+  initialize: ->
     @listenTo(@model, 'destroy', @remove)
     @render()
 
