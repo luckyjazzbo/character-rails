@@ -2,12 +2,12 @@ class Character::Admin::ApiController < Character::Admin::BaseController
   before_filter :set_model_class
   
   def set_model_class
-    model_slug   = params[:model_slug]
+    @model_slug  = params[:model_slug]
     
     # TODO: make a proper way of getting names out of url
     ### ============================================== ###
-    @model_class = model_slug.gsub('-', '::').constantize
-    @namespace   = model_slug.split('-').last().downcase()
+    @model_class = @model_slug.gsub('-', '::').constantize
+    @namespace   = @model_slug.split('-').last().downcase() # singularize or something similar should be here
     ### ============================================== ###
   end
 
@@ -17,6 +17,9 @@ class Character::Admin::ApiController < Character::Admin::BaseController
   end
 
   def new
+    @object       = @model_class.new
+    @form_action  = "/admin/api/#{ @model_slug }"
+    render 'character/admin/forms/generic', layout: false
   end  
 
   def create
@@ -25,7 +28,9 @@ class Character::Admin::ApiController < Character::Admin::BaseController
   end
 
   def edit
-    @object = @model_class.find(params[:id])
+    @object       = @model_class.find(params[:id])
+    @form_action  = "/admin/api/#{ @namespace }/#{ params[:id] }"
+    render 'character/admin/forms/generic', layout: false
   end
 
   def update

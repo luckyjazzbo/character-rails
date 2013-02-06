@@ -4,7 +4,10 @@
 
 
 class Blog extends Character.App
-  constructor: (@scope='blog', @menu='Blog', options={}) ->
+  scope: 'blog'
+  menu:  'Blog'
+
+  constructor: (options={}) ->
     @index_scroll_y = 0
     @options        = @override_default_options(options)
     @router         = workspace.router

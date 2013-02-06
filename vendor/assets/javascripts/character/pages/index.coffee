@@ -4,8 +4,11 @@
 
 
 class Pages extends Character.App
-  constructor: (@scope='pages', @menu='Pages') ->
-    @router         = workspace.router
+  scope: 'pages'
+  menu:  'Pages'
+
+  constructor: ->
+    @router = workspace.router
     
     @add_routes()
     @add_menu_item()

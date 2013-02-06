@@ -9,10 +9,7 @@
 @import "compass/reset/utilities";
 @import "foundation";
 @import "foundation-icons";
-
-
-@mixin shadow                         { @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
-}
+@import "helpers";
 
 body                                  { background:$bodyBgColor;
 }
@@ -38,6 +35,11 @@ body                                  { background:$bodyBgColor;
 */
 
 .chr-header                           { @import "foundation/components/modules/topbar";
+}
+
+.chr-main-menu                        {
+  li.current                          { @include top-triangle-arrow($bodyBgColor, 6px);
+  }
 }
 
 
@@ -159,6 +161,9 @@ body                                  { background:$bodyBgColor;
 ##     ## ##       ##     ## ##    ##  
 ########  ########  #######   ######   
 */
+
+.chr-edit                             { padding:.5em 1em 1em;
+}
 
 .chr-blog-post-preview                { padding:.5em 1em 1em;
   &.scroll                            { overflow-y:scroll;

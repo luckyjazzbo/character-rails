@@ -1,6 +1,7 @@
 #= require_self
 
 
+Character.Generic = {}
 
 
 #   ##     ##  #######  ########  ######## ##       
@@ -14,11 +15,11 @@
 
 
 
-class GenericModel extends Backbone.Model
+class Model extends Backbone.Model
   idAttribute:  '_id'
 
 
-Character.GenericModel = GenericModel
+Character.Generic.Model = Model
 
 
 
@@ -34,11 +35,11 @@ Character.GenericModel = GenericModel
 
 
 
-class GenericCollection extends Backbone.Collection
-  model: Character.GenericModel
+class Collection extends Backbone.Collection
+  model: Character.Generic.Model
 
 
-Character.GenericCollection = GenericCollection
+Character.Generic.Collection = Collection
 
 
 
@@ -54,14 +55,14 @@ Character.GenericCollection = GenericCollection
 
 
 
-class GenericAppIndex extends Character.IndexView
+class IndexView extends Character.IndexView
   render_item: (model) ->
     config = { action_url: "#/#{ @scope }/edit/#{ model.id }" }    
     _.each @render_item_options, (val, key) -> config[key] = model.get(val)
     Character.Templates.IndexItem(config)
 
 
-Character.GenericAppIndex = GenericAppIndex
+Character.Generic.IndexView = IndexView
 
 
 
@@ -77,19 +78,19 @@ Character.GenericAppIndex = GenericAppIndex
 
 
 
-class GenericApp extends Character.App
+class App extends Character.App
   constructor: (@config) ->
     @router = workspace.router
     
     _.extend @config,
       scope:      _.string.slugify(@config.title)
-      model_slug: @config.model.replace('::', '-')
+      model_slug: @config.model_name.replace('::', '-')
       items:      => @collection.toArray()
 
     @add_routes(@config.scope)
     @add_menu_item(@config.title)
     
-    @collection      = new Character.GenericCollection()
+    @collection      = new Character.Generic.Collection()
     @collection.url  = "/admin/api/#{ @config.model_slug }"
 
 
@@ -99,20 +100,38 @@ class GenericApp extends Character.App
 
 
   action_index: ->
-    index_view = new Character.GenericAppIndex(@config)
+    index_view = new Character.Generic.IndexView(@config)
     workspace.set_current_view(index_view)
 
 
   action_new: ->
-    #workspace.set_current_view -> new Character.Pages.Views.PagesEdit()
+    if not (workspace.current_view and workspace.current_view.model_name == @config.model_model)
+      @action_index()
+    
+    form = new Character.FormView(@config)
+    
+    $.get "/admin/api/#{ @config.model_slug }/new", (form_html) ->
+      html = form.render(form_html).el
+      $(workspace.current_view.el).append(html)
 
 
   action_edit: (id) ->
-    #page = @pages.get(id)
-    #workspace.set_current_view -> new Character.Pages.Views.PagesEdit model: page
+    if not (workspace.current_view and workspace.current_view.model_name == @config.model_model)
+      @action_index()
+
+    doc = @collection.get(id)
+    
+    config_with_model = { model: doc }
+    _.extend(config_with_model, @config)
+
+    form = new Character.FormView(config_with_model)
+    
+    $.get "/admin/api/#{ @config.model_slug }/#{ id }/edit", (form_html) ->
+      html = form.render(form_html).el
+      $(workspace.current_view.el).append(html)
 
 
-Character.GenericApp = GenericApp
+Character.Generic.App = App
 
 
 

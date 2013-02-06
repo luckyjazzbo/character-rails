@@ -66,6 +66,9 @@ class BlogIndex extends Character.IndexView
     window.scroll(0, blog.index_scroll_y)
 
 
+
+
+
   show_preview: (post_id) ->
     @set_active(post_id)
 
