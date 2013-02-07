@@ -24,4 +24,5 @@ require 'meta_tags'
 require 'character/version'
 require 'character/engine'
 require 'character/routing'
+require 'character/admin_model'
 

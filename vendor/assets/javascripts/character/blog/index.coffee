@@ -39,7 +39,7 @@ class Blog extends Character.App
 
 
   action_index: ->
-    if workspace.current_view_is('BlogIndex')
+    if workspace.current_view_is('blog')
       workspace.current_view.close_preview()
     else
       index_view = new Character.Blog.Views.BlogIndex()

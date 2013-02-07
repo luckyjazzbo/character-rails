@@ -27,50 +27,10 @@ class BlogIndex extends Character.IndexView
       return posts
 
 
-
-
-
-  scroll_to_active: ->
-    if blog.index_scroll_y > 0
-      window.scroll(0, blog.index_scroll_y)
-    else
-      top_offset = $('#index_view a.active').offset().top
-      if top_offset - window.scrollY > $(window).height()
-        window.scroll(0, top_offset - 100)
-  
-
-  set_active: (id) ->
-    @unset_active()
-    $("#index_view a[href='#/blog/show/#{id}']").addClass('active')
-    @scroll_to_active()
-
-
-  unset_active: ->
-    $('#index_view a.active').removeClass('active')
-
-
-  lock: ->
-    blog.index_scroll_y = window.scrollY
-
-    top_bar_height  = $('.top-bar').height()
-    app_top_padding = parseInt($('#character').css('padding-top'))
-
-    $(@panel_el).css('top', -window.scrollY + top_bar_height + app_top_padding)
-               .addClass('fixed')
-
-
-  unlock: ->
-    $(@panel_el).css('top', '').removeClass('fixed')
-    window.scroll(0, blog.index_scroll_y)
-
-
-
-
-
   show_preview: (post_id) ->
     @set_active(post_id)
 
-    if @preview then (@preview.remove() ; delete @preview) else @lock()
+    if @preview then (@preview.remove() ; delete @preview) else @lock_scroll()
     
     post      = blog.posts.get(post_id)
     @preview  = new Character.Blog.Views.BlogIndexShow model: post
@@ -78,16 +38,16 @@ class BlogIndex extends Character.IndexView
     html = @preview.render().el
     $(@el).append(html)
 
-    window.scroll(0, 0)
+    @scroll_top()
 
 
   close_preview: ->
-    @unlock()
+    @unlock_scroll()
 
     (@preview.remove() ; delete @preview) if @preview 
 
     @unset_active()
-    blog.index_scroll_y = 0
+    @flush_scroll_y()
 
 
 Character.Blog.Views.BlogIndex = BlogIndex

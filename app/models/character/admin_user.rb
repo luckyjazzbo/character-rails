@@ -1,5 +1,6 @@
 class Character::AdminUser
   include Mongoid::Document
+  include Character::AdminModel
 
   field :email
 

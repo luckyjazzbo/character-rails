@@ -5,8 +5,8 @@ class CharacterWorkspace
     @collections  = {}
 
   
-  current_view_is: (class_name) ->
-    (@current_view and @current_view.constructor.name == class_name)
+  current_view_is: (name) ->
+    (@current_view and @current_view.options.scope == name)
 
 
   set_current_view: (view) ->

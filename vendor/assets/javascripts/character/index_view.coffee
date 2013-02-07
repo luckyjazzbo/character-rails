@@ -14,6 +14,9 @@ class IndexView extends Backbone.View
   tagName:    'div'
   id:         'index_view'
 
+  #
+  # Rendering
+  #
 
   render: ->
     html = Character.Templates.Index
@@ -24,10 +27,13 @@ class IndexView extends Backbone.View
     return this
   
 
-  render_item: (model) ->
+  action_url: (id) ->
     action_name = @options.render_item_options.action_name ? 'edit'
-    config      = { action_url: "#/#{ @options.scope }/#{ action_name }/#{ model.id }" }
+    "#/#{ @options.scope }/#{ action_name }/#{ id }"
 
+
+  render_item: (model) ->
+    config = { action_url: @action_url(model.id) }
     _.each @options.render_item_options, (val, key) -> config[key] = model.get(val)
     
     Character.Templates.IndexItem(config)
@@ -56,6 +62,9 @@ class IndexView extends Backbone.View
       
       $(@items_el).append item.el
 
+  #
+  # Sorting items
+  #
 
   enable_sorting: ->
     sort_options =
@@ -66,12 +75,61 @@ class IndexView extends Backbone.View
     $(@items_el).sortable(sort_options).disableSelection()
 
 
+  #
+  # Navigation experience
+  #
+
+  set_active: (id) ->
+    @unset_active()
+    $("#index_view a[href='#{ @action_url(id) }']").addClass('active')
+    @scroll_to_active()
+
+
+  unset_active: ->
+    $('#index_view a.active').removeClass('active')
+
+
+  scroll_to_active: ->
+    scroll_y = workspace["#{ @options.scope }_index_scroll_y"]
+    
+    if scroll_y and scroll_y > 0
+      window.scroll(0, scroll_y)
+    else
+      top_offset = $('#index_view a.active').offset().top
+      if top_offset - window.scrollY > $(window).height()
+        window.scroll(0, top_offset - 100)
+  
+
+  lock_scroll: ->
+    workspace["#{ @options.scope }_index_scroll_y"] = window.scrollY
+
+    top_bar_height  = $('.top-bar').height()
+    app_top_padding = parseInt($('#character').css('padding-top'))
+
+    $(@panel_el).css('top', -window.scrollY + top_bar_height + app_top_padding)
+                .addClass('fixed')
+
+
+  unlock_scroll: ->
+    $(@panel_el).css('top', '').removeClass('fixed')
+    window.scroll(0, workspace["#{ @options.scope }_index_scroll_y"])
+
+
+  scroll_top: ->
+    window.scroll(0, 0)
+
+
+  flush_scroll_y: ->
+    workspace["#{ @options.scope }_index_scroll_y"] = 0
+
+
   # Options are:
   #   @titlex
   #   @scope
   #   @reorderable
   #   @model_slug
   #   @items ->
+
 
   initialize: ->
     html = @render().el

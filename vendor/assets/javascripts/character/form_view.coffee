@@ -12,7 +12,7 @@ class FormView extends Backbone.View
 
     html = Character.Templates.Panel 
       classes:  'right'
-      title:    "TITLE" #@model.state()
+      title:    if @model then "Edit" else "New"
       actions:  actions
       content:  """<section class='chr-edit chr-form'>#{ form_html }</section>"""
 
@@ -24,13 +24,9 @@ class FormView extends Backbone.View
     workspace.router.navigate("#/#{ @scope }", { trigger: true })
 
 
-  create_model: (obj) ->
-    @collection().add(obj)
+  update_or_create: (obj) ->
+    if @model then @model.set(obj) else @options.collection().add(obj)
     @back_to_index()
-  
-
-  update_model: ->
-    @model.fetch { success: => @back_to_index() }
 
 
   initialize: (config, parent_el, form_html) ->
@@ -40,7 +36,7 @@ class FormView extends Backbone.View
     $(parent_el).append(html)
 
     $('.chr-form form').ajaxForm
-      success: (obj) => if @model then @update_model() else @create_model(obj)
+      success: (obj) => @update_or_create(obj) #if @model then @update_model(obj) else @create_model(obj)
 
     @listenTo(@model, 'destroy', @remove) if @model
 
