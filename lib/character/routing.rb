@@ -35,8 +35,8 @@ module ActionDispatch::Routing
 
     def mount_character_pages
       scope :module => "Character" do
-        match '/',  to: 'pages#root'
-        match '*a', to: 'pages#show'
+        match '/',  to: 'pages#root', as: :root
+        match '*a', to: 'pages#show', as: :flat_page
       end
     end
     

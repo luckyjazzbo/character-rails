@@ -14,6 +14,9 @@ module Character
         url: url }
     end
 
+    #
+    # Class Methods
+    #
 
     def self.admin_editable_fields
       self.fields.keys - %w( _id _type created_at udpated_at _position )
@@ -21,7 +24,7 @@ module Character
 
 
     def self.admin_title
-      self.name.split('::').last().pluralize
+      self.name.split('::').last().pluralize.scan(/[A-Z][^A-Z]*/).join(' ')
     end
 
 

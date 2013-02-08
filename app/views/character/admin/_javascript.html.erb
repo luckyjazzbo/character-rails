@@ -1,0 +1,23 @@
+<script type='text/javascript'>
+  $(function(){
+
+    window.workspace = new Character();
+
+    <% if respond_to? 'blog_index_path' %>
+      window.blog = new Character.Blog({ blog_url: '<%= "http://#{ ENV['WEBSITE_URL'] }#{ blog_index_path }" %>' });
+      window.workspace.apps['blog']   = window.blog;
+    <% end %>
+
+    <% if respond_to? 'flat_page_path' %>
+      window.pages = new Character.Pages();
+      window.workspace.apps['pages']  = window.pages;
+    <% end %>
+
+    <% @admin_models.each do |cls| %>
+      <%= "window.workspace.apps['#{ cls.admin_title }'] = new Character.Generic.App({ title: '#{ cls.admin_title }', model_name: '#{ cls.name }', reorderable: #{ cls.admin_reorderable? }, render_item_options: #{ cls.admin_render_item_options }});".html_safe %>
+      <%= %>
+    <% end %>
+
+    window.workspace.launch();
+  });
+</script>
