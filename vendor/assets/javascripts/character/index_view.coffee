@@ -107,7 +107,7 @@ class IndexView extends Backbone.View
     app_top_padding = parseInt($('#character').css('padding-top'))
 
     $(@panel_el).css('top', -window.scrollY + top_bar_height + app_top_padding)
-                .addClass('fixed')
+    $(@panel_el).addClass('fixed')
 
 
   unlock_scroll: ->

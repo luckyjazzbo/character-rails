@@ -58,7 +58,7 @@ class Blog extends Character.App
 
 
   action_show: (id) ->
-    if not workspace.current_view_is('BlogIndex')
+    if not workspace.current_view_is('blog')
       @action_index()
     workspace.current_view.show_preview(id)
 

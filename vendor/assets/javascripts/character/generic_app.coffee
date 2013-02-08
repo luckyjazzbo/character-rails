@@ -96,14 +96,13 @@ class App extends Character.App
 
 
   set_form_view: (view) ->
-    (@form_view.remove() ; delete @form_view) if @form_view
+    if @form_view then (@form_view.remove() ; delete @form_view) else @index_view.lock_scroll()
     @form_view = view
-    @index_view.lock_scroll()
     @index_view.scroll_top()
   
 
   action_new: ->
-    if not (workspace.current_view and workspace.current_view.model_name == @options.model_model)
+    if not workspace.current_view_is(@options.scope)
       @action_index()
     
     @index_view.unset_active()
@@ -113,7 +112,7 @@ class App extends Character.App
 
 
   action_edit: (id) ->
-    if not (workspace.current_view and workspace.current_view.options.model_name == @options.model_model)
+    if not workspace.current_view_is(@options.scope)
       @action_index()
 
     @index_view.set_active(id)
