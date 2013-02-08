@@ -133,6 +133,9 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
 
 ## TODO
 
+**Bugs:**
+ - unlock index after item removal
+
 **Styles:**
  - Login page styles (browserid)
  - Image uploader style for markdown editor

@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
 <% if authenticated? %>
   <header class='chr-header'>
     <div class='fixed'>
@@ -46,6 +45,26 @@
   </header>
 
   <div id='character'></div>
+
+  <script type='text/javascript'>
+    $(function(){
+
+      window.workspace  = new Character();
+      window.blog       = new Character.Blog({ blog_url: window.blog_url });
+      window.pages      = new Character.Pages();
+
+      window.workspace.apps['blog']   = window.blog;
+      window.workspace.apps['pages']  = window.pages;
+
+
+      <% @admin_models.each do |cls| %>
+        <%= "window.workspace.apps['#{ cls.admin_title }'] = new Character.Generic.App({ title: '#{ cls.admin_title }', model_name: '#{ cls.name }', reorderable: #{ cls.admin_reorderable? }, render_item_options: #{ cls.admin_render_item_options }});".html_safe %>
+        <%= %>
+      <% end %>
+
+      window.workspace.launch();
+    });
+  </script>
 <% else %>
   
   <div class='chr-login-box' style='text-align:center; margin-top:5em;'>
