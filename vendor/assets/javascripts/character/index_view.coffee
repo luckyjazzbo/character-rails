@@ -46,7 +46,15 @@ class IndexView extends Backbone.View
     $(@items_el).append html
 
 
-  render_items: ->
+  add_item: (model) ->
+    item = new Character.IndexItemView
+      model:  model
+      html:   @render_item(model)
+    
+    $(@items_el).append item.el
+
+
+  add_items: ->
     if @options.items
       objects = @options.items()
     else
@@ -55,12 +63,8 @@ class IndexView extends Backbone.View
 
     (@render_placeholder() ; return) if objects.length == 0
     
-    _(objects).each (obj) =>
-      item = new Character.IndexItemView
-        model:  obj
-        html:   @render_item(obj)
-      
-      $(@items_el).append item.el
+    @add_item(obj) for obj in objects
+
 
   #
   # Sorting items
@@ -138,9 +142,13 @@ class IndexView extends Backbone.View
     @panel_el = this.$('.chr-panel')
     @items_el = this.$('ul')
 
-    @render_items()
+    @add_items()
 
     @enable_sorting() if @options.reorderable
+
+    if @options.collection
+      collection = @options.collection()
+      collection.on 'add', (model) => @add_item(model)
 
 
 Character.IndexView = IndexView

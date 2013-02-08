@@ -40,6 +40,10 @@ Gem::Specification.new do |gem|
   # meta tags support
   gem.add_runtime_dependency 'meta-tags'
 
+  # forms
+  gem.add_runtime_dependency 'simple_form'
+
+
   #gem.add_runtime_dependency 'mongoid_slug' #git: 'git://github.com/digitalplaywright/mongoid-slug.git'
   #gem.add_runtime_dependency 'kaminari'
   #gem.add_runtime_dependency 'activeadmin-mongoid-reorder'

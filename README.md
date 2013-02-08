@@ -133,9 +133,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
 
 ## TODO
 
-**Bugs:**
- - unlock index after item removal
-
 **Styles:**
  - Login page styles (browserid)
  - Image uploader style for markdown editor
@@ -148,8 +145,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
  - Moving page element
  - Add search functionality on index view
  - Settings app out of the box
- - General data loading mechanics for apps
- - Default admin app generator for mongoid model
  - Isolate browserid
  - Add filters/categories for the blog
  - Filter which converts local images paths to S3 hosted

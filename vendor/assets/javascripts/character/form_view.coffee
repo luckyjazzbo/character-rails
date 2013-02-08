@@ -45,7 +45,7 @@ class FormView extends Backbone.View
     e.preventDefault()
     if confirm('Do you really want to remove this document?')
       @model.destroy()
-      workspace.router.navigate('#/', { trigger: true })      
+      workspace.router.navigate("#/#{ @options.scope }", { trigger: true })      
 
 
   events:

@@ -19,6 +19,7 @@ require 'carrierwave/mongoid'
 # other
 require 'browserid-rails'
 require 'meta_tags'
+require 'simple_form'
 
 # character
 require 'character/version'
