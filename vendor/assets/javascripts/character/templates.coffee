@@ -57,7 +57,7 @@ Templates =
             <strong>#{ params.line1_left }</strong>
             <aside><small>#{ params.line1_right }</small></aside>
           </div>
-          <div>
+          <div class='chr-line-2'>
             <small><em>#{ params.line2_left }</em></small>
             <aside>#{ params.line2_right }</aside>
           </div>

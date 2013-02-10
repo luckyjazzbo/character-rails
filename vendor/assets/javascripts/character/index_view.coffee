@@ -148,7 +148,8 @@ class IndexView extends Backbone.View
 
     if @options.collection
       collection = @options.collection()
-      collection.on 'add', (model) => @add_item(model)
+      collection.on 'add',  (model) => @add_item(model)
+      #collection.on 'sync', (collection) => alert 'kuku'
 
 
 Character.IndexView = IndexView

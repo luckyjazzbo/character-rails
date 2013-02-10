@@ -66,15 +66,18 @@ class App extends Character.App
       items:      => @collection.toArray()
       collection: => @collection
 
+
     @add_routes(@options.scope)
     @add_menu_item(@options.title)
     
-    @collection      = new Character.Generic.Collection()
-    @collection.url  = "/admin/api/#{ @options.model_slug }"
+    @collection     = new Character.Generic.Collection()
+    @collection.url = "/admin/api/#{ @options.model_slug }"
+    #@collection_fetched = false
 
 
   fetch_data: (callback) ->
     @collection.fetch success: ->
+      #@collection_fetched = true
       callback()
 
 

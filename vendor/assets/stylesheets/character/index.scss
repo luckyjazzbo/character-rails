@@ -117,6 +117,7 @@ body                                  { background:$bodyBgColor;
                                         padding:.5em 0;
                                         margin:0 1em;
                                         min-height:5 * 14px + 1px;
+                                        color:$txtColor;
 
       // selected item
       &.active                        { margin:-1px 0 0;
@@ -124,6 +125,8 @@ body                                  { background:$bodyBgColor;
                                         border-top: 1px solid rgb(216,216,214); //#222;
                                         border-bottom: 1px solid rgb(216,216,214)!important; //#222!important;
                                         min-height:5 * 14px + 2px;
+                                        color:$white;
+                                        background:$topBarBgColor;
       }
     }
 
@@ -132,9 +135,6 @@ body                                  { background:$bodyBgColor;
 
     small                             { color:$txtColor2;
                                         font-size:90%;
-    }
-
-    strong                            { color:$txtColor;
     }
 
     img                               { @include border-radius(2em);
@@ -148,6 +148,12 @@ body                                  { background:$bodyBgColor;
     &.chr-placeholder                 { text-align:center;
                                         line-height:3em;
     }
+  }
+}
+
+// List Item Template
+.chr-index                            {
+  .chr-line-2                         { line-height:1.3;
   }
 }
 

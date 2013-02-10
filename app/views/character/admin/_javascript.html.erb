@@ -14,7 +14,7 @@
     <% end %>
 
     <% @admin_models.each do |cls| %>
-      <%= "window.workspace.apps['#{ cls.admin_title }'] = new Character.Generic.App({ title: '#{ cls.admin_title }', model_name: '#{ cls.name }', reorderable: #{ cls.admin_reorderable? }, render_item_options: #{ cls.admin_render_item_options }});".html_safe %>
+      <%= "window.workspace.apps['#{ cls.admin_title.downcase }'] = new Character.Generic.App({ title: '#{ cls.admin_title }', model_name: '#{ cls.name }', reorderable: #{ cls.admin_reorderable? }, render_item_options: #{ cls.admin_render_item_options }});".html_safe %>
       <%= %>
     <% end %>
 
