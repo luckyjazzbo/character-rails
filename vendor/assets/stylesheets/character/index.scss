@@ -10,8 +10,10 @@
 @import "foundation-icons";
 @import "font-awesome";
 @import "foundation";
-@import "topbar";
 @import "helpers";
+@import "topbar";
+@import "login";
+
 
 
 $bodyBgColor: #edeeef;
@@ -22,30 +24,6 @@ $txtColor2: #888;
 
 $redColor: #a71820;
 $blueColor: #2763a5;
-
-
-
-
-@mixin shadow                         { @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
-}
-
-@mixin top-triangle-arrow($cl, $sz)   {
-  &:after                             { content: ' ';
-                                        display: block;
-                                        position: relative;
-                                        top: 0;
-                                        left: 50%;
-                                        width: 0;
-                                        height: 0;
-                                        border: $sz solid transparent;
-                                        border-bottom-color: $cl;
-                                        margin: 0 auto;
-                                        margin-left: -$sz;
-                                        margin-top: -$sz * 2;                                    
-  }
-}
-
-
 
 
 body                                  { background:$bodyBgColor;
@@ -73,11 +51,6 @@ body                                  { background:$bodyBgColor;
 
 .chr-header                           { @import "foundation/components/modules/topbar";
 }
-
-//.chr-main-menu                        {
-//  li.current                          { @include top-triangle-arrow($bodyBgColor, 6px);
-//  }
-//}
 
 
 /*

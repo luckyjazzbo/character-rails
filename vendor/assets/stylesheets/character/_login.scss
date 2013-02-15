@@ -1,0 +1,62 @@
+
+/*
+##        #######   ######   #### ##    ## 
+##       ##     ## ##    ##   ##  ###   ## 
+##       ##     ## ##         ##  ####  ## 
+##       ##     ## ##   ####  ##  ## ## ## 
+##       ##     ## ##    ##   ##  ##  #### 
+##       ##     ## ##    ##   ##  ##   ### 
+########  #######   ######   #### ##    ## 
+*/
+
+.chr-login-message                    { text-align:center;
+                                        margin-top:3em;
+
+  .browserid_login                    { background:lighten($mainColor, 5%);
+                                        border:darken($mainColor, 5%);
+                                        font-size:1em;
+                                        display:block;
+                                        width:16em;
+                                        margin:0 auto;
+                                        margin-top: 1em;
+                                        text-align:left;
+                                        @include border-radius(10px);
+                                        @include shadow;
+                                        @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.2));
+
+    strong                            { color:$white;
+                                        top: -.2em;
+                                        position: relative;
+                                        @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.2));
+    }
+
+    &:hover strong                    { text-decoration: underline;
+    }
+  }
+  .icon-user                          { background:darken($mainColor, 5%);
+                                        color:$white;
+                                        line-height:2;
+                                        padding:0 .1em 0 .8em;
+                                        position:relative;
+                                        margin-right:1.3em;
+                                        font-size:1.8em;
+                                        @include border-top-left-radius(10px);
+                                        @include border-bottom-left-radius(10px);
+
+
+    &:after                           { left: 100%;
+                                        border: solid transparent;
+                                        content: " ";
+                                        height: 0;
+                                        width: 0;
+                                        position: absolute;
+                                        pointer-events: none;
+    }
+
+    &:after                           { border-left-color:darken($mainColor, 5%);
+                                        border-width: 1em;
+                                        top: 50%;
+                                        margin-top: -1em;
+    }  
+  }
+}

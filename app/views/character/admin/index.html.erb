@@ -51,13 +51,16 @@
 
   <%= render 'character/admin/javascript' %>
 <% else %>
-  
-  <div class='chr-login-box' style='text-align:center; margin-top:5em;'>
-    <p>Welcome to <strong>DryWired</strong> administration spot,<br>
-      <%= login_link %>
-    </p>
-  </div>
-
+  <section class='chr-login'>
+    <div class='chr-login-message'>
+      <p>Welcome to <strong>DryWired</strong> administration spot,<br>
+        <%= link_to browserid_config.login.path, class: :browserid_login do %>
+          <i class='icon-user'></i>
+          <strong>Login with Persona</strong>
+        <% end %>
+      </p>
+    </div>
+  </section>
 <% end %>
 
 </body>
