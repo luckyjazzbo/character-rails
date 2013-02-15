@@ -159,8 +159,8 @@ body                                  { background:$bodyBgColor;
       // selected item
       &.active                        { margin:-1px 0 0;
                                         padding:.5em 1em;
-                                        border-top: 1px solid lighten($mainColor, 40%); //#222;
-                                        border-bottom: 1px solid lighten($mainColor, 40%)!important; //#222!important;
+                                        border-top: 1px solid lighten($mainColor, 52%); //#222;
+                                        border-bottom: 1px solid lighten($mainColor, 52%)!important; //#222!important;
                                         min-height:5 * 14px + 2px;
                                         background:lighten($mainColor, 56%);
       }

@@ -28,12 +28,6 @@
   <header class='chr-header'>
     <div class='fixed'>
       <nav class='top-bar'>
-        <!-- 
-        <ul>
-          <li class='name'><h1><a href='/' target=_blank><%= ENV['WEBSITE_NAME'] %></a></h1></li>
-          <li class='toggle-topbar'><a href="#"></a></li>
-        </ul>
-        -->
         <section>
           <ul class='left chr-main-menu' id='main_menu'>
             <li class='active'>
@@ -42,7 +36,11 @@
           </ul>
 
           <ul class='right'>
-            <li><%= logout_link %></li>
+            <li>
+              <%= link_to browserid_config.logout.path, class: :browserid_logout do %>
+                <%= image_tag current_user.avatar_url(50) %> Logout
+              <% end %>
+            </li>
           </ul>
         </section>
       </nav>

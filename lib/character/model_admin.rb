@@ -1,7 +1,7 @@
 module Character
   class ModelAdmin
     def admin_form_config
-      
+
 
       slug  = self.class.name.gsub('::', '-')
       url   = "/admin/api/#{ slug }"
@@ -19,7 +19,7 @@ module Character
     #
 
     def self.admin_editable_fields
-      self.fields.keys - %w( _id _type created_at udpated_at _position )
+      self.fields.keys - %w( _id _type created_at updated_at _position )
     end
 
 
