@@ -7,8 +7,8 @@ class CharacterApp
 
 
   select_menu: ->
-    $('#main_menu li').removeClass 'current'
-    $("#main_menu a[href='#/#{ @scope }']").parent().addClass 'current'
+    $('#main_menu li').removeClass 'active'
+    $("#main_menu a[href='#/#{ @scope }']").parent().addClass 'active'
 
 
   add_routes: (scope) ->

@@ -7,9 +7,46 @@
 // ASCII Art: http://patorjk.com/software/taag/#p=display&f=Banner3&t=posts
 
 @import "compass/reset/utilities";
-@import "foundation";
 @import "foundation-icons";
+@import "font-awesome";
+@import "foundation";
+@import "topbar";
 @import "helpers";
+
+
+$bodyBgColor: #edeeef;
+$iconBtnColor: $txtColor;
+
+$iconBtnSize: 14px;
+$txtColor2: #888;
+
+$redColor: #a71820;
+$blueColor: #2763a5;
+
+
+
+
+@mixin shadow                         { @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+@mixin top-triangle-arrow($cl, $sz)   {
+  &:after                             { content: ' ';
+                                        display: block;
+                                        position: relative;
+                                        top: 0;
+                                        left: 50%;
+                                        width: 0;
+                                        height: 0;
+                                        border: $sz solid transparent;
+                                        border-bottom-color: $cl;
+                                        margin: 0 auto;
+                                        margin-left: -$sz;
+                                        margin-top: -$sz * 2;                                    
+  }
+}
+
+
+
 
 body                                  { background:$bodyBgColor;
 }
@@ -37,10 +74,10 @@ body                                  { background:$bodyBgColor;
 .chr-header                           { @import "foundation/components/modules/topbar";
 }
 
-.chr-main-menu                        {
-  li.current                          { @include top-triangle-arrow($bodyBgColor, 6px);
-  }
-}
+//.chr-main-menu                        {
+//  li.current                          { @include top-triangle-arrow($bodyBgColor, 6px);
+//  }
+//}
 
 
 /*
@@ -122,18 +159,17 @@ body                                  { background:$bodyBgColor;
       // selected item
       &.active                        { margin:-1px 0 0;
                                         padding:.5em 1em;
-                                        border-top: 1px solid rgb(216,216,214); //#222;
-                                        border-bottom: 1px solid rgb(216,216,214)!important; //#222!important;
+                                        border-top: 1px solid lighten($mainColor, 40%); //#222;
+                                        border-bottom: 1px solid lighten($mainColor, 40%)!important; //#222!important;
                                         min-height:5 * 14px + 2px;
-                                        color:$white;
-                                        background:$topBarBgColor;
+                                        background:lighten($mainColor, 56%);
       }
     }
 
     &:last-child a                    { border-bottom:none;
     }
 
-    small                             { color:$txtColor2;
+    small                             { color:lighten($txtColor,15%);
                                         font-size:90%;
     }
 
@@ -227,7 +263,7 @@ body                                  { background:$bodyBgColor;
 
 .chr-footer                           { height:$topBarHeight;
                                         width:100%;
-                                        background:$topBarBgColor;
+                                        background:$black;
                                         position:fixed;
                                         bottom:0;
                                         padding:5px 1em;
@@ -281,8 +317,8 @@ body                                  { background:$bodyBgColor;
                                         width:32em;
                                         padding:12px 12px 0;
                                         color:$white;                                        
-                                        background:$topBarBgColor;
-                                        border: 4px solid $topBarBgColor;
+                                        background:$black;
+                                        border: 4px solid $black;
                                         @include border-radius(6px);
                                         @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.3));
 
@@ -303,7 +339,7 @@ body                                  { background:$bodyBgColor;
   }
 
   &:before                            { border-color: rgba(51, 51, 51, 0);
-                                        border-top-color: $topBarBgColor;
+                                        border-top-color: $black;
                                         border-width: 16px;
                                         left: 50%;
                                         margin-left:1.5em;

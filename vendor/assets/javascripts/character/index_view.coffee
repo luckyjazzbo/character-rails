@@ -110,7 +110,7 @@ class IndexView extends Backbone.View
     top_bar_height  = $('.top-bar').height()
     app_top_padding = parseInt($('#character').css('padding-top'))
 
-    $(@panel_el).css('top', -window.scrollY + top_bar_height + app_top_padding)
+    $(@panel_el).css('top', -window.scrollY + top_bar_height + app_top_padding + 1)
     $(@panel_el).addClass('fixed')
 
 
