@@ -9,8 +9,34 @@
 ########  #######   ######   #### ##    ## 
 */
 
+.chr-login                            { background:$white;
+                                        padding:1em 1em 2em;
+                                        @include shadow;
+                                        @include column(6);
+                                        float: none;
+                                        margin: 2em auto;
+}
+
+.chr-login-icon                       { width:2em;
+                                        height:2em;
+                                        margin: .3em auto;
+                                        font-size:3em;
+                                        @include border-radius(1em);
+
+                                        background:lighten($black, 10%);
+                                        color:darken($white, 10%);
+                                        text-align:center;
+                                        line-height: 2;
+
+                                        @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.2));
+                                        border:1px solid lighten($black, 8%);
+                                        @include shadow;
+}
+
 .chr-login-message                    { text-align:center;
-                                        margin-top:3em;
+
+  h1                                  { margin-bottom:0;
+  }
 
   .browserid_login                    { background:lighten($mainColor, 5%);
                                         border:darken($mainColor, 5%);
@@ -20,8 +46,8 @@
                                         margin:0 auto;
                                         margin-top: 1em;
                                         text-align:left;
-                                        @include border-radius(10px);
                                         @include shadow;
+                                        @include border-radius(10px);
                                         @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.2));
 
     strong                            { color:$white;
@@ -33,7 +59,7 @@
     &:hover strong                    { text-decoration: underline;
     }
   }
-  .icon-user                          { background:darken($mainColor, 5%);
+  i                                   { background:darken($mainColor, 5%);
                                         color:$white;
                                         line-height:2;
                                         padding:0 .1em 0 .8em;
