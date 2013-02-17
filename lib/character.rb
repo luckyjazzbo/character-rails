@@ -22,6 +22,7 @@ require 'browserid-rails'
 require 'meta_tags'
 require 'whatlanguage'
 require 'russian'
+require 'simple_form'
 
 # character
 require 'character/version'
