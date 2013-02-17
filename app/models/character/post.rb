@@ -38,8 +38,19 @@ class Character::Post
     published ? 'Published' : 'Draft'
   end
 
+  def language
+    require 'whatlanguage' # this is buggy for russin (shows french)
+    title.language == :english ? :english : :russian
+  end
+
   def date_formatted
-    date ? date.to_s.gsub('-', '/') : ''
+    if date
+      if language == :english 
+        date.strftime('%a, %d %b %Y')
+      else
+        Russian::strftime(date, '%a, %d %b %Y')
+      end
+    end
   end
 
   def date_or_state

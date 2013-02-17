@@ -44,6 +44,10 @@ Gem::Specification.new do |gem|
   # forms
   gem.add_runtime_dependency 'simple_form'
 
+  # language support
+  gem.add_runtime_dependency 'whatlanguage'
+  gem.add_runtime_dependency 'russian'
+
 
   #gem.add_runtime_dependency 'mongoid_slug' #git: 'git://github.com/digitalplaywright/mongoid-slug.git'
   #gem.add_runtime_dependency 'kaminari'

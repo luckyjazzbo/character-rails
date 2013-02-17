@@ -20,7 +20,8 @@ require 'carrierwave/mongoid'
 # other
 require 'browserid-rails'
 require 'meta_tags'
-require 'simple_form'
+require 'whatlanguage'
+require 'russian'
 
 # character
 require 'character/version'
