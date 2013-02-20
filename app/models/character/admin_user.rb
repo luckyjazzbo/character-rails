@@ -1,6 +1,7 @@
-class Character::AdminUser < Character::ModelAdmin
+class Character::AdminUser
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Character::Admin
 
   field :email
 

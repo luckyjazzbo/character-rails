@@ -28,5 +28,5 @@ require 'simple_form'
 require 'character/version'
 require 'character/engine'
 require 'character/routing'
-require 'character/model_admin'
+require 'character/admin'
 
