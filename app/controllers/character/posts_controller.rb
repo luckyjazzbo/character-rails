@@ -22,7 +22,7 @@ class Character::PostsController < ApplicationController
   end
 
   def feed
-    @posts = Character::Post.published
+    @posts = Character::Post.unscoped.order_by(:date.desc).published
 
     respond_to do |format|
       format.rss { render :layout => false }
