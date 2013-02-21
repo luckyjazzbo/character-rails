@@ -2,7 +2,7 @@ class Character::AdminUser
   include Mongoid::Document
   include Mongoid::Timestamps
   include Character::Admin
-
+  
   field :email
 
 
@@ -12,20 +12,8 @@ class Character::AdminUser
   end
 
 
-  def avatar56_url
+  def admin_thumb_url
     avatar_url(56)
-  end
-
-
-  def joined_since
-    created_at ? 'Since ' + created_at.strftime('%d %b %Y') : ''
-  end
-
-
-  def as_json(options = { })
-    super((options || { }).merge({
-      :methods => [:avatar56_url, :joined_since]
-    }))
   end
 
   #
@@ -43,6 +31,6 @@ class Character::AdminUser
   end
 
   def self.admin_render_item_options
-    """{ line1_left: 'email', line2_left: 'joined_since', image_url: 'avatar56_url' }"""
+    """{ line1_left: 'email', line2_left: 'formatted_created_at', image_url: 'admin_thumb_url' }"""
   end
 end

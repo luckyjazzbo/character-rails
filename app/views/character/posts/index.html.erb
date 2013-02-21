@@ -1,11 +1,11 @@
 <% set_meta_tags open_graph: { type: 'blog' } %>
 
 <% @posts.each do |p| %>
-  <%= link_to blog_post_path(p.slug), class:'chr-post-link' do %>
+  <%= link_to blog_post_path(p.slug), class: 'chr-post-link' do %>
     <header>
       <aside><em><%= p.date_formatted %></em></aside>
       <h1><%= p.title %></h1>
     </header>
-    <p><%= p.excerpt %></p>
+    <% if p.featured %><p><%= p.excerpt %></p><% end %>
   <% end %>
 <% end %>

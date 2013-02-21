@@ -17,13 +17,18 @@ class BlogIndex extends Character.IndexView
     items: ->
       # drafts go first, then published posts
       drafts    = window.blog.posts.filter (p) -> not p.get('published')
-      published = window.blog.posts.filter (p) -> p.get('published')
+      featured  = window.blog.posts.filter (p) -> p.get('published') and p.get('featured')
+      published = window.blog.posts.filter (p) -> p.get('published') and not p.get('featured')
+
+      # then featured sorted by date
+      featured_reversed  = _(featured).sortBy (p) -> p.get('date')
+      featured_sorted    = featured_reversed.reverse()
 
       # then published sorted by date
-      reversed  = _(published).sortBy (p) -> p.get('date')
-      sorted    = reversed.reverse()
+      published_reversed  = _(published).sortBy (p) -> p.get('date')
+      published_sorted    = published_reversed.reverse()
 
-      posts     = drafts.concat(sorted)
+      posts = drafts.concat(featured_sorted).concat(published_sorted)
       return posts
 
 

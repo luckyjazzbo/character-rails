@@ -15,7 +15,26 @@ module Character::Admin
   end
 
 
+  def as_json(options = { })
+    methods = []
+    methods << :admin_thumb_url       if self.class.method_defined? :admin_thumb_url
+    methods << :formatted_created_at  if self.class.method_defined? :formatted_created_at
+
+    super((options || { }).merge( { methods: methods } ))
+  end
+
+
   included do
+    # Add class to the admin
+    if not ::Rails.application.config.character_admin_models.include?(self.name)
+      ::Rails.application.config.character_admin_models << self.name
+    end
+
+    if self.method_defined? :created_at
+      def formatted_created_at
+        'Created at ' + created_at.strftime('%b %d, %Y') if created_at
+      end
+    end
   end
 
 
@@ -38,9 +57,9 @@ module Character::Admin
     def admin_render_item_options
       fields = admin_editable_fields
       
-
-      # add timestamp check: , line1_right:  'created_at' }"
       js = "{ line1_left:  '#{ fields[0] }' }"
+      js = js.gsub(" }", ", line1_right: 'formatted_created_at' }") if self.method_defined? :formatted_created_at
+      js = js.gsub(" }", ", image_url: 'admin_thumb_url' }")        if self.method_defined? :admin_thumb_url
       
       if fields.size > 1
         js = js.gsub(" }", ", line2_left: '#{ fields[1] }' }")

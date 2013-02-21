@@ -23,7 +23,7 @@ class IndexView extends Backbone.View
       title:        @options.title
       new_item_url: "#/#{ @options.scope }/new"
 
-    $(this.el).html html
+    @$el.html html
     return this
   
 
@@ -32,24 +32,23 @@ class IndexView extends Backbone.View
     "#/#{ @options.scope }/#{ action_name }/#{ id }"
 
 
-  render_item: (model) ->
-    config = { action_url: @action_url(model.id) }
-    _.each @options.render_item_options, (val, key) -> config[key] = model.get(val)
-    
-    Character.Templates.IndexItem(config)
+  #render_item: (model) ->
+  #  config = { action_url: @action_url(model.id) }
+  #  _.each @options.render_item_options, (val, key) -> config[key] = model.get(val)
+  #  
+  #  Character.Templates.IndexItem(config)
 
 
   render_placeholder: ->
-    html = """<li class=chr-placeholder>
-                You don't have any posts yet, so go ahead and create the first one!
-              </li>"""
+    html = """<li class=chr-placeholder>Yet nothing is here.</li>"""
     $(@items_el).append html
 
 
   add_item: (model) ->
     item = new Character.IndexItemView
-      model:  model
-      html:   @render_item(model)
+      model:                model
+      render_item_options:  @options.render_item_options
+      scope:                @options.scope
     
     $(@items_el).append item.el
 
@@ -172,14 +171,22 @@ class IndexItemView extends Backbone.View
   tagName: 'li'
 
 
-  render: ->
-    $(this.el).html @options.html
-    $(this.el).attr('data-id', @model.id)
+  render: =>
+    action_name = @options.render_item_options.action_name ? 'edit'
+    config      = { action_url: "#/#{ @options.scope }/#{ action_name }/#{ @model.id }" }
+    
+    _.each @options.render_item_options, (val, key) => config[key] = @model.get(val)
+    
+    html = Character.Templates.IndexItem(config)
+
+    @$el.html html
+    @$el.attr('data-id', @model.id)
     return this
 
 
   initialize: ->
     @listenTo(@model, 'destroy', @remove)
+    @listenTo(@model, 'change', @render)
     @render()
 
 

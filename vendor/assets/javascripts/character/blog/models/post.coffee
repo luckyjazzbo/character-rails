@@ -11,7 +11,8 @@ class Post extends Backbone.Model
     'excerpt',
     'category_id',
     'published',
-    'featured_image_id' ]
+    'featured_image_id',
+    'featured' ]
 
   toJSON: ->
     attributes = {}

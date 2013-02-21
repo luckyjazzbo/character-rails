@@ -4,6 +4,7 @@ class Character::Post
 
   field :title
   field :published, type: Boolean,  default: false
+  field :featured,  type: Boolean,  default: false
   field :date,      type: Date
   field :slug
   field :md
@@ -19,7 +20,7 @@ class Character::Post
 
 
   # Scope
-  default_scope     order_by date: :desc
+  default_scope     order_by(:published.asc, :featured.desc, :date.desc) # admin order is defined in javascript
   scope :drafts,    where(published: false)
   scope :published, where(published: true)
 
@@ -30,12 +31,12 @@ class Character::Post
 
   def as_json(options = { })
     super((options || { }).merge({
-        :methods => [:state, :date_formatted, :date_or_state, :featured_image_url, :thumb_image_url]
+      methods: %w(state date_formatted date_or_state featured_image_url thumb_image_url)
     }))
   end
 
   def state
-    published ? 'Published' : 'Draft'
+    published ? ( featured ? 'Published + Featured' : 'Published') : 'Draft'
   end
 
   def language
@@ -54,7 +55,7 @@ class Character::Post
   end
 
   def date_or_state
-    published ? date_formatted : state
+    featured ? 'Featured' : (published ? date_formatted : state)
   end
 
   def featured_image_url

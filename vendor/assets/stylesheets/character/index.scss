@@ -3,6 +3,12 @@
 //= require redactor
 //= require codemirror
 
+//
+//
+// Character admin styles
+//
+//
+
 @charset "UTF-8";
 // ASCII Art: http://patorjk.com/software/taag/#p=display&f=Banner3&t=posts
 
@@ -217,6 +223,16 @@ body                                  { background:$bodyBgColor;
 
 .chr-form                             { @import "foundation/common/forms";
   .datepicker                         { width:6.3em!important;
+  }
+
+  input[type=file]                    { margin:0 0 12px 0;
+  }
+}
+
+.chr-settings                         {
+  label                               { color:#fff;
+    input[type=checkbox]              { margin-bottom:12px;
+    }
   }
 }
 

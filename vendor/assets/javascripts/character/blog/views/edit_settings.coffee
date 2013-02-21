@@ -1,8 +1,9 @@
 class BlogEditSettings extends Character.SettingsView
   render_settings: ->
-    date    = @model?.get('date')    ? ''
-    excerpt = @model?.get('excerpt') ? ''
-    tags    = @model?.get('tags')    ? ''
+    date      = @model?.get('date')     ? ''
+    excerpt   = @model?.get('excerpt')  ? ''
+    tags      = @model?.get('tags')     ? ''
+    featured  = if @model?.get('featured') then 'checked' else ''
 
     featured_image_form_tag = @render_featured_image_form()
     category_options_tag    = if blog.options.categories then @category_options() else ''
@@ -12,6 +13,7 @@ class BlogEditSettings extends Character.SettingsView
         <input id=date class=datepicker type=text value='#{date}' placeholder='Date'>
         <textarea id=excerpt rows=5 placeholder='Excerpt'>#{excerpt}</textarea>
         <input type=text id=tags value='#{tags}' placeholder='Keywords splitted with comma' />
+        <label for=featured><input type=checkbox id=featured #{ featured } /> This post is featured</label>
 
         #{ category_options_tag }"""
 
@@ -42,6 +44,10 @@ class BlogEditSettings extends Character.SettingsView
 
   tags: ->
     $('#tags').val()
+
+
+  featured: ->
+    $('#featured').is(':checked')
 
 
   category_id: ->

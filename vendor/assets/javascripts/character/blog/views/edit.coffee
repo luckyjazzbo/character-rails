@@ -49,10 +49,12 @@ class BlogEdit extends Backbone.View
       excerpt:            @settings.excerpt()
       category_id:        @settings.category_id()
       featured_image_id:  @settings.featured_image_id()
+      featured:           @settings.featured()
 
     _.extend attributes, extra_attributes
 
     if @model
+      console.log attributes
       @model.save(attributes, { success: callback })
     else
       blog.posts.create(attributes, { wait: true, success: callback })
