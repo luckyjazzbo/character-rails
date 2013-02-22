@@ -21,11 +21,11 @@ class BlogIndex extends Character.IndexView
       published = window.blog.posts.filter (p) -> p.get('published') and not p.get('featured')
 
       # then featured sorted by date
-      featured_reversed  = _(featured).sortBy (p) -> p.get('date')
+      featured_reversed  = _.sortBy featured, (p) -> p.get('date')
       featured_sorted    = featured_reversed.reverse()
 
       # then published sorted by date
-      published_reversed  = _(published).sortBy (p) -> p.get('date')
+      published_reversed  = _.sortBy published, (p) -> p.get('date')
       published_sorted    = published_reversed.reverse()
 
       posts = _.union(drafts, featured_sorted, published_sorted)

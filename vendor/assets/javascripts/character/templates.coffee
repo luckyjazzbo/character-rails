@@ -49,7 +49,7 @@ Templates =
 
     _.extend(params, context)
 
-    image = if params.image_url then "<img src='#{ params.image_url }' />" else ''
+    image = if params.image_url then "<img src='#{ params.image_url }' width=56px height=56px />" else ''
 
     """ <a href='#{ params.action_url }'>
           #{ image }
