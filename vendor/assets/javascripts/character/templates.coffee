@@ -54,12 +54,12 @@ Templates =
     """ <a href='#{ params.action_url }'>
           #{ image }
           <div>
-            <strong>#{ params.line1_left }</strong>
-            <aside><small>#{ params.line1_right }</small></aside>
+            <strong class='chr-line-left'>#{ params.line1_left }</strong>
+            <aside><small class='chr-line-right'>#{ params.line1_right }</small></aside>
           </div>
           <div class='chr-line-2'>
-            <small><em>#{ params.line2_left }</em></small>
-            <aside>#{ params.line2_right }</aside>
+            <small><em class='chr-line-left'>#{ params.line2_left }</em></small>
+            <aside class='chr-line-right'>#{ params.line2_right }</aside>
           </div>
         </a>"""  
 

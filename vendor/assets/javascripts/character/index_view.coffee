@@ -32,13 +32,6 @@ class IndexView extends Backbone.View
     "#/#{ @options.scope }/#{ action_name }/#{ id }"
 
 
-  #render_item: (model) ->
-  #  config = { action_url: @action_url(model.id) }
-  #  _.each @options.render_item_options, (val, key) -> config[key] = model.get(val)
-  #  
-  #  Character.Templates.IndexItem(config)
-
-
   render_placeholder: ->
     html = """<li class=chr-placeholder>Yet nothing is here.</li>"""
     $(@items_el).append html
@@ -63,6 +56,9 @@ class IndexView extends Backbone.View
     (@render_placeholder() ; return) if objects.length == 0
     
     @add_item(obj) for obj in objects
+
+    $('.chr-line-1 .chr-line-left').trunk8 { lines: 1 }
+    $('.chr-line-2 .chr-line-left').trunk8 { lines: 2 }
 
 
   #

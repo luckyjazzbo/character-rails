@@ -6,7 +6,7 @@
 #= require character/plugins/replace_nth_occurrence
 #= require character/plugins/jquery.smartresize
 #= require character/plugins/jquery.form
-#= require character/plugins/jquery.autogrow
+#= require character/plugins/jquery.trunk8
 
 #= require lodash
 #= require underscore.string

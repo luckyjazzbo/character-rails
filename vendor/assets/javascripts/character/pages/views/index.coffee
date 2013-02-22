@@ -11,7 +11,7 @@ class PagesIndex extends Character.IndexView
       line1_right:  'state'
       line2_left:   'permalink'
 
-    items:        -> window.pages.pages.toArray()
+    items: -> window.pages.pages.toArray()
 
 
 Character.Pages.Views.PagesIndex = PagesIndex
