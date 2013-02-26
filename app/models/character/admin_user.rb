@@ -29,8 +29,4 @@ class Character::AdminUser
   def self.admin_title
     "Admins"
   end
-
-  def self.admin_render_item_options
-    """{ line1_left: 'email', line2_left: 'formatted_created_at', image_url: 'admin_thumb_url' }"""
-  end
 end
