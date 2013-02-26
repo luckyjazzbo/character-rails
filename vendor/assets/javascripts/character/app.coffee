@@ -2,7 +2,7 @@ class CharacterApp
   add_menu_item: (menu) ->
     @menu = menu if menu
     
-    html = """<li><a href='#/#{ @scope }'>#{ @menu }</a></li>"""
+    html = """<li class='#{ @scope }'><a href='#/#{ @scope }'>#{ @menu }</a></li>"""
     $('#main_menu').append html
 
 
