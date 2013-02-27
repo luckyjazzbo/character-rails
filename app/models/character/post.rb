@@ -47,9 +47,11 @@ class Character::Post
   def date_formatted
     if date
       if language == :english 
-        date.strftime('%a, %d %b %Y')
+        #date.strftime('%a, %d %b %Y')
+        date.strftime('%b %d, %Y')
       else
-        Russian::strftime(date, '%a, %d %b %Y')
+        #Russian::strftime(date, '%a, %d %b %Y')
+        Russian::strftime(date, '%d %b %Y')
       end
     end
   end
