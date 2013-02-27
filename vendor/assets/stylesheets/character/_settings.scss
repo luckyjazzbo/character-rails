@@ -126,7 +126,7 @@ $topBarBtmMargin: 0px;
 // $topBarLinkColor: #fff !default;
 // $topBarLinkWeight: bold !default;
 // $topBarLinkSize: 13px !default;
-// $topBarDropBgColor: #222 !default;
+$topBarDropBgColor: lighten($topBarBgColor, 4.5%); //$mainColor; //#222 !default;
 // $topBarDropLinkColor: #fff !default;
 // $topBarDropToggleSize: 5px !default;
 // $topBarDropToggleColor: #fff !default;

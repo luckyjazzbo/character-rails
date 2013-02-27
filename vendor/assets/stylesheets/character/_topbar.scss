@@ -1,8 +1,21 @@
+@import "foundation/components/modules/topbar";
+
+$darkBorder: darken($topBarBgColor, 5%);
+$lightBorder: lighten($topBarBgColor, 5%);
+
+.chr-top-bar-line                     { border-top:1px solid darken($topBarBgColor, 7%);
+                                        //position:relative;
+                                        //top:40px;
+                                        z-index: 33;
+                                        position:relative;
+                                        margin-top:-1px;
+}
+
 .top-bar                              { border-bottom: 1px solid darken($topBarBgColor, 7%);
 
 
-  > section > ul > li                 { border-left: 1px solid darken($topBarBgColor, 5%);
-                                        border-right: 1px solid lighten($topBarBgColor, 5%);
+  > section > ul > li                 { border-left: 1px solid $darkBorder;
+                                        border-right: 1px solid $lightBorder;
                                         margin-left: -2px;
                                         
     &:hover, &:focus                  { background: lighten($topBarBgColor, 4.5%)!important;
@@ -10,8 +23,8 @@
       }
     }
     &.active                          { background: darken($topBarBgColor, 4.5%)!important;
-                                        border-left: 1px solid lighten($topBarBgColor, 5%);
-                                        border-right: 1px solid lighten($topBarBgColor, 5%);
+                                        border-left: 1px solid $lightBorder;
+                                        border-right: 1px solid $lightBorder;
                                         position: relative;
                                         z-index:2;
       > a                             { border-left: 1px solid darken($topBarBgColor, 7%);
@@ -19,16 +32,28 @@
                                         color:$white!important;
       }
     }
-    > a                               { border-left: 1px solid lighten($topBarBgColor, 5%);
-                                        border-right: 1px solid darken($topBarBgColor, 5%);
-                                        @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
+    > a                               { border-left: 1px solid $lightBorder;
+                                        border-right: 1px solid $darkBorder;
     }
   }
 
-  .dropdown                           { margin-top:-1px!important;
-                                        min-width:150px;
-                                        left:0!important;
+  a                                   { @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
+  }
+
+  .dropdown                           { min-width:106px;
+                                        padding-top:0!important;
+                                        margin-top:-1px!important;
+
     a                                 { line-height:2!important;
+                                        font-weight: 600!important;
+                                        border-left: 1px solid $darkBorder;
+                                        border-right: 1px solid $darkBorder;
+    }
+
+    li                                { padding-bottom:0!important;
+                                        text-align: right;                                        
+      &:last-child                    { border-bottom: 1px solid $darkBorder;
+      }
     }
   }
 
@@ -44,14 +69,6 @@
 
 
 
-.dg-home-link                         { padding:0 .5em!important;
-  .icon-home                          { font-size:2em;
-                                        line-height:1.6;
-                                        @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
-                                        color:$white!important;
-  }
-}
-
 .browserid_logout                     { padding:0 .7em!important;
   img                                 { float:left;
                                         width:2em;
@@ -63,6 +80,15 @@
   }
 }
 
+
+
+.chr-menu-home                        { padding:0 .5em!important;
+  .icon-home                          { font-size:2em;
+                                        line-height:1.6;
+                                        @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
+                                        color:$white!important;
+  }
+}
 
 
 .chr-menu-settings                    {

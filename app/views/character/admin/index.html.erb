@@ -27,18 +27,19 @@
 <% if authenticated? %>
   <header class='chr-header'>
     <div class='fixed'>
+      
       <nav class='top-bar'>
         <section>
           <ul class='left chr-main-menu' id='main_menu'>
             <li class='active'>
-              <a class='dg-home-link' href='#'><i class='icon-home'></i></a>
+              <a class='chr-menu-home' href='#'><i class='icon-home'></i></a>
             </li>
           </ul>
 
           <ul class='right'>
             <li class='chr-menu-settings has-dropdown'>
-              <a href="#">
-                <i class='icon-cog'></i>
+              <a href="#/admins">
+                <i class='icon-cog'></i> Settings
               </a>
 
               <ul class="dropdown">
@@ -55,6 +56,9 @@
           </ul>
         </section>
       </nav>
+
+      <div class='chr-top-bar-line'></div>
+
     </div>
   </header>
 

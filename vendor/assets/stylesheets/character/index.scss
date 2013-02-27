@@ -17,7 +17,6 @@
 @import "font-awesome";
 @import "foundation";
 @import "helpers";
-@import "topbar";
 @import "login";
 
 
@@ -58,7 +57,7 @@ body                                  { background:$bodyBgColor;
 ##     ## ######## ##     ## ########  ######## ##     ## 
 */
 
-.chr-header                           { @import "foundation/components/modules/topbar";
+.chr-header                           { @import "topbar";
 }
 
 
