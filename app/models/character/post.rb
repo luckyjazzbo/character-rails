@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Character::Post
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -40,8 +42,7 @@ class Character::Post
   end
 
   def language
-    require 'whatlanguage' # this is buggy for russin (shows french)
-    title.language == :english ? :english : :russian
+    title.scan(/[А-Яа-я]+?/).size > 0 ? :russian : :english 
   end
 
   def date_formatted
