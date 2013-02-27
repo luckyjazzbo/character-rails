@@ -48,10 +48,10 @@ class Character::Post
     if date
       if language == :english 
         #date.strftime('%a, %d %b %Y')
-        date.strftime('%b %d, %Y')
+        Date.today.year == date.year ? date.strftime('%b %d') : date.strftime('%b %d, %Y')
       else
         #Russian::strftime(date, '%a, %d %b %Y')
-        Russian::strftime(date, '%d %b %Y')
+        Date.today.year == date.year ? Russian::strftime(date, '%e %b') : Russian::strftime(date, '%e %b %Y')
       end
     end
   end

@@ -36,7 +36,7 @@ class BlogEditMarkdown extends Backbone.View
     html = @render().el
     $('#header').after(html)
 
-    @converter  = new Showdown.converter { extensions: ['github', 'image_uploader', 'video'] }
+    @converter  = new Showdown.converter { extensions: ['dashdash', 'github', 'image_uploader', 'video'] }
     @html       = document.getElementById('html')
     
     @code_mirror = CodeMirror.fromTextArea document.getElementById('markdown'),

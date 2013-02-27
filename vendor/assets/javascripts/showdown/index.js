@@ -2,6 +2,7 @@
 //= require ./image_uploader
 //= require ./github
 //= require ./video
+//= require ./dashdash
 
 //
 // showdown.js -- A javascript port of Markdown.
