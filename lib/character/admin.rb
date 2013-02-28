@@ -42,7 +42,7 @@ module Character::Admin
   module ClassMethods
     def admin_editable_fields
       # exclude these fields from the auto generated form
-      self.fields.keys - %w( _id _type created_at _position updated_at )
+      self.fields.keys - %w( _id _type created_at _position updated_at deleted_at )
     end
 
 
