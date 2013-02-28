@@ -1,4 +1,7 @@
 class Character::Admin::BaseController < ActionController::Base
-  #include BrowserID::Rails::Base
-  #before_filter :return_unavailable_status
+  before_filter :authenticate_admin_user
+
+  def authenticate_admin_user
+    @character_admin_user = browserid_current_user if browserid_authenticated?
+  end
 end

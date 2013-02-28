@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<% if authenticated? %>
+<% if @character_admin_user %>
   <header class='chr-header'>
     <div class='fixed'>
       
@@ -50,7 +50,7 @@
             
             <li>
               <%= link_to browserid_config.logout.path, class: :browserid_logout do %>
-                <%= image_tag current_user.avatar_url(50) %> Logout
+                <%= image_tag @character_admin_user.avatar_url(50) %> Logout
               <% end %>
             </li>
           </ul>

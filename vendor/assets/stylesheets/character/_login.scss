@@ -46,6 +46,7 @@
                                         margin:0 auto;
                                         margin-top: 1em;
                                         text-align:left;
+                                        overflow:hidden;
                                         @include shadow;
                                         @include border-radius(10px);
                                         @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.2));

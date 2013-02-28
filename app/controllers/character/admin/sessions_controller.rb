@@ -1,6 +1,4 @@
 class Character::Admin::SessionsController < ActionController::Base
-  #include BrowserID::Rails::Base
-
   # POST /login
   def create
     respond_to_browserid

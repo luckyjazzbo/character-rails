@@ -134,7 +134,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
 ## TODO
 
 **Styles:**
- - Login page styles (browserid)
  - Image uploader style for markdown editor
 
 **Features:**
@@ -144,8 +143,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
  - Remove page function
  - Moving page element
  - Add search functionality on index view
- - Settings app out of the box
- - Isolate browserid
  - Add filters/categories for the blog
  - Filter which converts local images paths to S3 hosted
  - Integrate fitvids into markdown editor
