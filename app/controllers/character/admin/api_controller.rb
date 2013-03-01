@@ -53,7 +53,7 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
 
   def reorder
-    # need to add reordarable check
+    # TODO: need to add reordarable check
     @model_class.reorder(params[:ids])
     render json: 'ok'
   end  
