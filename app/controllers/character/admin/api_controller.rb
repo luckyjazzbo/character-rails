@@ -1,6 +1,16 @@
 class Character::Admin::ApiController < Character::Admin::BaseController
   before_filter :set_model_class
-  
+  before_filter :set_form_template, only: %w( new edit )
+
+  def set_form_template
+    if template_exists?("#{@namespace}_form", "character/admin/api", false)
+      @form_template = "character/admin/api/#{ @namespace }_form"
+    else
+      @form_template = "character/admin/api/generic_form"
+    end
+  end
+
+
   def set_model_class
     @model_slug  = params[:model_slug]
     @model_class = @model_slug.gsub('-', '::').constantize
@@ -22,19 +32,19 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def new
     @object  = @model_class.new
-    render 'character/admin/api/form', layout: false
+    render @form_template, layout: false
   end  
+
+
+  def edit
+    @object = @model_class.find(params[:id])
+    render @form_template, layout: false
+  end
 
 
   def create
     @object = @model_class.create params[@namespace]
     render json: @object
-  end
-
-
-  def edit
-    @object = @model_class.find(params[:id])
-    render 'character/admin/api/form', layout: false
   end
 
 
