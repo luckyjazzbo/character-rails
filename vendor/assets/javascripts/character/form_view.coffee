@@ -25,8 +25,11 @@ class FormView extends Backbone.View
 
 
   update_or_create: (obj) ->
-    if @model then @model.set(obj) else @options.collection().add(obj)
-    @back_to_index()
+    if typeof(obj) == "string"
+      @render(obj)
+    else
+      if @model then @model.set(obj) else @options.collection().add(obj)
+      @back_to_index()
 
 
   initialize: (config, parent_el, form_html) ->

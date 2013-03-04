@@ -270,6 +270,12 @@ body                                  { background:$backgroundCharacterColor;
 
   .columns                            { padding:0 7px;
   }
+
+  .help-inline                        { font-size:.9em;
+                                        top:-.8em;
+                                        position:relative;
+                                        margin-left: .8em;
+  }
 }
 
 .ui-datepicker                        { z-index: 9999 !important;

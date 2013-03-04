@@ -1,6 +1,6 @@
 class Character::Admin::ApiController < Character::Admin::BaseController
   before_filter :set_model_class
-  before_filter :set_form_template, only: %w( new edit )
+  before_filter :set_form_template, only: %w( new edit create update )
 
   def set_form_template
     if template_exists?("#{@namespace}_form", "character/admin/api", false)
@@ -43,15 +43,24 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
 
   def create
-    @object = @model_class.create params[@namespace]
-    render json: @object
+    @object = @model_class.new params[@namespace]
+
+    if @object.save
+      render json: @object
+    else
+      render @form_template, layout: false
+    end
   end
 
 
   def update
     @object = @model_class.find(params[:id])
-    @object.update_attributes params[@namespace]
-    render json: @object
+    
+    if @object.update_attributes params[@namespace]
+      render json: @object
+    else
+      render @form_template, layout: false
+    end
   end
 
 
