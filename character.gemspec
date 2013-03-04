@@ -36,7 +36,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'mongoid_slug'
 
   # browserid auth
-  gem.add_runtime_dependency 'browserid-rails'
+  gem.add_runtime_dependency 'browserid-auth-rails'
 
   # meta tags support
   gem.add_runtime_dependency 'meta-tags'
