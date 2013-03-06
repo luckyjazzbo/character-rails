@@ -5,8 +5,6 @@ require 'zurb-foundation'
 require 'foundation-icons-sass-rails'
 require 'font-awesome-sass-rails'
 require 'jquery-ui-rails'
-require 'redactor'
-require 'showdown'
 require 'lodash-rails'
 require 'underscore-string-rails'
 
@@ -20,7 +18,6 @@ require 'carrierwave/mongoid'
 # other
 require 'browserid-rails'
 require 'meta_tags'
-require 'whatlanguage'
 require 'russian'
 require 'simple_form'
 

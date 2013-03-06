@@ -2,6 +2,8 @@
 #= require_tree ./models
 #= require_tree ./views
 
+#= require ./plugins/redactor
+
 
 class Pages extends Character.App
   scope: 'pages'

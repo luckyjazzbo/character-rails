@@ -1,14 +1,13 @@
 class FormView extends Backbone.View
   tagName:    'div'
 
-  # @scope
 
   render: (form_html)->
     actions = ""
 
     if @model
       actions += """<a href='#' title='Delete this document' class='general foundicon-trash' id=delete></a>"""
-    actions += """<a href='#/#{ @scope }' title='Close form' class='general foundicon-remove'></a>"""
+    actions   += """<a href='#' title='Close form' class='general foundicon-remove' id=close></a>"""
 
     html = Character.Templates.Panel 
       classes:  'right'
@@ -20,15 +19,12 @@ class FormView extends Backbone.View
     return this
 
 
-  back_to_index: ->
-    workspace.router.navigate("#/#{ @scope }", { trigger: true })
-
-
   update_or_create: (obj) ->
     if typeof(obj) == "string"
       @render(obj)
     else
       if @model then @model.set(obj) else @options.collection().add(obj)
+      @close()
       @back_to_index()
 
 
@@ -51,8 +47,25 @@ class FormView extends Backbone.View
       workspace.router.navigate("#/#{ @options.scope }", { trigger: true })      
 
 
+  close: (e) ->
+    e.preventDefault() if e
+    workspace.current_view.unlock_scroll()
+    
+    @back_to_index()
+    @remove()
+
+    workspace.current_view.unset_active()
+    workspace.current_view.flush_scroll_y()
+
+
+
+  back_to_index: ->
+    workspace.router.navigate("#/#{ @scope }", { trigger: false })
+
+
   events:
     'click #delete': 'delete'
+    'click #close':  'close'
 
 
 Character.FormView = FormView

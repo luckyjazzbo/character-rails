@@ -1,47 +1,9 @@
 #= require_self
+#= require_tree ./models
+#= require_tree ./views
 
 
 Character.Generic = {}
-
-
-#   ##     ##  #######  ########  ######## ##       
-#   ###   ### ##     ## ##     ## ##       ##       
-#   #### #### ##     ## ##     ## ##       ##       
-#   ## ### ## ##     ## ##     ## ######   ##       
-#   ##     ## ##     ## ##     ## ##       ##       
-#   ##     ## ##     ## ##     ## ##       ##       
-#   ##     ##  #######  ########  ######## ######## 
-
-
-
-
-class Model extends Backbone.Model
-  idAttribute:  '_id'
-
-
-Character.Generic.Model = Model
-
-
-
-
-#    ######   #######  ##       ##       ########  ######  ######## ####  #######  ##    ## 
-#   ##    ## ##     ## ##       ##       ##       ##    ##    ##     ##  ##     ## ###   ## 
-#   ##       ##     ## ##       ##       ##       ##          ##     ##  ##     ## ####  ## 
-#   ##       ##     ## ##       ##       ######   ##          ##     ##  ##     ## ## ## ## 
-#   ##       ##     ## ##       ##       ##       ##          ##     ##  ##     ## ##  #### 
-#   ##    ## ##     ## ##       ##       ##       ##    ##    ##     ##  ##     ## ##   ### 
-#    ######   #######  ######## ######## ########  ######     ##    ####  #######  ##    ## 
-
-
-
-
-class Collection extends Backbone.Collection
-  model: Character.Generic.Model
-
-
-Character.Generic.Collection = Collection
-
-
 
 
 
@@ -70,15 +32,9 @@ class App extends Character.App
     @add_routes(@options.scope)
     @add_menu_item(@options.title)
     
-    @collection     = new Character.Generic.Collection()
-    @collection.url = "/admin/api/#{ @options.model_slug }"
-    #@collection_fetched = false
-
-
-  fetch_data: (callback) ->
-    @collection.fetch success: ->
-      #@collection_fetched = true
-      callback()
+    @collection           = new Character.Generic.Collection()
+    @collection.url       = "/admin/api/#{ @options.model_slug }"
+    @collection.paginate  = {} if @options.paginate
 
 
   close_form: ->
@@ -90,12 +46,10 @@ class App extends Character.App
     @index_view.flush_scroll_y()
   
 
-  action_index: ->
-    if workspace.current_view_is(@options.scope)
-      @close_form()
-    else
-      @index_view = new Character.IndexView(@options)
-      workspace.set_current_view(@index_view)
+  action_index: (q) ->
+    @options.search_query = q
+    @index_view = new Character.IndexView(@options)
+    workspace.set_current_view(@index_view)
 
 
   set_form_view: (view) ->

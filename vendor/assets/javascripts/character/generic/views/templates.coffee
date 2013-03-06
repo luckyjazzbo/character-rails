@@ -28,9 +28,20 @@ Templates =
     # --------------------------
     actions = ''
     
-    if params.new_item_url
-      actions += "<a href='#{ params.new_item_url }' title='Create new' class='general foundicon-add-doc'></a>"
+    if params.searchable
+      query = params.search_query ? ''
+      actions += "<span class='chr-search-widget'>
+                    <i class='general foundicon-search'></i>
+                    <input id='search_input' type='text' placeholder='Search...' value='#{ query }' />
+                  </span>"
     
+    #if params.search_query
+    #  #actions += "<a href='#{ params.index_url }' title='Back to index' class='general foundicon-remove'></a>"
+    #else
+    
+    if params.new_item_url # show new button when not in search view
+      actions += "<a href='#{ params.new_item_url }' title='Create new' class='general foundicon-add-doc'></a>"
+
     Character.Templates.Panel
       classes: 'left'
       title:   params.title
@@ -51,7 +62,7 @@ Templates =
 
     image = if params.image_url then "<img src='#{ params.image_url }' width=56px height=56px />" else ''
 
-    """ <a href='#{ params.action_url }'>
+    """ <a href='#{ params.action_url }' style='opacity:0;'>
           #{ image }
           <div>
             <strong class='chr-line-left'>#{ params.line1_left }</strong>

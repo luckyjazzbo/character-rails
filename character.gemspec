@@ -45,7 +45,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'simple_form'
 
   # language support
-  gem.add_runtime_dependency 'whatlanguage'
   gem.add_runtime_dependency 'russian'
 
 

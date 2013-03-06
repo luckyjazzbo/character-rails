@@ -1,6 +1,6 @@
 //= require_self
 //= require jquery.ui.datepicker
-//= require redactor
+//= require ./redactor
 //= require codemirror
 
 //
@@ -148,7 +148,8 @@ body                                  { background:$backgroundCharacterColor;
 */
 
 .chr-index                            { list-style:none;
-                                        padding-bottom:.5em;
+                                        margin-bottom:0;
+                                        //padding-bottom:.5em;
 
   & > li                              {
     
@@ -159,6 +160,8 @@ body                                  { background:$backgroundCharacterColor;
                                         margin:0 1em;
                                         min-height:5 * 14px + 1px;
                                         color:$txtColor;
+
+                                        @include single-transition(opacity, .2s, false, .1s);
 
       // selected item
       &.active                        { margin:-1px 0 0;
@@ -188,6 +191,28 @@ body                                  { background:$backgroundCharacterColor;
     &.chr-placeholder                 { text-align:center;
                                         line-height:3em;
     }
+  }
+}
+
+// Search Widget for index page
+.chr-search-widget                    { position:relative;
+                                        top:-2px;
+  
+  input                               { @include border-radius(12px);
+                                        height:24px;
+                                        position:relative;
+                                        top:-3px;
+                                        margin-top:-2px;
+                                        border:1px solid $secondaryColor;
+                                        padding-left:2.2em;
+                                        margin-left:-2.2em;
+                                        background:transparent;
+    &:focus                           { outline:0;
+    }
+  }
+
+  i                                   { color:lighten($iconBtnColor, 25%);
+                                        font-size:$iconBtnSize;
   }
 }
 

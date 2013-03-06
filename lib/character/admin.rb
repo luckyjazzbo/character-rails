@@ -40,19 +40,28 @@ module Character::Admin
 
 
   module ClassMethods
+    def admin_title
+      self.name.split('::').last().pluralize.scan(/[A-Z][^A-Z]*/).join(' ')
+    end
+
+
     def admin_editable_fields
       # exclude these fields from the auto generated form
       self.fields.keys - %w( _id _type created_at _position updated_at deleted_at )
     end
 
 
-    def admin_title
-      self.name.split('::').last().pluralize.scan(/[A-Z][^A-Z]*/).join(' ')
+    def admin_reorderable?
+      # There is a module Mongoid:Reorderable to be included in the mongo model,
+      # this module adds _position field to identify object position in the list.
+      fields.keys.include?('_position') ? true : false
     end
 
 
-    def admin_reorderable?
-      fields.keys.include?('_position') ? true : false
+    def admin_searchable?
+      # There is a module Mongoid:Search to be included in the mongo model,
+      # this module adds _keywords field to store searchable terms.
+      fields.keys.include?('_keywords') ? true : false
     end
 
 
@@ -75,15 +84,18 @@ module Character::Admin
     end
 
 
-    def admin_render_item_options
-      js = []
+    def admin_paginate
+      true
+    end
 
-      self.admin_item_options.each_pair { |key, value| js << "#{ key }: '#{ value }'" }
 
-      js = js.join(',')
-      js = "{ #{ js }  }"
-
-      return js.html_safe
-    end    
+    def admin_config
+      { model_name:           self.name,
+        title:                self.admin_title,
+        reorderable:          self.admin_reorderable?,
+        searchable:           self.admin_searchable?,
+        render_item_options:  self.admin_item_options,
+        paginate:             self.admin_paginate }
+    end
   end
 end

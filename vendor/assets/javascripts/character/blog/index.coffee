@@ -2,6 +2,14 @@
 #= require_tree ./models
 #= require_tree ./views
 
+#= require codemirror
+#= require codemirror/modes/javascript
+#= require codemirror/modes/css
+#= require codemirror/modes/xml
+#= require codemirror/modes/htmlmixed
+#= require codemirror/modes/markdown
+#= require ./plugins/showdown
+
 
 class Blog extends Character.App
   scope: 'blog'

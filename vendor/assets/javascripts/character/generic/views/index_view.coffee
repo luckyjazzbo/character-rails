@@ -14,55 +14,33 @@ class IndexView extends Backbone.View
   tagName:    'div'
   id:         'index_view'
 
+
   #
-  # Rendering
+  # Resizing min-height of the panels
   #
 
-  render: ->
-    html = Character.Templates.Index
-      title:        @options.title
-      new_item_url: "#/#{ @options.scope }/new"
+  resize_panel: (fetch_data) ->
+    top_nav_height      = 40
+    margin_top_bottom   = 14 * 2
+    panel_header_height = 34
 
-    @$el.html html
-    return this
-  
+    panel_min_height = $(window).innerHeight() - (top_nav_height + margin_top_bottom + panel_header_height) 
 
-  action_url: (id) ->
-    action_name = @options.render_item_options.action_name ? 'edit'
-    "#/#{ @options.scope }/#{ action_name }/#{ id }"
+    $('.chr-index').css 'min-height', panel_min_height
 
+    paginator_height = 0
+    item_height      = 71
 
-  render_placeholder: ->
-    html = """<li class=chr-placeholder>Yet nothing is here.</li>"""
-    $(@items_el).append html
-
-
-  add_item: (model) ->
-    item = new Character.IndexItemView
-      model:                model
-      render_item_options:  @options.render_item_options
-      scope:                @options.scope
+    if @options.paginate
+      collection = @options.collection()
+      collection.paginate.per_page = Math.floor((panel_min_height - paginator_height) / item_height)
     
-    $(@items_el).append item.el
-
-
-  add_items: ->
-    if @options.items
-      objects = @options.items()
-    else
-      console.error 'IMPORTANT: index view options doesn\'t provide "collection" method!'
-      objects = []
-
-    (@render_placeholder() ; return) if objects.length == 0
-    
-    @add_item(obj) for obj in objects
-
-    $('.chr-line-1 .chr-line-left').trunk8 { lines: 1 }
-    $('.chr-line-2 .chr-line-left').trunk8 { lines: 2 }
+    $(window).smartresize =>
+      @resize_panel(true)
 
 
   #
-  # Sorting items
+  # Sorting items with Drag'n'Drop
   #
 
   enable_sorting: ->
@@ -77,6 +55,11 @@ class IndexView extends Backbone.View
   #
   # Navigation experience
   #
+
+  action_url: (id) ->
+    action_name = @options.render_item_options.action_name ? 'edit'
+    "#/#{ @options.scope }/#{ action_name }/#{ id }"
+
 
   set_active: (id) ->
     @unset_active()
@@ -129,22 +112,89 @@ class IndexView extends Backbone.View
   #   @model_slug
   #   @items ->
 
+  events:
+    'keypress #search_input': 'search'
+
+
+  search: (e) ->
+    if e.charCode == 13
+      value = $('#search_input').val()
+      path  = "#/#{ @options.scope }"
+      path  = "#{ path }/s/#{ value }" if value
+      workspace.router.navigate(path, { trigger: true })
+
 
   initialize: ->
-    html = @render().el
-    $('#character').append(html)
+    @render()
+
+    collection = @options.collection()
+
+    collection.search_query = @options.search_query
+
+    collection.on('add',   @add_item,  @)
+    collection.on('reset', @add_items, @)
+    #collection.on('all',   @render,    @)
+
+    collection.fetch { url: collection.paginate_url() }
+
+
+  #
+  # Rendering
+  #
+
+  render: ->
+    html = Character.Templates.Index
+      title:        @options.title
+      searchable:   @options.searchable
+      search_query: @options.search_query
+      index_url:    "#/#{ @options.scope }"
+      new_item_url: "#/#{ @options.scope }/new"
+
+    @$el.html html
+
+    $('#character').append @el
 
     @panel_el = this.$('.chr-panel')
     @items_el = this.$('ul')
 
-    @add_items()
+    @resize_panel(false)
 
+
+  add_item: (model) ->
+    # TODO: remove placeholder on adding first item
+
+    item = new Character.IndexItemView
+      model:                model
+      render_item_options:  @options.render_item_options
+      scope:                @options.scope
+    
+    $(@items_el).append item.el
+
+
+  render_placeholder: ->
+    $(@items_el).append """<li class=chr-placeholder>Nothing is here yet.</li>"""
+
+
+  add_items: ->
+    if @options.items
+      objects = @options.items()
+    else
+      console.error 'IMPORTANT: index view options doesn\'t provide "collection" method!'
+      objects = []
+
+    (@render_placeholder() ; return) if objects.length == 0
+    
+    @add_item(obj) for obj in objects
+
+    # Truncate lines
+    $('.chr-line-1 .chr-line-left').trunk8 { lines: 1 }
+    $('.chr-line-2 .chr-line-left').trunk8 { lines: 2 }
+
+    # Sorting with drag'n'drop
     @enable_sorting() if @options.reorderable
 
-    if @options.collection
-      collection = @options.collection()
-      collection.on 'add',  (model) => @add_item(model)
-      #collection.on 'sync', (collection) => alert 'kuku'
+    # Applying
+    $('.chr-index li a').css opacity: 1
 
 
 Character.IndexView = IndexView
@@ -181,8 +231,8 @@ class IndexItemView extends Backbone.View
 
 
   initialize: ->
+    @listenTo(@model, 'change',  @render)
     @listenTo(@model, 'destroy', @remove)
-    @listenTo(@model, 'change', @render)
     @render()
 
 
