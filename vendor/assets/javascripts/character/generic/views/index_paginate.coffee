@@ -29,9 +29,9 @@ class IndexPaginateView extends Backbone.View
 
     if pages > 1
       prev_visibility = if current != 1 then '' else 'unavailable'
-      prev_page_path  = @build_page_path(current - 1)
+      prev_page_path  = @build_page_path(current)
       next_visibility = if current != pages then '' else 'unavailable'
-      next_page_path  = @build_page_path(current + 1)
+      next_page_path  = @build_page_path(current)
 
       page_links = ''
       _.each _.range(1, pages + 1), (i) =>
