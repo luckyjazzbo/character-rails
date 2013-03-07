@@ -224,21 +224,9 @@ body                                  { background:$backgroundCharacterColor;
   }
 }
 
-// Paginate Widget
-.chr-paginate                         { height:28px;
-                                        line-height:2;
-  
-  > a                                 { display:block;
-                                        text-align:center;
-                                        line-height:2;
-                                        width:28px;
-                                        height:28px;
-                                        color:lighten($iconBtnColor, 25%);
-    &:hover                           { color:$iconBtnColor;
-    }
-  }
+.chr-paginate .pagination             { margin-bottom:0px;
+                                        margin-left:0px;
 }
-
 
 /*
 ########  ##        #######   ######   
