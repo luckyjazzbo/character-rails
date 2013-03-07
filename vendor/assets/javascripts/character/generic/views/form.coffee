@@ -55,7 +55,7 @@ class FormView extends Backbone.View
     e.preventDefault()
     if confirm('Do you really want to remove this document?')
       @model.destroy()
-      workspace.router.navigate("#/#{ @options.scope }", { trigger: true })      
+      @back_to_index()
 
 
   close: (e) ->
@@ -71,7 +71,8 @@ class FormView extends Backbone.View
 
 
   back_to_index: ->
-    workspace.router.navigate("#/#{ @scope }", { trigger: false })
+    index_path = @options.current_index_path()
+    workspace.router.navigate(index_path, { trigger: true })
 
 
   events:

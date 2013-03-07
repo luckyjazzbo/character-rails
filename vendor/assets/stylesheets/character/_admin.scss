@@ -154,7 +154,6 @@ body                                  { background:$backgroundCharacterColor;
 
 .chr-index                            { list-style:none;
                                         margin-bottom:0;
-                                        //padding-bottom:.5em;
 
   & > li                              {
     
@@ -165,8 +164,6 @@ body                                  { background:$backgroundCharacterColor;
                                         margin:0 1em;
                                         min-height:5 * 14px + 1px;
                                         color:$txtColor;
-
-                                        @include single-transition(opacity, .2s, false, .1s);
 
       // selected item
       &.active                        { margin:-1px 0 0;
@@ -229,7 +226,6 @@ body                                  { background:$backgroundCharacterColor;
 
 // Paginate Widget
 .chr-paginate                         { height:28px;
-                                        text-align:center;
                                         line-height:2;
   
   > a                                 { display:block;

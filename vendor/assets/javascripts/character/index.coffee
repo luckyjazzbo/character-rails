@@ -90,29 +90,31 @@ class CharacterApp
   add_routes: (scope) ->
     @scope = scope if scope
 
-    # Index / Search / Pagination and Scopes
+    # Index / Search / Pagination (later add Scopes)
+
+    index_route = "#{ @scope }(/search/:query)(/p:page)"
 
     if @action_index
-      @router.route "#{ @scope }",          "#{ @scope }_index",      => @before_all => @action_index()
-
-    if @options.searchable
-      @router.route "#{ @scope }/s/:q",     "#{ @scope }_search", (q) => @before_all => @action_index(q)
+      @router.route index_route, "#{ @scope }_index", (query, page) => @before_all =>
+        @action_index(page, query)
 
     # New
 
     if @action_new
-      @router.route "#{ @scope }/new",      "#{ @scope }_new",        => @before_all => @action_new()
+      @router.route "#{ index_route }/new", "#{ @scope }_new", (query, page) => @before_all =>
+        @action_index(page, query, => @action_new() )
     
     # Edit
 
     if @action_edit
-      @router.route "#{ @scope }/edit/:id", "#{ @scope }_edit",  (id) => @before_all => @action_edit(id)
+      @router.route "#{ index_route }/edit/:id", "#{ @scope }_edit", (query, page, id) => @before_all =>
+        @action_index(page, query, => @action_edit(id) )
     
     # Show
 
     if @action_show
-      @router.route "#{ @scope }/show/:id", "#{ @scope }_show",  (id) => @before_all => @action_show(id)
-
+      @router.route "#{ index_route }/show/:id", "#{ @scope }_show", (query, page, id) => @before_all =>
+        @action_index(page, query, => @action_show(id) )
 
 
 window.Character      = CharacterWorkspace

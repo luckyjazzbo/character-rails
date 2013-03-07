@@ -62,7 +62,7 @@ Templates =
 
   IndexItem: (context) ->
     params =
-      action_url:   ''
+      action_path:  ''
       image_url:    ''
       line1_left:   ''
       line1_right:  ''
@@ -73,7 +73,7 @@ Templates =
 
     image = if params.image_url then "<img src='#{ params.image_url }' width=56px height=56px />" else ''
 
-    """ <a href='#{ params.action_url }' style='opacity:0;'>
+    """ <a href='#{ params.action_path }'>
           #{ image }
           <div>
             <strong class='chr-line-left'>#{ params.line1_left }</strong>

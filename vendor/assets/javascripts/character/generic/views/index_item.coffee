@@ -19,7 +19,8 @@ class IndexItemView extends Backbone.View
 
   render: =>
     action_name = @options.render_item_options.action_name ? 'edit'
-    config      = { action_url: "#/#{ @options.scope }/#{ action_name }/#{ @model.id }" }
+    config =
+      action_path: "#{ @options.current_index_path }/#{ action_name }/#{ @model.id }"
     
     _.each @options.render_item_options, (val, key) => config[key] = @model.get(val)
     

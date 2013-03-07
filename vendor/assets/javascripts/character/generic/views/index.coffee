@@ -26,7 +26,7 @@ class IndexView extends Backbone.View
     window_height       = $(window).innerHeight()
 
     index_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height + paginate_height) 
-    panel_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height) + paginate_height + 7
+    panel_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height) + paginate_height + 6
 
     $('.chr-index').css               'min-height', index_min_height
     $('.chr-panel.left section').css  'min-height', panel_min_height
@@ -58,14 +58,9 @@ class IndexView extends Backbone.View
   # Navigation experience
   #
 
-  action_url: (id) ->
-    action_name = @options.render_item_options.action_name ? 'edit'
-    "#/#{ @options.scope }/#{ action_name }/#{ id }"
-
-
   set_active: (id) ->
     @unset_active()
-    $("#index_view a[href='#{ @action_url(id) }']").addClass('active')
+    $("#index_view li[data-id=#{ id }] a").addClass('active')
     @scroll_to_active()
 
 
@@ -121,8 +116,10 @@ class IndexView extends Backbone.View
   search: (e) ->
     if e.charCode == 13
       value = $('#search_input').val()
+
       path  = "#/#{ @options.scope }"
-      path  = "#{ path }/s/#{ value }" if value
+      path  = "#{ path }/search/#{ value }" if value
+      
       workspace.router.navigate(path, { trigger: true })
 
 
@@ -135,9 +132,6 @@ class IndexView extends Backbone.View
 
     collection.on('add',   @add_item,  @)
     collection.on('reset', @add_items, @)
-    #collection.on('all',   @render,    @)
-
-    collection.fetch { url: collection.paginate_url() }
 
 
   #
@@ -168,8 +162,8 @@ class IndexView extends Backbone.View
 
     item = new Character.IndexItemView
       model:                model
+      current_index_path:   @options.current_index_path()
       render_item_options:  @options.render_item_options
-      scope:                @options.scope
     
     $(@items_el).append item.el
 
@@ -195,9 +189,6 @@ class IndexView extends Backbone.View
 
     # Sorting with drag'n'drop
     @enable_sorting() if @options.reorderable
-
-    # Applying
-    $('.chr-index li a').css opacity: 1
 
     # Add paginate
     @paginate_view = new Character.IndexPaginateView(@options) if @options.paginate and not @paginate_view
