@@ -1,4 +1,5 @@
 
+
 #    #### ##    ## ########  ######## ##     ## 
 #     ##  ###   ## ##     ## ##        ##   ##  
 #     ##  ####  ## ##     ## ##         ## ##   
@@ -6,8 +7,6 @@
 #     ##  ##  #### ##     ## ##         ## ##   
 #     ##  ##   ### ##     ## ##        ##   ##  
 #    #### ##    ## ########  ######## ##     ## 
-
-
 
 
 class IndexView extends Backbone.View
@@ -19,24 +18,27 @@ class IndexView extends Backbone.View
   # Resizing min-height of the panels
   #
 
-  resize_panel: (fetch_data) ->
+  resize_panel: ->
     top_nav_height      = 40
     margin_top_bottom   = 14 * 2
     panel_header_height = 34
+    paginate_height     = if @options.paginate then 28 else 0
+    window_height       = $(window).innerHeight()
 
-    panel_min_height = $(window).innerHeight() - (top_nav_height + margin_top_bottom + panel_header_height) 
+    index_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height + paginate_height) 
+    panel_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height) + paginate_height + 7
 
-    $('.chr-index').css 'min-height', panel_min_height
+    $('.chr-index').css               'min-height', index_min_height
+    $('.chr-panel.left section').css  'min-height', panel_min_height
 
-    paginator_height = 0
-    item_height      = 71
+    item_height = 71
 
     if @options.paginate
       collection = @options.collection()
-      collection.paginate.per_page = Math.floor((panel_min_height - paginator_height) / item_height)
+      collection.paginate.per_page = Math.floor((panel_min_height - paginate_height) / item_height)
     
     $(window).smartresize =>
-      @resize_panel(true)
+      @resize_panel()
 
 
   #
@@ -142,6 +144,7 @@ class IndexView extends Backbone.View
   # Rendering
   #
 
+
   render: ->
     html = Character.Templates.Index
       title:        @options.title
@@ -157,7 +160,7 @@ class IndexView extends Backbone.View
     @panel_el = this.$('.chr-panel')
     @items_el = this.$('ul')
 
-    @resize_panel(false)
+    @resize_panel()
 
 
   add_item: (model) ->
@@ -196,46 +199,16 @@ class IndexView extends Backbone.View
     # Applying
     $('.chr-index li a').css opacity: 1
 
+    # Add paginate
+    @paginate_view = new Character.IndexPaginateView(@options) if @options.paginate and not @paginate_view
+    @paginate_view.render()
+
+
+
 
 Character.IndexView = IndexView
 
 
 
-
-#    #### ######## ######## ##     ## 
-#     ##     ##    ##       ###   ### 
-#     ##     ##    ##       #### #### 
-#     ##     ##    ######   ## ### ## 
-#     ##     ##    ##       ##     ## 
-#     ##     ##    ##       ##     ## 
-#    ####    ##    ######## ##     ## 
-
-
-
-
-class IndexItemView extends Backbone.View
-  tagName: 'li'
-
-
-  render: =>
-    action_name = @options.render_item_options.action_name ? 'edit'
-    config      = { action_url: "#/#{ @options.scope }/#{ action_name }/#{ @model.id }" }
-    
-    _.each @options.render_item_options, (val, key) => config[key] = @model.get(val)
-    
-    html = Character.Templates.IndexItem(config)
-
-    @$el.html html
-    @$el.attr('data-id', @model.id)
-    return this
-
-
-  initialize: ->
-    @listenTo(@model, 'change',  @render)
-    @listenTo(@model, 'destroy', @remove)
-    @render()
-
-
-Character.IndexItemView = IndexItemView
 
 

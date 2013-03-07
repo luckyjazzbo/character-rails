@@ -69,6 +69,11 @@ body                                  { background:$backgroundCharacterColor;
   }
 }
 
+.chr-left                             { float:left;
+}
+
+.chr-right                            { float:right;
+}
 
 /*
 ##     ## ########    ###    ########  ######## ########  
@@ -219,6 +224,22 @@ body                                  { background:$backgroundCharacterColor;
 // List Item Template
 .chr-index                            {
   .chr-line-2                         { line-height:1.3;
+  }
+}
+
+// Paginate Widget
+.chr-paginate                         { height:28px;
+                                        text-align:center;
+                                        line-height:2;
+  
+  > a                                 { display:block;
+                                        text-align:center;
+                                        line-height:2;
+                                        width:28px;
+                                        height:28px;
+                                        color:lighten($iconBtnColor, 25%);
+    &:hover                           { color:$iconBtnColor;
+    }
   }
 }
 
