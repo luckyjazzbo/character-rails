@@ -31,7 +31,7 @@ class App extends Character.App
       search_query:       ""
       current_index_path: =>
         page   = @collection.paginate.page
-        query  = @options.search_query
+        query  = @collection.search_query
         url  = "#/#{ scope }"
         url += "/search/#{ query }" if query != ""
         url += "/p#{ page }" if page > 1
@@ -54,7 +54,7 @@ class App extends Character.App
 
     return true unless workspace.current_view_is(@options.scope)
     return true unless page         == parseInt(@collection.paginate.page)
-    return true unless search_query == @options.search_query
+    return true unless search_query == @collection.search_query
 
     return false
 
@@ -63,11 +63,12 @@ class App extends Character.App
     page = parseInt(page)
 
     if @update_index_check(page, search_query)
-      @options.search_query     = search_query
+      @collection.search_query  = search_query
       @collection.paginate.page = page
 
-      @index_view = new Character.IndexView(@options)
-      workspace.set_current_view(@index_view)
+      unless workspace.current_view_is(@options.scope)
+        @index_view = new Character.IndexView(@options)
+        workspace.set_current_view(@index_view)
 
       @collection.fetch
         url: @collection.paginate_url()

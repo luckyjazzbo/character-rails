@@ -22,11 +22,11 @@ class IndexView extends Backbone.View
     top_nav_height      = 40
     margin_top_bottom   = 14 * 2
     panel_header_height = 34
-    paginate_height     = if @options.paginate then 28 else 0
+    paginate_height     = 24 #if @options.paginate then 24 else 0
     window_height       = $(window).innerHeight()
 
     index_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height + paginate_height) 
-    panel_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height) + paginate_height + 6
+    panel_min_height = window_height - (top_nav_height + margin_top_bottom + panel_header_height) + paginate_height + 10
 
     $('.chr-index').css               'min-height', index_min_height
     $('.chr-panel.left section').css  'min-height', panel_min_height
@@ -35,7 +35,7 @@ class IndexView extends Backbone.View
 
     if @options.paginate
       collection = @options.collection()
-      collection.paginate.per_page = Math.floor((panel_min_height - paginate_height) / item_height)
+      collection.paginate.per_page = Math.floor((index_min_height - paginate_height) / item_height)
     
     $(window).smartresize =>
       @resize_panel()
@@ -102,13 +102,6 @@ class IndexView extends Backbone.View
     workspace["#{ @options.scope }_index_scroll_y"] = 0
 
 
-  # Options are:
-  #   @titlex
-  #   @scope
-  #   @reorderable
-  #   @model_slug
-  #   @items ->
-
   events:
     'keypress #search_input': 'search'
 
@@ -125,10 +118,9 @@ class IndexView extends Backbone.View
 
   initialize: ->
     @render()
+    @resize_panel()
 
     collection = @options.collection()
-
-    collection.search_query = @options.search_query
 
     collection.on('add',   @add_item,  @)
     collection.on('reset', @add_items, @)
@@ -143,7 +135,7 @@ class IndexView extends Backbone.View
     html = Character.Templates.Index
       title:        @options.title
       searchable:   @options.searchable
-      search_query: @options.search_query
+      search_query: @options.collection().search_query
       index_url:    "#/#{ @options.scope }"
       new_item_url: "#/#{ @options.scope }/new"
 
@@ -153,8 +145,6 @@ class IndexView extends Backbone.View
 
     @panel_el = this.$('.chr-panel')
     @items_el = this.$('ul')
-
-    @resize_panel()
 
 
   add_item: (model) ->
@@ -173,6 +163,8 @@ class IndexView extends Backbone.View
 
 
   add_items: ->
+    $(@items_el).empty()
+
     if @options.items
       objects = @options.items()
     else
