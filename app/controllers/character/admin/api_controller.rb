@@ -60,7 +60,7 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
 
   def create
-    @object = @model_class.create! params[@namespace]
+    @object = @model_class.create params[@namespace]
 
     if @object.save
       render json: @object
