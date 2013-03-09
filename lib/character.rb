@@ -10,6 +10,7 @@ require 'underscore-string-rails'
 
 # mongoid
 require 'mongoid_slug'
+require 'mongoid_search'
 require 'mongoid/reorder'
 
 # uploads
@@ -19,7 +20,9 @@ require 'carrierwave/mongoid'
 require 'browserid-rails'
 require 'meta_tags'
 require 'russian'
+require 'kaminari'
 require 'simple_form'
+require 'nested_form'
 
 # character
 require 'character/version'

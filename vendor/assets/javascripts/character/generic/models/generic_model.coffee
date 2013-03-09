@@ -34,6 +34,7 @@ Character.Generic.Model = Model
 #class Collection extends Backbone.Paginator.requestPager #Backbone.Collection
 class Collection extends Backbone.Collection
   model: Character.Generic.Model
+  search_query: ''
   
   parse: (resp) ->
     @paginate = resp.paginate ? null

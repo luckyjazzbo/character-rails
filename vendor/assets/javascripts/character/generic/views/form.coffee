@@ -60,14 +60,13 @@ class FormView extends Backbone.View
 
   close: (e) ->
     e.preventDefault() if e
-    workspace.current_view.unlock_scroll()
+    #workspace.current_view.unlock_scroll()
     
     @back_to_index()
     @remove()
 
     workspace.current_view.unset_active()
-    workspace.current_view.flush_scroll_y()
-
+    #workspace.current_view.flush_scroll_y()
 
 
   back_to_index: ->

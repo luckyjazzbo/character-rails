@@ -57,7 +57,7 @@ class BlogEdit extends Backbone.View
       console.log attributes
       @model.save(attributes, { success: callback })
     else
-      blog.posts.create(attributes, { wait: true, success: callback })
+      @collection().create(attributes, { wait: true, success: callback })
 
 
   save_draft: ->
@@ -71,8 +71,9 @@ class BlogEdit extends Backbone.View
 
 
   back_to_index: ->
-    path = if @model then "#/blog/show/#{@model.id}" else '#/blog'
-    workspace.router.navigate(path, {trigger: true})
+    index_path  = @options.current_index_path()
+    index_path += "/show/#{ @model.id }" if @model
+    workspace.router.navigate(index_path, { trigger: true })
 
 
   events:
@@ -83,7 +84,9 @@ class BlogEdit extends Backbone.View
 
   update_permalink: ->
     set_permalink = =>
-      blog_url  = blog.options.blog_url
+      blog_url  = @options.blog_url
+      blog_url += '/' unless _.string.endsWith(blog_url, '/')
+
       slug      = _.string.slugify($(@title).val())
       html      = """<strong>Permalink:</strong> #{blog_url}<strong id='slug'>#{slug}</strong>"""
       $('#permalink').html html

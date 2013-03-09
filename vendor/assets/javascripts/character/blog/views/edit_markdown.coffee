@@ -1,5 +1,5 @@
 class BlogEditMarkdown extends Backbone.View
-  tagName:    'div'
+  tagName: 'div'
 
 
   events:

@@ -3,16 +3,19 @@
 
     window.workspace = new Character();
 
+    // Load blog admin if route is mounted
     <% if respond_to? 'blog_index_path' %>
       window.blog = new Character.Blog({ blog_url: '<%= "http://#{ ENV['WEBSITE_URL'] }#{ blog_index_path }" %>' });
-      window.workspace.apps['blog']   = window.blog;
+      window.workspace.apps['blog'] = window.blog;
     <% end %>
 
+    // Load pages admin if route is mounted
     <% if respond_to? 'flat_page_path' %>
       window.pages = new Character.Pages();
-      window.workspace.apps['pages']  = window.pages;
+      window.workspace.apps['pages'] = window.pages;
     <% end %>
 
+    // Generic app for admin registered models
     <% @admin_models.each do |cls| %>
       <%= "window.workspace.apps['#{ cls.admin_title.downcase }'] = new Character.Generic.App(#{ cls.admin_config().to_json });".html_safe %>
     <% end %>

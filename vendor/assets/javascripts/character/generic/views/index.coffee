@@ -61,45 +61,12 @@ class IndexView extends Backbone.View
   set_active: (id) ->
     @unset_active()
     $("#index_view li[data-id=#{ id }] a").addClass('active')
-    @scroll_to_active()
+    $(@panel_el).addClass('fixed') # HACK: when fixed in css, breaks the layout
 
 
   unset_active: ->
     $('#index_view a.active').removeClass('active')
-
-
-  scroll_to_active: ->
-    scroll_y = workspace["#{ @options.scope }_index_scroll_y"]
-    
-    if scroll_y and scroll_y > 0
-      window.scroll(0, scroll_y)
-    else
-      top_offset = $('#index_view a.active').offset().top
-      if top_offset - window.scrollY > $(window).height()
-        window.scroll(0, top_offset - 100)
-  
-
-  lock_scroll: ->
-    workspace["#{ @options.scope }_index_scroll_y"] = window.scrollY
-
-    top_bar_height  = $('.top-bar').height()
-    app_top_padding = parseInt($('#character').css('padding-top'))
-
-    $(@panel_el).css('top', -window.scrollY + top_bar_height + app_top_padding + 1)
-    $(@panel_el).addClass('fixed')
-
-
-  unlock_scroll: ->
-    $(@panel_el).css('top', '').removeClass('fixed')
-    window.scroll(0, workspace["#{ @options.scope }_index_scroll_y"])
-
-
-  scroll_top: ->
-    window.scroll(0, 0)
-
-
-  flush_scroll_y: ->
-    workspace["#{ @options.scope }_index_scroll_y"] = 0
+    $(@panel_el).css('top', '').removeClass('fixed') # HACK: when fixed in css, breaks the layout
 
 
   events:

@@ -19,15 +19,14 @@ class Post extends Backbone.Model
     attributes[a] = @get(a) for a in @update_attributes
     return { character_post: attributes }
 
-  category: ->
-    Character.Blog.categories.find (c) => c.id == @get('category_id')
+  state: ->
+    if @get('published')
+      if @get('featured')
+        return 'Published & Featured'
+      else
+        return 'Published'
+    return 'Draft'
 
-Character.Blog.Post   = Post
 
-
-class Posts extends Backbone.Collection
-  model: Post
-  url: '/admin/api/Character-Post'
-
-Character.Blog.Posts  = Posts
+Character.Blog.Post = Post
 

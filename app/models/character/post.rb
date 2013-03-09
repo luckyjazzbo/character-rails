@@ -3,8 +3,11 @@
 class Character::Post
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
+  include Character::Admin
 
   field :title
+  field :excerpt,                   default: ''
   field :published, type: Boolean,  default: false
   field :featured,  type: Boolean,  default: false
   field :date,      type: Date
@@ -12,7 +15,6 @@ class Character::Post
   field :md
   field :html
   field :views,     type: Integer,  default: 0
-  field :excerpt,                   default: ''
   field :tags,                      default: ''
 
 
@@ -31,42 +33,45 @@ class Character::Post
   index :slug rescue index slug: 1
 
 
-  def as_json(options = { })
-    super((options || { }).merge({
-      methods: %w(state date_formatted date_or_state featured_image_url thumb_image_url)
-    }))
-  end
+  # Search
+  search_in :title, :excerpt, :tags, :md
 
-  def state
-    published ? ( featured ? 'Published + Featured' : 'Published') : 'Draft'
-  end
+  # def as_json(options = { })
+  #   super((options || { }).merge({
+  #     methods: %w(state date_formatted date_or_state featured_image_url thumb_image_url)
+  #   }))
+  # end
 
-  def language
-    title.scan(/[А-Яа-я]+?/).size > 0 ? :russian : :english 
-  end
+  # def state
+  #   published ? ( featured ? 'Published + Featured' : 'Published') : 'Draft'
+  # end
 
-  def date_formatted
-    if date
-      if language == :english 
-        #date.strftime('%a, %d %b %Y')
-        Date.today.year == date.year ? date.strftime('%b %d') : date.strftime('%b %d, %Y')
-      else
-        #Russian::strftime(date, '%a, %d %b %Y')
-        Date.today.year == date.year ? Russian::strftime(date, '%e %b') : Russian::strftime(date, '%e %b %Y')
-      end
-    end
-  end
+  # def language
+  #   title.scan(/[А-Яа-я]+?/).size > 0 ? :russian : :english 
+  # end
 
-  def date_or_state
-    featured ? 'Featured' : (published ? date_formatted : state)
-  end
+  # def date_formatted
+  #   if date
+  #     if language == :english 
+  #       #date.strftime('%a, %d %b %Y')
+  #       Date.today.year == date.year ? date.strftime('%b %d') : date.strftime('%b %d, %Y')
+  #     else
+  #       #Russian::strftime(date, '%a, %d %b %Y')
+  #       Date.today.year == date.year ? Russian::strftime(date, '%e %b') : Russian::strftime(date, '%e %b %Y')
+  #     end
+  #   end
+  # end
 
-  def featured_image_url
-    featured_image.try(:featured)
-  end
+  # def date_or_state
+  #   featured ? 'Featured' : (published ? date_formatted : state)
+  # end
 
-  def thumb_image_url
-    featured_image.try(:thumb)
-  end
+  # def featured_image_url
+  #   featured_image.try(:featured)
+  # end
+
+  # def thumb_image_url
+  #   featured_image.try(:thumb)
+  # end
 
 end

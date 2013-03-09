@@ -6,7 +6,7 @@ class BlogEditSettings extends Character.SettingsView
     featured  = if @model?.get('featured') then 'checked' else ''
 
     featured_image_form_tag = @render_featured_image_form()
-    category_options_tag    = if blog.options.categories then @category_options() else ''
+    category_options_tag    = '' #if blog.options.categories then @category_options() else ''
     
     """#{ featured_image_form_tag }
 

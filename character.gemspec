@@ -34,6 +34,7 @@ Gem::Specification.new do |gem|
   
   # mongoid
   gem.add_runtime_dependency 'mongoid_slug'
+  gem.add_runtime_dependency 'mongoid_search'
 
   # browserid auth
   gem.add_runtime_dependency 'browserid-auth-rails'
@@ -43,13 +44,13 @@ Gem::Specification.new do |gem|
 
   # forms
   gem.add_runtime_dependency 'simple_form'
+  gem.add_runtime_dependency 'nested_form'
 
   # language support
   gem.add_runtime_dependency 'russian'
 
-
-  #gem.add_runtime_dependency 'mongoid_slug' #git: 'git://github.com/digitalplaywright/mongoid-slug.git'
-  #gem.add_runtime_dependency 'kaminari'
+  # pagination
+  gem.add_runtime_dependency 'kaminari'
 
   #gem 'rmagick'
   #gem "carrierwave-mongoid",  require: "carrierwave/mongoid", git: "git://github.com/jnicklas/carrierwave-mongoid.git", branch: "mongoid-3.0"
