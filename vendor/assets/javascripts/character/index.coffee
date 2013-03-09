@@ -15,6 +15,7 @@
 #= require character/plugins/jquery.smartresize
 #= require character/plugins/jquery.form
 #= require character/plugins/jquery.trunk8
+#= require character/plugins/redactor
 
 #= require_self
 #= require character/generic

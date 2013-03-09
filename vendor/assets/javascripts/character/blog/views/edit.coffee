@@ -14,10 +14,10 @@ class BlogEdit extends Backbone.View
               </header>
 
               <footer class='chr-footer' id=footer>
-                <button class='chr-btn cancel'>Back to index</button>
+                <button class='chr-btn' id=back>Back to index</button>
                 <aside>
-                  <button class='chr-btn blue save-draft'>Save Draft</button>
-                  <button class='chr-btn red publish'>Publish</button>
+                  <button class='chr-btn blue' id=save_draft>Save Draft</button>
+                  <button class='chr-btn red' id=publish>Publish</button>
                 </aside>
               </footer>"""
     $(this.el).html html
@@ -28,9 +28,14 @@ class BlogEdit extends Backbone.View
     html = @render().el
     $('#character').append(html)
 
-    @title    = document.getElementById('title')    
-    @mode     = new Character.Blog.Views.BlogEditMarkdown model: @model
-    @settings = new Character.Blog.Views.BlogEditSettings model: @model
+    @title = document.getElementById('title')
+
+    if @options.mode == 'redactor'
+      @mode = new Character.Blog.Views.Redactor model: @model
+    else
+      @mode = new Character.Blog.Views.Markdown model: @model
+
+    @settings = new Character.Blog.Views.Settings model: @model
     
     @update_permalink()
 
@@ -54,7 +59,6 @@ class BlogEdit extends Backbone.View
     _.extend attributes, extra_attributes
 
     if @model
-      console.log attributes
       @model.save(attributes, { success: callback })
     else
       @collection().create(attributes, { wait: true, success: callback })
@@ -77,9 +81,9 @@ class BlogEdit extends Backbone.View
 
 
   events:
-    'click .save-draft': 'save_draft'
-    'click .publish':    'publish'
-    'click .cancel':     'back_to_index'
+    'click #save_draft': 'save_draft'
+    'click #publish':    'publish'
+    'click #back':       'back_to_index'
 
 
   update_permalink: ->

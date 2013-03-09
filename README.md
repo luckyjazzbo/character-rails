@@ -142,7 +142,6 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
  - Set page _position when creating new
  - Remove page function
  - Moving page element
- - Add search functionality on index view
  - Add filters/categories for the blog
  - Filter which converts local images paths to S3 hosted
  - Integrate fitvids into markdown editor

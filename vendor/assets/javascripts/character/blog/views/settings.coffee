@@ -1,4 +1,4 @@
-class BlogEditSettings extends Character.SettingsView
+class Settings extends Character.SettingsView
   render_settings: ->
     date      = @model?.get('date')     ? ''
     excerpt   = @model?.get('excerpt')  ? ''
@@ -54,7 +54,7 @@ class BlogEditSettings extends Character.SettingsView
     $('#category_id').val()
 
 
-Character.Blog.Views.BlogEditSettings = BlogEditSettings
+Character.Blog.Views.Settings = Settings
 
 
 

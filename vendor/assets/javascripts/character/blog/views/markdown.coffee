@@ -1,4 +1,4 @@
-class BlogEditMarkdown extends Backbone.View
+class Markdown extends Backbone.View
   tagName: 'div'
 
 
@@ -95,7 +95,7 @@ class BlogEditMarkdown extends Backbone.View
       @resize_panels()
 
 
-Character.Blog.Views.BlogEditMarkdown = BlogEditMarkdown
+Character.Blog.Views.Markdown = Markdown
 
 
 

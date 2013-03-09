@@ -46,22 +46,6 @@ class Character::Post
   #   published ? ( featured ? 'Published + Featured' : 'Published') : 'Draft'
   # end
 
-  # def language
-  #   title.scan(/[А-Яа-я]+?/).size > 0 ? :russian : :english 
-  # end
-
-  # def date_formatted
-  #   if date
-  #     if language == :english 
-  #       #date.strftime('%a, %d %b %Y')
-  #       Date.today.year == date.year ? date.strftime('%b %d') : date.strftime('%b %d, %Y')
-  #     else
-  #       #Russian::strftime(date, '%a, %d %b %Y')
-  #       Date.today.year == date.year ? Russian::strftime(date, '%e %b') : Russian::strftime(date, '%e %b %Y')
-  #     end
-  #   end
-  # end
-
   # def date_or_state
   #   featured ? 'Featured' : (published ? date_formatted : state)
   # end

@@ -2,9 +2,6 @@
 #= require_tree ./models
 #= require_tree ./views
 
-#= require ./plugins/redactor
-
-
 class Pages extends Character.App
   scope: 'pages'
   menu:  'Pages'
@@ -39,7 +36,6 @@ class Pages extends Character.App
 
 
 Character.Pages = Pages
-
 Character.Pages.Views  = {}
 
 
