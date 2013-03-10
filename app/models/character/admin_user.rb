@@ -3,6 +3,7 @@ class Character::AdminUser
   include Mongoid::Timestamps
   include Character::Admin
   
+  field :name
   field :email
 
 

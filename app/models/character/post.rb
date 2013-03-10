@@ -27,6 +27,7 @@ class Character::Post
   default_scope     order_by(:published.asc, :featured.desc, :date.desc)
   scope :drafts,    where(published: false)
   scope :published, where(published: true)
+  scope :featured,  where(featured: true)
 
 
   # Indexes
@@ -34,7 +35,7 @@ class Character::Post
 
 
   # Search
-  search_in :title, :excerpt, :tags, :md
+  search_in :title, :excerpt, :tags, :md #, html clear text should be added here
 
 
   def admin_thumb_url
