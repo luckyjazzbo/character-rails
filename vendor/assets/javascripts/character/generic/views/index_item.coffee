@@ -22,7 +22,9 @@ class IndexItemView extends Backbone.View
     config =
       action_path: "#{ @options.current_index_path }/#{ action_name }/#{ @model.id }"
     
-    _.each @options.render_item_options, (val, key) => config[key] = @model.get(val)
+    _.each @options.render_item_options, (val, key) =>
+      unless key == 'action_name'
+        config[key] = @model.get(val) ? ( if @model[val] then @model[val]() )
     
     html = Character.Templates.IndexItem(config)
 

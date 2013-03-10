@@ -4,9 +4,12 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def set_form_template
     # Check if there is a custom form template for the class in the
-    # character/admin/api folder, if not using generic form
-    if template_exists?("#{@namespace}_form", "character/admin/api", false)
-      @form_template = "character/admin/api/#{ @namespace }_form"
+    # character/admin/ folder, if not using generic form
+
+    template_folder = @namespace.to_s.pluralize
+
+    if template_exists?("form", "character/admin/#{ template_folder }", false)
+      @form_template = "character/admin/#{ template_folder }/form"
     else
       @form_template = "character/admin/api/generic_form"
     end

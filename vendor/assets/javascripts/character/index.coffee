@@ -16,6 +16,14 @@
 #= require character/plugins/jquery.form
 #= require character/plugins/jquery.trunk8
 #= require character/plugins/redactor
+#= require character/plugins/showdown
+
+#= require codemirror
+#= require codemirror/modes/javascript
+#= require codemirror/modes/css
+#= require codemirror/modes/xml
+#= require codemirror/modes/htmlmixed
+#= require codemirror/modes/markdown
 
 #= require_self
 #= require character/generic

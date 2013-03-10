@@ -24,7 +24,7 @@ class Character::Post
 
 
   # Scope
-  default_scope     order_by(:published.asc, :featured.desc, :date.desc) # admin order is defined in javascript
+  default_scope     order_by(:published.asc, :featured.desc, :date.desc)
   scope :drafts,    where(published: false)
   scope :published, where(published: true)
 
@@ -36,26 +36,17 @@ class Character::Post
   # Search
   search_in :title, :excerpt, :tags, :md
 
-  # def as_json(options = { })
-  #   super((options || { }).merge({
-  #     methods: %w(state date_formatted date_or_state featured_image_url thumb_image_url)
-  #   }))
-  # end
 
-  # def state
-  #   published ? ( featured ? 'Published + Featured' : 'Published') : 'Draft'
-  # end
+  def admin_thumb_url
+    featured_image.try(:thumb)
+  end
 
-  # def date_or_state
-  #   featured ? 'Featured' : (published ? date_formatted : state)
-  # end
+  def featured_image_url
+    featured_image.try(:featured)
+  end
 
-  # def featured_image_url
-  #   featured_image.try(:featured)
-  # end
-
-  # def thumb_image_url
-  #   featured_image.try(:thumb)
-  # end
+  def self.admin_json_methods
+    admin_item_options.values + %w( featured_image_url )
+  end
 
 end

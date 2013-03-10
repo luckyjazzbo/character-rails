@@ -20,13 +20,19 @@ class Post extends Backbone.Model
     return { character_post: attributes }
 
   state: ->
-    if @get('published')
-      if @get('featured')
-        return 'Published & Featured'
+    if @get 'published'
+      if @get 'featured'
+        return 'Published + Featured'
       else
         return 'Published'
     return 'Draft'
 
+  date_or_state: ->
+    if @get 'published'
+      if @get 'featured'
+        return 'Featured'
+      return @get('formatted_created_at').replace('Created at', '')
+    return 'Draft'
 
 Character.Blog.Post = Post
 

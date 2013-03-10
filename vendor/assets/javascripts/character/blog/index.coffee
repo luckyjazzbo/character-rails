@@ -2,19 +2,15 @@
 #= require_tree ./models
 #= require_tree ./views
 
-#= require codemirror
-#= require codemirror/modes/javascript
-#= require codemirror/modes/css
-#= require codemirror/modes/xml
-#= require codemirror/modes/htmlmixed
-#= require codemirror/modes/markdown
-#= require ./plugins/showdown
-
 
 class Blog extends Character.Generic.App
   constructor: (@options) ->
+    @options.scope = 'blog'
+    _.extend @options.render_item_options,
+      action_name: 'show'
+      line1_right: 'date_or_state'
+    
     super @options
-    @options.render_item_options.action_name = 'show'
     @collection.model = Character.Blog.Post
 
     index_route = "#{ @options.scope }(/search/:query)(/p:page)"
@@ -53,7 +49,6 @@ class Blog extends Character.Generic.App
 
 Character.Blog        = Blog
 Character.Blog.Views  = {}
-
 
 
 
