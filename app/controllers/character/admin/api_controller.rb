@@ -1,6 +1,7 @@
 class Character::Admin::ApiController < Character::Admin::BaseController
   before_filter :set_model_class
   before_filter :set_form_template, only: %w( new edit create update )
+  before_filter :set_admin_user_id, only: %w( create update )
 
   def set_form_template
     # Check if there is a custom form template for the class in the
@@ -22,6 +23,11 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     @model_slug  = params[:model_slug]
     @model_class = @model_slug.gsub('-', '::').constantize
     @namespace   = @model_class.name.underscore.gsub('/', '_').to_sym
+  end
+
+
+  def set_admin_user_id
+    params[@namespace][:admin_user_id] = @character_admin_user.id
   end
 
 
