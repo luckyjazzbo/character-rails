@@ -27,11 +27,14 @@ class Post extends Backbone.Model
         return 'Published'
     return 'Draft'
 
+  date_published: ->
+    moment(@get('date'), "YYYY-MM-DD").format('MMM D, YYYY');#.fromNow() 
+
   date_or_state: ->
     if @get 'published'
       if @get 'featured'
         return 'Featured'
-      return @get('formatted_created_at').replace('Created at', '')
+      return @date_published()
     return 'Draft'
 
 Character.Blog.Post = Post

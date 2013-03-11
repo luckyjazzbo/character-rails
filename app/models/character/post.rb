@@ -37,7 +37,6 @@ class Character::Post
   # Search
   search_in :title, :excerpt, :tags, :md #, html clear text should be added here
 
-
   def admin_thumb_url
     featured_image.try(:thumb)
   end

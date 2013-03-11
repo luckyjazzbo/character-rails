@@ -17,6 +17,7 @@
 #= require character/plugins/jquery.trunk8
 #= require character/plugins/redactor
 #= require character/plugins/showdown
+#= require character/plugins/moment
 
 #= require codemirror
 #= require codemirror/modes/javascript
