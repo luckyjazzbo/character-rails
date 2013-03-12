@@ -32,21 +32,20 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
 
   def index
-    query     = params[:q]
-    page      = params[:page]
-    per_page  = params[:per_page] || 10
+    search_query  = params[:search_query] || ''
+    page          = params[:page]         || 1
+    per_page      = params[:per_page]     || 10
 
     @objects = @model_class.all
 
-    @objects = @objects.full_text_search(query)   if query
-    @objects = @objects.page(page).per(per_page)  if page
+    @objects = @objects.full_text_search(search_query) if not search_query.empty?
+    @objects = @objects.page(page).per(per_page)
 
-    result = { objects: @objects }
-
-    result[:paginate] = { page: page, per_page: per_page, total_pages: @objects.total_pages() } if page
-    result[:query]    = query if query
-
-    render json: result
+    render json: {  objects:       @objects,
+                    total_pages:   @objects.total_pages(),
+                    page:          page,
+                    per_page:      per_page,
+                    search_query:  search_query }
   end
 
 

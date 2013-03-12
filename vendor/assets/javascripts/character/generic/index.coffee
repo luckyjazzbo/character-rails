@@ -75,23 +75,21 @@ class App
       scope:              scope
       model_slug:         @options.model_name.replace('::', '-')
       search_query:       ''
-      items:              => @collection.toArray()
       collection:         => @collection
       current_index_path: =>
-        page   = @collection.paginate.page
-        query  = @collection.search_query
+        page  = @collection.current_page()
+        query = @collection.request_params.search_query
         url  = "#/#{ scope }"
         url += "/search/#{ query }" if query != ""
-        url += "/p#{ page }" if page > 1
+        url += "/p#{ page }"        if page > 1
         return url
 
 
     @add_routes()
     @add_menu_item()
     
-    @collection           = new Character.Generic.Collection()
-    @collection.url       = "/admin/api/#{ @options.model_slug }"
-    @collection.paginate  = { page: 1 } if @options.paginate
+    @collection     = new Character.Generic.Collection()
+    @collection.url = "/admin/api/#{ @options.model_slug }"
 
 
   update_index_check: (page, search_query)->
@@ -101,8 +99,8 @@ class App
     #  - having same search query
 
     return true unless workspace.current_view_is(@options.scope, 'IndexView')
-    return true unless page         == parseInt(@collection.paginate.page)
-    return true unless search_query == @collection.search_query
+    return true unless page         == @collection.request_params.page
+    return true unless search_query == @collection.request_params.search_query
 
     return false
 
@@ -111,15 +109,15 @@ class App
     page = parseInt(page)
 
     if @update_index_check(page, search_query)
-      @collection.search_query  = search_query
-      @collection.paginate.page = page
+      # TODO: rewrite this section and the function above
+      @collection.request_params.search_query = search_query
+      @collection.request_params.page         = page
 
       unless workspace.current_view_is(@options.scope, 'IndexView')
         @index_view = new Character.IndexView(@options)
         workspace.set_current_view(@index_view)
 
-      @collection.fetch
-        url: @collection.paginate_url()
+      @collection.fetch_with_params
         success: -> callback() if callback
     else
       callback() if callback

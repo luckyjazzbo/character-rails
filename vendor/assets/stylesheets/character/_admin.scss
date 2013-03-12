@@ -223,6 +223,20 @@ body                                  { background:$backgroundCharacterColor;
 
 .chr-paginate .pagination             { margin-bottom:0px;
                                         margin-left:0px;
+
+  li.current a:hover,
+  li.current a,
+  li a:hover                          { font-weight:normal;
+                                        color:$txtColor;
+                                        background:$secondaryColor;
+  }
+  li.arrow i                          { color:lighten($txtColor, 25%);
+  }
+  li.arrow.unavailable i              { opacity:0.2;
+  }
+  li.arrow:last-child                 { float:right;
+                                        margin-right:5px;
+  }
 }
 
 /*

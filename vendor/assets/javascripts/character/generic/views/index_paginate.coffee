@@ -16,7 +16,7 @@ class IndexPaginateView extends Backbone.View
 
 
   build_page_path: (num) ->
-    query = @options.collection().search_query
+    query = @options.collection().request_params.search_query
     url = "#/#{ @options.scope }"
     url += "/search/#{ query}" if query != ''
     url += "/p#{num}"
@@ -41,29 +41,79 @@ class IndexPaginateView extends Backbone.View
       """<li class='arrow'><a href='#{ path }'><i class='icon-chevron-right'></i></a></li>"""
 
 
+  render_page_link: (i, current) ->
+    current_cls = if i == current then 'current' else ''
+    page_path   = @build_page_path(i)
+    """<li class='#{ current_cls }'><a href='#{ page_path }'>#{ i }</a></li>"""
+
+
+  render_first: (current, pages, left) ->
+    html = ''
+    html += @render_page_link(1, current) if left > 1
+    html += @render_page_link(2, current) if left > 2
+    html += """<li class="unavailable"><a href="">…</a></li>""" if left > 3
+    return html
+
+
+  render_last: (current, pages, right) ->
+    dif = pages - right
+    html = ''
+    html += """<li class="unavailable"><a href="">…</a></li>""" if dif > 2
+    html += @render_page_link((pages-1), current) if dif > 1
+    html += @render_page_link(pages, current)     if dif > 0
+    return html
+
+
+  render_links: (current, pages) ->
+    range = 3
+    page_links = ''
+
+    if pages < 10
+      _.each _.range(1, pages + 1), (i) =>
+        page_links += @render_page_link(i, current)
+    else
+      left  = current - range
+      right = current + range
+
+      if left < 1
+        right += ( left * -1 )
+        left   = 1
+      
+      if right > pages
+        left  += pages - right
+        right  = pages
+
+      # first page
+      page_links  += @render_first(current, pages, left)
+      
+      _.each _.range(left, right + 1), (i) =>
+        page_links += @render_page_link(i, current)
+
+      # last page
+      page_links += @render_last(current, pages, right)
+
+    return page_links
+
+
   render: ->
-    collection = @options.collection()
-    current = parseInt(collection.paginate.page)
-    pages   = parseInt(collection.paginate.total_pages)
+    collection  = @options.collection()
+    current     = collection.current_page()
+    pages       = collection.total_pages
 
     if pages > 1
-
-      page_links = ''
-      _.each _.range(1, pages + 1), (i) =>
-        current_cls = if i == current then 'current' else ''
-        page_path   = @build_page_path(i)
-        page_links += """<li class='#{ current_cls }'><a href='#{ page_path }'>#{ i }</a></li>"""
-
-      prev_link = @render_prev(current, pages)
-      next_link = @render_next(current, pages)
+      prev_link   = @render_prev(current, pages)
+      next_link   = @render_next(current, pages)
+      page_links  = @render_links(current, pages)
 
       html = """<ul class='pagination'>
                   #{ prev_link }
                   #{ page_links }
                   #{ next_link }
                 </ul>"""
+    else
+      html = ''
 
-      @$el.html html
+    @$el.html html
 
 
   initialize: ->
@@ -72,15 +122,4 @@ class IndexPaginateView extends Backbone.View
 
 Character.IndexPaginateView = IndexPaginateView
 
-
-
-
-# DEMO:
-# <li class="current"><a href="">1</a></li>
-# <li><a href="">2</a></li>
-# <li><a href="">3</a></li>
-# <li><a href="">4</a></li>
-# <li class="unavailable"><a href="">&hellip;</a></li>
-# <li><a href="">12</a></li>
-# <li><a href="">13</a></li>
 

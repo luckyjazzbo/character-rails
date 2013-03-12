@@ -33,9 +33,8 @@ class IndexView extends Backbone.View
 
     item_height = 71
 
-    if @options.paginate
-      collection = @options.collection()
-      collection.paginate.per_page = Math.floor((index_min_height - paginate_height) / item_height)
+    collection = @options.collection()
+    collection.request_params.per_page = Math.floor((index_min_height - paginate_height) / item_height)
     
     $(window).smartresize =>
       @resize_panel()
@@ -102,7 +101,7 @@ class IndexView extends Backbone.View
     html = Character.Templates.Index
       title:        @options.title
       searchable:   @options.searchable
-      search_query: @options.collection().search_query
+      search_query: @options.collection().request_params.search_query
       index_url:    "#/#{ @options.scope }"
       new_item_url: "#/#{ @options.scope }/new"
 
@@ -115,7 +114,7 @@ class IndexView extends Backbone.View
 
 
   add_item: (model) ->
-    # TODO: remove placeholder on adding first item
+    $(@items_el).find('.chr-placeholder').remove()
 
     item = new Character.IndexItemView
       model:                model
@@ -132,28 +131,23 @@ class IndexView extends Backbone.View
   add_items: ->
     $(@items_el).empty()
 
-    if @options.items
-      objects = @options.items()
-    else
-      console.error 'IMPORTANT: index view options doesn\'t provide "collection" method!'
-      objects = []
+    objects = @options.collection().toArray()
 
-    (@render_placeholder() ; return) if objects.length == 0
-    
-    @add_item(obj) for obj in objects
+    if objects.length == 0
+      @render_placeholder()
+    else    
+      @add_item(obj) for obj in objects
 
-    # Truncate lines
-    $('.chr-line-1 .chr-line-left').trunk8 { lines: 1 }
-    $('.chr-line-2 .chr-line-left').trunk8 { lines: 2 }
+      # Truncate lines
+      $('.chr-line-1 .chr-line-left').trunk8 { lines: 1 }
+      $('.chr-line-2 .chr-line-left').trunk8 { lines: 2 }
 
-    # Sorting with drag'n'drop
-    @enable_sorting() if @options.reorderable
+      # Sorting with drag'n'drop
+      @enable_sorting() if @options.reorderable
 
-    # Add paginate
-    @paginate_view = new Character.IndexPaginateView(@options) if @options.paginate and not @paginate_view
-    @paginate_view.render()
-
-
+      # Add paginate
+      @paginate_view = new Character.IndexPaginateView(@options) unless @paginate_view
+      @paginate_view.render()
 
 
 Character.IndexView = IndexView

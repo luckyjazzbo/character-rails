@@ -14,7 +14,7 @@ class Character::Post
   field :slug
   field :md
   field :html
-  field :views,     type: Integer,  default: 0
+  #field :views,     type: Integer,  default: 0
   field :tags,                      default: ''
 
 
