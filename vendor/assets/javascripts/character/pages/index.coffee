@@ -2,44 +2,37 @@
 #= require_tree ./models
 #= require_tree ./views
 
-class Pages extends Character.App
-  scope: 'pages'
-  menu:  'Pages'
 
-  constructor: ->
-    @router = workspace.router
+class Character.Pages extends Character.Generic.App
+  constructor: (@options) ->
+    @options.scope = 'pages'
+    _.extend @options.render_item_options,
+      line1_left:  'menu_or_title'
+      line1_right: 'state'
     
-    @add_routes()
-    @add_menu_item()
+    super @options
+    @collection.model = Character.Pages.Page
 
-
-  fetch_data: (callback) ->
-    @pages = new Character.Pages.Pages()
-    @pages.fetch success: ->
-      callback()
-
-
-  action_index: ->
-    index_view = new Character.Pages.Views.PagesIndex()
-    workspace.set_current_view(index_view)
+    index_route = "#{ @options.scope }(/search/:query)(/p:page)"
+    @router.route "#{ index_route }/new", "#{ @options.scope }_new", (query, page) =>
+      @action_new()
 
 
   action_new: ->
-    edit_view = new Character.Pages.Views.PagesEdit()
-    workspace.set_current_view(edit_view)
+    @edit_view = new Character.Pages.Views.Edit(@options)
+    workspace.set_current_view(@edit_view)
 
 
   action_edit: (id) ->
-    page = @pages.get(id)
-    edit_view = new Character.Pages.Views.PagesEdit model: page
-    workspace.set_current_view(edit_view)
+    post = @collection.get(id)
+
+    config_with_model = { model: post }
+    _.extend(config_with_model, @options)
+
+    @edit_view = new Character.Pages.Views.Edit(config_with_model)
+    workspace.set_current_view(@edit_view)
 
 
-Character.Pages = Pages
 Character.Pages.Views  = {}
-
-
-
-
 
 

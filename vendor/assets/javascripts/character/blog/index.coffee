@@ -7,8 +7,8 @@ class Blog extends Character.Generic.App
   constructor: (@options) ->
     @options.scope = 'blog'
     _.extend @options.render_item_options,
-      action_name: 'show'
-      line1_right: 'date_or_state'
+      action_name:  'show'
+      line1_right:  'date_or_state'
     
     super @options
     @collection.model = Character.Blog.Post

@@ -1,4 +1,4 @@
-class Post extends Backbone.Model
+class Character.Blog.Post extends Backbone.Model
   idAttribute:  '_id'
 
   update_attributes: [
@@ -14,10 +14,12 @@ class Post extends Backbone.Model
     'featured_image_id',
     'featured' ]
 
+
   toJSON: ->
     attributes = {}
     attributes[a] = @get(a) for a in @update_attributes
     return { character_post: attributes }
+
 
   state: ->
     if @get 'published'
@@ -27,8 +29,11 @@ class Post extends Backbone.Model
         return 'Published'
     return 'Draft'
 
+
   date_published: ->
-    moment(@get('date'), "YYYY-MM-DD").format('MMM D, YYYY');#.fromNow() 
+    date = @get 'date'
+    if date then moment(date, "YYYY-MM-DD").format('MMM D, YYYY') else ''
+
 
   date_or_state: ->
     if @get 'published'
@@ -37,5 +42,4 @@ class Post extends Backbone.Model
       return @date_published()
     return 'Draft'
 
-Character.Blog.Post = Post
 

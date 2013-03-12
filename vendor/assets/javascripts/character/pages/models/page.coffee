@@ -1,11 +1,11 @@
-class Page extends Backbone.Model
-
+class Character.Pages.Page extends Backbone.Model
   idAttribute:  '_id'
 
   update_attributes: [
     'title',
-    'pemalink',
+    'permalink',
     'html',
+    'menu',
     'keywords',
     'description',
     'published',
@@ -16,12 +16,10 @@ class Page extends Backbone.Model
     attributes[a] = @get(a) for a in @update_attributes
     return { character_page: attributes }
 
-Character.Pages.Page = Page
+  state: ->
+    if @get 'published' then 'Published' else 'Hidden'
 
-
-class Pages extends Backbone.Collection
-  model: Page
-  url: '/admin/api/Character-Page'
-
-Character.Pages.Pages = Pages
+  menu_or_title: ->
+    menu = @get 'menu'
+    if menu then return menu else return @get 'title'
 

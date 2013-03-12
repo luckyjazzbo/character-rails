@@ -1,4 +1,4 @@
-class PagesEditRedactor extends Backbone.View
+class Character.Pages.Views.Redactor extends Backbone.View
   tagName:    'div'
 
   render: ->
@@ -43,9 +43,5 @@ class PagesEditRedactor extends Backbone.View
 
   get_html: ->
     @html.value
-
-
-Character.Pages.Views.PagesEditRedactor = PagesEditRedactor
-
 
 

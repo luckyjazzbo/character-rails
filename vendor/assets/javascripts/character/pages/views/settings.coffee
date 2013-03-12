@@ -1,4 +1,4 @@
-class PagesEditSettings extends Character.SettingsView
+class Character.Pages.Views.Settings extends Character.SettingsView
   render_settings: ->
     menu        = @model?.get('menu')         ? ''
     permalink   = @model?.get('permalink')    ? ''
@@ -28,10 +28,6 @@ class PagesEditSettings extends Character.SettingsView
 
   menu: ->
     $('#menu').val()
-
-
-Character.Pages.Views.PagesEditSettings = PagesEditSettings
-
 
 
 

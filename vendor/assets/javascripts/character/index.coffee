@@ -29,7 +29,7 @@
 #= require_self
 #= require character/generic
 #= require character/blog
-# require character/pages
+#= require character/pages
 
 
 

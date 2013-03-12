@@ -1,4 +1,4 @@
-class PagesEdit extends Backbone.View
+class Character.Pages.Views.Edit extends Backbone.View
   tagName:    'div'
 
 
@@ -31,8 +31,8 @@ class PagesEdit extends Backbone.View
     $('#character').append(html)
 
     @title    = document.getElementById('title')
-    @settings = new Character.Pages.Views.PagesEditSettings model: @model
-    @mode     = new Character.Pages.Views.PagesEditRedactor model: @model
+    @settings = new Character.Pages.Views.Settings model: @model
+    @mode     = new Character.Pages.Views.Redactor model: @model
     
     @update_permalink()
 
@@ -55,7 +55,7 @@ class PagesEdit extends Backbone.View
     if @model
       @model.save(attributes, { success: callback })
     else
-      pages.pages.create(attributes, { wait: true, success: callback })
+      @options.collection().create(attributes, { wait: true, success: callback })
 
 
   save_hidden: ->
@@ -68,7 +68,8 @@ class PagesEdit extends Backbone.View
 
 
   back_to_index: ->
-    workspace.router.navigate('#/pages', {trigger: true})
+    index_path = @options.current_index_path()
+    workspace.router.navigate(index_path, { trigger: true })
 
 
   events:
@@ -93,8 +94,6 @@ class PagesEdit extends Backbone.View
     $('#permalink_override').keyup => set_permalink()
     set_permalink()
 
-
-Character.Pages.Views.PagesEdit = PagesEdit
 
 
 
