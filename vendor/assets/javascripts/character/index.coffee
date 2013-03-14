@@ -53,8 +53,8 @@ class CharacterWorkspace
     @apps         = {}
 
   
-  current_view_is: (scope, name) ->
-    (@current_view and @current_view.constructor.name == name and @current_view.options.scope == scope)
+  current_view_is: (scope, view_id) ->
+    (@current_view and @current_view.id == view_id and @current_view.options.scope == scope)
 
 
   set_current_view: (view) ->

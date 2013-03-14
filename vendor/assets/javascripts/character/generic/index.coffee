@@ -98,7 +98,7 @@ class App
     #  - we are on the same collection page AND
     #  - having same search query
 
-    return true unless workspace.current_view_is(@options.scope, 'IndexView')
+    return true unless workspace.current_view_is(@options.scope, 'index_view')
     return true unless page         == @collection.request_params.page
     return true unless search_query == @collection.request_params.search_query
 
@@ -113,7 +113,7 @@ class App
       @collection.request_params.search_query = search_query
       @collection.request_params.page         = page
 
-      unless workspace.current_view_is(@options.scope, 'IndexView')
+      unless workspace.current_view_is(@options.scope, 'index_view')
         @index_view = new Character.IndexView(@options)
         workspace.set_current_view(@index_view)
 

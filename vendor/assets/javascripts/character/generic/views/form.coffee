@@ -10,7 +10,8 @@
 
 
 class FormView extends Backbone.View
-  tagName:    'div'
+  tagName: 'div'
+  id:      'form_view'
 
 
   render: (form_html)->
@@ -27,6 +28,7 @@ class FormView extends Backbone.View
       content:  """<section class='chr-edit chr-form'>#{ form_html }</section>"""
 
     $(this.el).html html
+
     return this
 
 
@@ -44,6 +46,9 @@ class FormView extends Backbone.View
 
     html = @render(form_html).el
     $(parent_el).append(html)
+
+    $('.datepicker').datepicker
+      dateFormat: 'yy-mm-dd'
 
     $('.chr-form form').ajaxForm
       success: (obj) => @update_or_create(obj) #if @model then @update_model(obj) else @create_model(obj)
