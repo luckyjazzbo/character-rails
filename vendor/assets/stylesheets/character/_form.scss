@@ -1,0 +1,46 @@
+
+
+/*
+########  #######  ########  ##     ##  ######  
+##       ##     ## ##     ## ###   ### ##    ## 
+##       ##     ## ##     ## #### #### ##       
+######   ##     ## ########  ## ### ##  ######  
+##       ##     ## ##   ##   ##     ##       ## 
+##       ##     ## ##    ##  ##     ## ##    ## 
+##        #######  ##     ## ##     ##  ######  
+*/
+
+
+.chr-edit                             { padding:.5em 0 0;
+}
+
+
+.chr-form                             {
+  form                                { margin-bottom:0;
+  }
+
+  input.boolean + label               { display:inline;
+  }
+  
+  input.boolean                       { margin-bottom:$form-spacing;
+  }
+
+  //input[type=file]                    { margin:0 0 12px 0;
+  //}
+
+  .help-inline                        { font-size:.9em;
+                                        top:-.8em;
+                                        position:relative;
+                                        margin-left: .8em;
+  }
+}
+
+
+.ui-datepicker                        { z-index: 9999 !important;
+}
+
+
+
+
+
+

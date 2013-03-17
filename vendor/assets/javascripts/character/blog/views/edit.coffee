@@ -14,10 +14,10 @@ class BlogEdit extends Backbone.View
               </header>
 
               <footer class='chr-footer' id=footer>
-                <button class='chr-btn' id=back>Back to index</button>
+                <a href=# class='chr-btn' id=back>Back to index</a>
                 <aside>
-                  <button class='chr-btn blue' id=save_draft>Save Draft</button>
-                  <button class='chr-btn red' id=publish>Publish</button>
+                  <a href=# class='chr-btn blue' id=save_draft>Save Draft</a>
+                  <a href=# class='chr-btn red' id=publish>Publish</a>
                 </aside>
               </footer>"""
     $(this.el).html html
@@ -64,17 +64,20 @@ class BlogEdit extends Backbone.View
       @collection().create(attributes, { wait: true, success: callback })
 
 
-  save_draft: ->
+  save_draft: (e) ->
+    e.preventDefault() if e
     @update_or_create_post {published: false}, =>
       @back_to_index()
 
 
-  publish: ->
+  publish: (e) ->
+    e.preventDefault() if e
     @update_or_create_post {published: true}, =>    
       @back_to_index()
 
 
-  back_to_index: ->
+  back_to_index: (e) ->
+    e.preventDefault() if e
     index_path  = @options.current_index_path()
     index_path += "/show/#{ @model.id }" if @model
     workspace.router.navigate(index_path, { trigger: true })

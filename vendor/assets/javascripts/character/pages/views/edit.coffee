@@ -15,10 +15,10 @@ class Character.Pages.Views.Edit extends Backbone.View
               </header>
 
               <footer class='chr-footer' id=footer>
-                <button class='chr-btn cancel'>Back to index</button>
+                <a href=# class='chr-btn cancel'>Back to index</a>
                 <aside>
-                  <button class='chr-btn blue save'>Save Hidden</button>
-                  <button class='chr-btn red publish'>Publish</button>
+                  <a href=# class='chr-btn blue save'>Save Hidden</a>
+                  <a href=# class='chr-btn red publish'>Publish</a>
                 </aside>
               </footer>"""
 
@@ -58,16 +58,20 @@ class Character.Pages.Views.Edit extends Backbone.View
       @options.collection().create(attributes, { wait: true, success: callback })
 
 
-  save_hidden: ->
-    @update_or_create { published: false }
+  save_hidden: (e) ->
+    e.preventDefault() if e
+    @update_or_create { published: false }, =>
+      @back_to_index()
 
 
-  publish: ->
+  publish: (e) ->
+    e.preventDefault() if e
     @update_or_create { published: true }, =>
       @back_to_index()
 
 
-  back_to_index: ->
+  back_to_index: (e) ->
+    e.preventDefault() if e
     index_path = @options.current_index_path()
     workspace.router.navigate(index_path, { trigger: true })
 

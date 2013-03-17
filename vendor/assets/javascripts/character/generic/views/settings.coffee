@@ -35,7 +35,7 @@ class SettingsView extends Backbone.View
           
           <input name=_method type=hidden value=post>
           <input type=file id=image_uploader_input name=file />
-          <button class=submit style='float:right;'>Upload</button>
+          <button class='submit tiny' style='float:right;'>Upload</button>
         </form>"""
 
 

@@ -60,12 +60,12 @@ class IndexView extends Backbone.View
   set_active: (id) ->
     @unset_active()
     $("#index_view li[data-id=#{ id }] a").addClass('active')
-    $(@panel_el).addClass('fixed') # HACK: when fixed in css, breaks the layout
+    #$(@panel_el).addClass('fixed') # HACK: when fixed in css, breaks the layout
 
 
   unset_active: ->
     $('#index_view a.active').removeClass('active')
-    $(@panel_el).css('top', '').removeClass('fixed') # HACK: when fixed in css, breaks the layout
+    #$(@panel_el).css('top', '').removeClass('fixed') # HACK: when fixed in css, breaks the layout
 
 
   events:

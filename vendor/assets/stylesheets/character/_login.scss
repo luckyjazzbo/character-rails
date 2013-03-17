@@ -9,10 +9,13 @@
         ########  #######   ######   #### ##    ## 
 */
 
+$white: #fff;
+$black: #000;
+
 .chr-login                            { background:$white;
                                         padding:1em 1em 2em;
                                         @include shadow;
-                                        @include column(6);
+                                        @include grid-column(6);
                                         float: none;
                                         margin: 2em auto;
 }
@@ -38,8 +41,8 @@
   h1                                  { margin-bottom:0;
   }
 
-  .browserid_login                    { background:lighten($mainColor, 5%);
-                                        border:darken($mainColor, 5%);
+  .browserid_login                    { background:lighten($primary-color, 5%);
+                                        border:darken($primary-color, 5%);
                                         font-size:1em;
                                         display:block;
                                         width:16em;
@@ -60,7 +63,7 @@
     &:hover strong                    { text-decoration: underline;
     }
   }
-  i                                   { background:darken($mainColor, 5%);
+  i                                   { background:darken($primary-color, 5%);
                                         color:$white;
                                         line-height:2;
                                         padding:0 .1em 0 .8em;
@@ -80,7 +83,7 @@
                                         pointer-events: none;
     }
 
-    &:after                           { border-left-color:darken($mainColor, 5%);
+    &:after                           { border-left-color:darken($primary-color, 5%);
                                         border-width: 1em;
                                         top: 50%;
                                         margin-top: -1em;

@@ -94,7 +94,7 @@ Templates =
     """ <div class='chr-settings chr-form' id=settings_dlg style='display:none;'>
           #{ params.content }
         </div>
-        <button id=settings_btn class=chr-btn><i class='general foundicon-settings' /></button>"""
+        <a href=# id=settings_btn class=chr-btn><i class='general foundicon-settings' /></a>"""
 
 
 

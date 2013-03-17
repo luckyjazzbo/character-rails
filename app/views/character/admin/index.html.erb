@@ -5,82 +5,29 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset='utf-8' />
 
-  <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="width=device-width" />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
   <title><%= ENV['WEBSITE_NAME'] %> | Admin</title>
-
   <%= stylesheet_link_tag 'admin', :media => 'all' %>
 
-  <!-- Custom Modernizr for Foundation -->
-  <%#= javascript_include_tag "foundation/modernizr.foundation.js" %>
-
-  <%= csrf_meta_tags %>
-
+  <%= javascript_include_tag 'vendor/custom.modernizr' %>
   <%= javascript_include_tag 'admin' %>
   <%= setup_browserid %>
+
+  <%= csrf_meta_tags %>
 </head>
 
 <body>
 <% if @character_admin_user %>
-  <header class='chr-header'>
-    <div class='fixed'>
-      
-      <nav class='top-bar'>
-        <section>
-          <ul class='left chr-main-menu' id='main_menu'>
-            <li class='active'>
-              <a class='chr-menu-home' href='#'><i class='icon-home'></i></a>
-            </li>
-          </ul>
-
-          <ul class='right'>
-            <li class='chr-menu-settings has-dropdown'>
-              <a href="#/admins">
-                <i class='icon-cog'></i> Settings
-              </a>
-
-              <ul class="dropdown">
-                <li><a href="#/admins">Admins</a></li>
-                <li><a href="#/assets">Assets</a></li>
-              </ul>
-            </li>
-            
-            <li>
-              <%= link_to browserid_config.logout.path, class: :browserid_logout do %>
-                <%= image_tag @character_admin_user.avatar_url(50) %> Logout
-              <% end %>
-            </li>
-          </ul>
-        </section>
-      </nav>
-
-      <div class='chr-top-bar-line'></div>
-
-    </div>
-  </header>
+  <%= render partial: 'character/admin/header' %>
 
   <div id='character'></div>
 
   <%= render 'character/admin/javascript' %>
 <% else %>
-    <section class='chr-login'>
-      <header class='chr-login-icon'>
-        <i class='icon-cogs'></i>
-      </header>
-      
-      <div class='chr-login-message'>
-        <h1><%= ENV['WEBSITE_NAME'] %></h1>
-        <p>Administration Spot</p>
-        
-        <%= link_to browserid_config.login.path, class: :browserid_login do %>
-          <i class='icon-user'></i>
-          <strong>Login with Persona</strong>
-        <% end %>
-      </div>
-    </section>
+  <%= render 'character/admin/login' %>
 <% end %>
 
 </body>

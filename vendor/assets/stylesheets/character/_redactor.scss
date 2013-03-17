@@ -1,3 +1,44 @@
+
+
+/*
+########  ######## ########     ###     ######  ########  #######  ########  
+##     ## ##       ##     ##   ## ##   ##    ##    ##    ##     ## ##     ## 
+##     ## ##       ##     ##  ##   ##  ##          ##    ##     ## ##     ## 
+########  ######   ##     ## ##     ## ##          ##    ##     ## ########  
+##   ##   ##       ##     ## ######### ##          ##    ##     ## ##   ##   
+##    ##  ##       ##     ## ##     ## ##    ##    ##    ##     ## ##    ##  
+##     ## ######## ########  ##     ##  ######     ##     #######  ##     ## 
+*/
+
+
+.chr-redactor                         {
+  & > section > header                { text-align:right;
+  }
+  .redactor_toolbar                   { position: absolute;
+                                        width: 100%;
+                                        top: -33px;
+                                        background: transparent;
+                                        border-bottom: none;
+                                        padding-left: 11px !important;
+    li.redactor_separator             { height:31px;
+                                        opacity:0;
+    }
+  }
+
+  .redactor_box                       { border:none;
+                                        padding:0 1em;
+  }
+}
+
+.redactor_dropdown                    { margin-top: -40px;
+}
+
+
+
+// Original theme
+
+
+
 .redactor_box {
   position: relative;
   border: 1px solid #ddd;

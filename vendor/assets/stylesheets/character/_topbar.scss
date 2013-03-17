@@ -1,101 +1,76 @@
-@import "foundation/components/modules/topbar";
-
-$darkBorder: darken($topBarBgColor, 5%);
-$lightBorder: lighten($topBarBgColor, 5%);
-
-.chr-top-bar-line                     { border-top:1px solid darken($topBarBgColor, 7%);
-                                        //position:relative;
-                                        //top:40px;
-                                        z-index: 33;
-                                        position:relative;
-                                        margin-top:-1px;
-}
-
-.top-bar                              { border-bottom: 1px solid darken($topBarBgColor, 7%);
 
 
-  > section > ul > li                 { border-left: 1px solid $darkBorder;
-                                        border-right: 1px solid $lightBorder;
-                                        margin-left: -2px;
-                                        
-    &:hover, &:focus                  { background: lighten($topBarBgColor, 4.5%)!important;
-      > a                             { color:$white!important;
-      }
-    }
-    &.active                          { background: darken($topBarBgColor, 4.5%)!important;
-                                        border-left: 1px solid $lightBorder;
-                                        border-right: 1px solid $lightBorder;
-                                        position: relative;
-                                        z-index:2;
-      > a                             { border-left: 1px solid darken($topBarBgColor, 7%);
-                                        border-right: 1px solid darken($topBarBgColor, 7%);
-                                        color:$white!important;
-      }
-    }
-    > a                               { border-left: 1px solid $lightBorder;
-                                        border-right: 1px solid $darkBorder;
-    }
+/*
+########  #######  ########     ########     ###    ########  
+   ##    ##     ## ##     ##    ##     ##   ## ##   ##     ## 
+   ##    ##     ## ##     ##    ##     ##  ##   ##  ##     ## 
+   ##    ##     ## ########     ########  ##     ## ########  
+   ##    ##     ## ##           ##     ## ######### ##   ##   
+   ##    ##     ## ##           ##     ## ##     ## ##    ##  
+   ##     #######  ##           ########  ##     ## ##     ## 
+*/
+
+
+.top-bar                              { margin-bottom:0;
+  // Hide settings apps
+  .admins + .divider,
+  .assets + .divider,
+  .admins, .assets                    { display:none;
   }
 
+  // Additional links styling
   a                                   { @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
   }
 
-  .dropdown                           { min-width:106px;
-                                        padding-top:0!important;
-                                        margin-top:-1px!important;
-
-    a                                 { line-height:2!important;
-                                        font-weight: 600!important;
-                                        border-left: 1px solid $darkBorder;
-                                        border-right: 1px solid $darkBorder;
-    }
-
-    li                                { padding-bottom:0!important;
-                                        text-align: right;                                        
-      &:last-child                    { border-bottom: 1px solid $darkBorder;
-      }
-    }
+  // Padding for header
+  .left .divider:first-child          { margin-left:$column-gutter/2 - 2px;
+  }
+  .right .divider:last-child          { margin-right:$column-gutter/2 - 2px;
   }
 
-  .left                               { margin-left:15px!important;
+  .top-bar-section ul                 { background: $chr-main-color;
   }
 
-  .right                              { margin-right:13px!important;
-  }
-
-  .admins, .assets                    { display:none;
-  }
-}
-
-
-
-.browserid_logout                     { padding:0 .7em!important;
-  img                                 { float:left;
-                                        width:2em;
+  // Logout button
+  .browserid_logout img               { width:2em;
                                         height:2em;
-                                        margin-top: .45em;
-                                        margin-right: .7em;
+                                        display: inline;
+                                        margin-bottom: -.5em;
+                                        margin-right:.3em;
                                         @include border-radius(5px);
                                         @include single-box-shadow(rgba(0,0,0,0.4), 1px, 1px, 2px, false, false);
   }
-}
 
-
-
-.chr-menu-home                        { padding:0 .5em!important;
-  .icon-home                          { font-size:2em;
-                                        line-height:1.6;
+  // Home button
+  .top-bar-section li .chr-home-link  { padding: 0 emCalc(8px);
+    i                                 { font-size:2em;
+                                        bottom:emCalc(-2px);
+                                        position:relative;
                                         @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
-                                        color:$white!important;
+    }
   }
-}
 
-
-.chr-menu-settings                    {
-  i                                   { font-size:1.3em;
+  // Dropdown links
+  .top-bar-section .dropdown li a     { font-weight: bold;
   }
-  > a                                 { padding:0 13.33333px!important;
-    &:after                           { display:none!important;
+
+  // Dividers and links active/hovers
+  .top-bar-section                    {
+    & > ul > .divider                 { border-#{$default-opposite}: solid 1px lighten($topbar-bg, 5%);
+                                        border-#{$default-float}: solid 1px darken($topbar-bg, 5%);
+    }
+    & > ul                            {
+      li.active a                     { background:darken($topbar-bg, 5%);
+      }
+      a:hover, a:focus,
+      li:hover a                      { background:lighten($topbar-bg, 5%);
+      }
     }
   }
 }
+
+
+
+
+
+

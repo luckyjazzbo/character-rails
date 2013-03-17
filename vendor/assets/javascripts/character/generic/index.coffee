@@ -22,7 +22,10 @@ Character.Generic = {}
 
 class App
   add_menu_item: ->
-    html = """<li class='#{ @options.scope }'><a href='#/#{ @options.scope }'>#{ @options.menu }</a></li>"""
+    html = """<li class='#{ @options.scope }'>
+                <a href='#/#{ @options.scope }'>#{ @options.menu }</a>
+              </li>
+              <li class='divider'></li>"""
     $('#main_menu').append html
 
 
