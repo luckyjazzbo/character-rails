@@ -61,22 +61,23 @@
                                         top:-2px;
   
   input                               { @include border-radius(12px);
+                                        display:inline;
+                                        width:200px;
+                                        margin-bottom:0;
                                         height:24px;
                                         position:relative;
                                         top:-3px;
                                         margin-top:-2px;
-                                        border:1px solid $chr-secondary-color;
                                         padding-left:2.2em;
-                                        margin-left:-2.2em;
-                                        background:transparent;
-
-                                        display:none;
     &:focus                           { outline:0;
     }
   }
 
   i                                   { color:lighten($chr-icon-btn-color, 25%);
                                         font-size:$chr-icon-btn-size;
+                                        position:relative;
+                                        z-index:10;
+                                        left: 1.8em;
   }
 }
 

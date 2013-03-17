@@ -4,7 +4,9 @@
 #= require jquery.ui.datepicker
 
 #= require browserid
-#= require foundation
+# require foundation
+#= require foundation/foundation
+#= require foundation/foundation.topbar
 
 #= require lodash
 #= require underscore.string

@@ -12,11 +12,15 @@
 
 
 .chr-blog-post-preview                { padding:.5em 1em 1em;
+                                        overflow:hidden;
+
   &.scroll                            { overflow-y:scroll;
                                         margin-right: 1px;
   }
+
   ul                                  { padding-left:30px;
   }
+  
   img                                 { width:100%;
   }
 }
