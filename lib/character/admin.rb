@@ -15,13 +15,14 @@ module Character::Admin
   end
 
 
-  def as_json(options = { })
-    methods = self.class.admin_json_methods
-
-    methods << :admin_thumb_url       if self.class.method_defined? :admin_thumb_url
-    methods << :formatted_created_at  if self.class.method_defined? :formatted_created_at
-
-    super((options || { }).merge( { methods: methods } ))
+  def as_json(options={})
+    if options.has_key?(:methods)
+      options[:methods] += self.class.admin_json_methods
+    else
+      options[:methods] = self.class.admin_json_methods
+    end
+    options[:methods].uniq!
+    super(options)
   end
 
 
@@ -66,7 +67,10 @@ module Character::Admin
 
 
     def admin_json_methods
-      admin_item_options.values
+      methods = admin_item_options.values
+      methods << :admin_thumb_url       if self.method_defined? :admin_thumb_url
+      methods << :formatted_created_at  if self.method_defined? :formatted_created_at
+      methods.uniq
     end
 
 
@@ -76,6 +80,7 @@ module Character::Admin
       fields  = admin_editable_fields
       hash[:line1_left]  = fields[0]
       hash[:line2_left]  = fields[1] if fields.size > 1
+      hash[:line1_right] = fields[2] if fields.size > 2
 
       hash[:line1_right] = :formatted_created_at if self.method_defined? :formatted_created_at 
       hash[:image_url]   = :admin_thumb_url      if self.method_defined? :admin_thumb_url

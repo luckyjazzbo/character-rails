@@ -7,6 +7,8 @@
 # require foundation
 #= require foundation/foundation
 #= require foundation/foundation.topbar
+# require foundation/foundation.section
+
 
 #= require lodash
 #= require underscore.string

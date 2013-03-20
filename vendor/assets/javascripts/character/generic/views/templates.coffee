@@ -81,7 +81,7 @@ Templates =
           </div>
           <div class='chr-line-2'>
             <small><em class='chr-line-left'>#{ params.line2_left }</em></small>
-            <aside class='chr-line-right'>#{ params.line2_right }</aside>
+            <aside class='chr-line-right'><small>#{ params.line2_right }</small></aside>
           </div>
         </a>"""  
 

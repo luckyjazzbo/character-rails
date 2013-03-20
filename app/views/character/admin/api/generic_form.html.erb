@@ -1,12 +1,15 @@
 <% config = @object.admin_form_config %>
 
 <%= simple_form_for @object, url: config[:url] do |f| %>
-  
-  <% config[:fields].each do |name| %>
+  <div class='row'>
+    <div class='small-12 columns'>  
+      <% config[:fields].each do |name| %>
 
-    <%= f.input name %>
+        <%= f.input name %>
 
-  <% end %>
+      <% end %>
 
-  <%= f.button :submit, class: 'small button' %>
+      <%= f.button :submit, class: 'small button' %>
+    </div>
+  </div>
 <% end %>
