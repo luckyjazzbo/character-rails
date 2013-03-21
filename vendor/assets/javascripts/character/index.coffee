@@ -4,10 +4,10 @@
 #= require jquery.ui.datepicker
 
 #= require browserid
-# require foundation
 #= require foundation/foundation
 #= require foundation/foundation.topbar
-# require foundation/foundation.section
+#= require foundation/foundation.section
+# require character/plugins/foundation.section
 
 
 #= require lodash
@@ -16,7 +16,7 @@
 #= require character/plugins/backbone
 #= require character/plugins/underscore.string.slugify
 #= require character/plugins/replace_nth_occurrence
-#= require character/plugins/jquery.smartresize
+#  require character/plugins/jquery.smartresize
 #= require character/plugins/jquery.form
 #= require character/plugins/jquery.trunk8
 #= require character/plugins/redactor

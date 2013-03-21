@@ -36,7 +36,10 @@ class IndexView extends Backbone.View
     collection = @options.collection()
     collection.request_params.per_page = Math.floor((index_min_height - paginate_height) / item_height)
     
-    $(window).smartresize =>
+    
+    $(window).off 'resize.character'
+    $(window).on 'resize.character', =>
+      console.log(jQuery._data( window, "events" ))
       @resize_panel()
 
 

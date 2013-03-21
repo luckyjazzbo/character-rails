@@ -50,6 +50,8 @@ class FormView extends Backbone.View
     $('.datepicker').datepicker
       dateFormat: 'yy-mm-dd'
 
+    $(this.el).foundation('section', 'resize')
+
     $('.chr-form form').ajaxForm
       success: (obj) => @update_or_create(obj) #if @model then @update_model(obj) else @create_model(obj)
 
@@ -85,3 +87,6 @@ class FormView extends Backbone.View
 
 
 Character.FormView = FormView
+
+
+

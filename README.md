@@ -137,6 +137,7 @@ Add first admin user via console: ```Character::AdminUser.create! email:'santyor
  - Image uploader style for markdown editor
 
 **Features:**
+ - fix fixed panels to be autosized without js
  - check a bunch of editors from: https://github.com/dybskiy/redactor-js/issues/2
  - redo blog/pages editor css layout similar to http://dillinger.io/
  - Make RSS pass validation: http://webdesign.about.com/od/validators/l/bl_validation.htm#rssvalidator
