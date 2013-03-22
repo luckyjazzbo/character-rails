@@ -39,7 +39,6 @@ class IndexView extends Backbone.View
     
     $(window).off 'resize.character'
     $(window).on 'resize.character', =>
-      console.log(jQuery._data( window, "events" ))
       @resize_panel()
 
 

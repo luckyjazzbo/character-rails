@@ -33,6 +33,17 @@
                                         position:relative;
                                         margin-left: .8em;
   }
+
+  form.custom                         { // Tweeks for Foundation 4
+    .input label.boolean              { display: inline;
+                                        position: relative;
+                                        padding-left: 1.5em;
+                                        margin-left: -1.2em;
+                                        margin-bottom: $label-bottom-margin;
+    }
+    .input.boolean                    { margin-bottom: 1em;
+    }
+  }
 }
 
 
