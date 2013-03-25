@@ -56,7 +56,7 @@ class Collection extends Backbone.Collection
     @request_params.page
 
 
-  fetch_with_params: (options) ->
+  fetch_with_params: (options={}) ->
     options.url = @url_with_params() unless options.url
     @fetch(options)
 

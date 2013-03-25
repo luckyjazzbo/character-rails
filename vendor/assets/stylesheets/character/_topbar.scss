@@ -22,14 +22,6 @@
   a                                   { @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
   }
 
-  // Padding for header
-  .left .divider:first-child          { margin-left:$column-gutter/2 - 2px;
-  }
-  .right .divider:last-child          { margin-right:$column-gutter/2 - 2px;
-  }
-
-  .top-bar-section ul                 { background: $chr-main-color;
-  }
 
   // Logout button
   .browserid_logout img               { width:2em;
@@ -41,6 +33,11 @@
                                         @include single-box-shadow(rgba(0,0,0,0.4), 1px, 1px, 2px, false, false);
   }
 
+  // Dropdown links
+  .top-bar-section .dropdown li a     { font-weight: bold;
+  }
+
+
   // Home button
   .top-bar-section li .chr-home-link  { padding: 0 emCalc(8px);
     i                                 { font-size:2em;
@@ -49,26 +46,46 @@
                                         @include single-text-shadow(1px, 1px, 2px, false, rgba(0,0,0,0.4));
     }
   }
+}
 
-  // Dropdown links
-  .top-bar-section .dropdown li a     { font-weight: bold;
-  }
 
-  // Dividers and links active/hovers
-  .top-bar-section                    {
-    & > ul > .divider                 { border-#{$default-opposite}: solid 1px lighten($topbar-bg, 5%);
-                                        border-#{$default-float}: solid 1px darken($topbar-bg, 5%);
-    }
-    & > ul                            {
-      li.active a                     { background:darken($topbar-bg, 5%);
+
+/* Styles for screens that are atleast 768px; */
+@media #{$small}                      {
+  .top-bar                            {
+    // Dropdown links
+    .top-bar-section .dropdown li a   { padding-top:$column-gutter/2;
+                                        padding-bottom:$column-gutter/2;
+      &:hover                         { background:lighten($topbar-bg, 10%);
       }
-      a:hover, a:focus,
-      li:hover a                      { background:lighten($topbar-bg, 5%);
+    }
+
+
+    // Padding for header
+    .left .divider:first-child        { margin-left:$column-gutter/2 - 2px;
+    }
+    .right .divider:last-child        { margin-right:$column-gutter/2 - 2px;
+    }
+
+    .top-bar-section ul               { background: $chr-main-color;
+    }
+
+
+    // Dividers and links active/hovers
+    .top-bar-section                  {
+      & > ul > .divider               { border-#{$default-opposite}: solid 1px lighten($topbar-bg, 5%);
+                                        border-#{$default-float}: solid 1px darken($topbar-bg, 5%);
+      }
+      & > ul                          {
+        li.active a                   { background:darken($topbar-bg, 5%);
+        }
+        a:hover, a:focus,
+        li:hover a                    { background:lighten($topbar-bg, 5%);
+        }
       }
     }
   }
 }
-
 
 
 

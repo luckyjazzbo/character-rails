@@ -60,6 +60,7 @@
     &.fixed                           { position:fixed;
                                         bottom:0;
                                         top:$topbar-height + $column-gutter / 2;
+                                        z-index:0;
       
       section                         { position:absolute;
                                         left: $column-gutter / 2;
