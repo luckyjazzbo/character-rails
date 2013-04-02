@@ -50,6 +50,13 @@ class FormView extends Backbone.View
     $('.datepicker').datepicker
       dateFormat: 'yy-mm-dd'
 
+    $('.chr-redactor').redactor
+      convertLinks: false
+      convertDivs:  false
+      buttons:      ['html', '|', 'bold', 'italic', 'deleted', '|', 'image', '|', 'link' ]
+      imageGetJson: '/admin/api/images'
+      imageUpload:  '/admin/api/images'
+
     $('.chr-form form').ajaxForm
       success: (obj) => @update_or_create(obj) #if @model then @update_model(obj) else @create_model(obj)
 
