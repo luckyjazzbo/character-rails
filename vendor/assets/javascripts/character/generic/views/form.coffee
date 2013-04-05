@@ -36,9 +36,13 @@ class FormView extends Backbone.View
     if typeof(obj) == "string"
       @render(obj)
     else
-      if @model then @model.set(obj) else @options.collection().add(obj)
-      @close()
-      @back_to_index()
+      if @model
+        @model.set(obj)
+        alert 'You changes saved!'
+      else
+        @options.collection().add(obj)
+        @close()
+        @back_to_index()
 
 
   initialize: (config, parent_el, form_html) ->
@@ -53,6 +57,8 @@ class FormView extends Backbone.View
     $(this.el).find('form').addClass('custom')
     $(this.el).foundation('section', 'resize')
     $(this.el).foundation('forms', 'assemble')
+
+    $(document).trigger "#{ @options.scope }.form.rendered", [ this.el ]
 
     $('.chr-form form').ajaxForm
       success: (obj) => @update_or_create(obj) #if @model then @update_model(obj) else @create_model(obj)
