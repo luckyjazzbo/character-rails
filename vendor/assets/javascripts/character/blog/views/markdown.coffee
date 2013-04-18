@@ -91,7 +91,7 @@ class Markdown extends Backbone.View
     article.css          'height', window_height - article_top_offset - footer_height
     $('.CodeMirror').css 'height', window_height - article_top_offset - footer_height
     
-    $(window).smartresize =>
+    $(window).resize =>
       @resize_panels()
 
 

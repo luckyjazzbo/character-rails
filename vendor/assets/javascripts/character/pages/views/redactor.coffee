@@ -37,7 +37,7 @@ class Character.Pages.Views.Redactor extends Backbone.View
     
     $('.redactor_editor').css 'height', window_height - top_offset - footer_height
     
-    $(window).smartresize =>
+    $(window).resize =>
       @resize_panels()
 
 
