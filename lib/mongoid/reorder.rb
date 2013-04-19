@@ -3,7 +3,8 @@ module Mongoid::Reorder
 
   included do
     field :_position, :type => Float, :default => 0.0
-    default_scope order_by(:_position => :desc)
+    # leaving is up to developer, cause there are maybe diffrent usages
+    #default_scope order_by(:_position => :desc)
   end
 
   module ClassMethods
