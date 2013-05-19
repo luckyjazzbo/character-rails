@@ -75,7 +75,7 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def create
     #TODO calling permit! is insecure, we must get rid of it in future
-    @object = @model_class.create @model_class.permit_params(params[@namespace])
+    @object = @model_class.create @model_class.admin_permit_params(params[@namespace])
 
     if @object.save
       render json: @object
@@ -89,7 +89,7 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     @object = @model_class.find(params[:id])
 
     #TODO calling permit! is insecure, we must get rid of it in future
-    if @object.update_attributes @model_class.permit_params(params[@namespace])
+    if @object.update_attributes @model_class.admin_permit_params(params[@namespace])
       render json: @object
     else
       render @form_template, layout: false
