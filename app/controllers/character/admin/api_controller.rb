@@ -90,7 +90,8 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
     #TODO calling permit! is insecure, we must get rid of it in future
     if @object.update_attributes @model_class.admin_permit_params(params[@namespace])
-      render json: @object
+      data = @object.serializable_hash.merge(_id: @object.id.to_s)
+      render json: data
     else
       render @form_template, layout: false
     end
