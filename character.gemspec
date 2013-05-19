@@ -32,6 +32,9 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'lodash-rails'
   gem.add_runtime_dependency 'underscore-string-rails'
 
+  # for rail4
+  gem.add_runtime_dependency 'protected_attributes'
+
   # mongoid
   gem.add_runtime_dependency 'mongoid_slug'
   gem.add_runtime_dependency 'mongoid_search'

@@ -41,7 +41,12 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     @objects = @objects.full_text_search(search_query) if not search_query.empty?
     @objects = @objects.page(page).per(per_page)
 
-    render json: {  objects:       @objects,
+    object_hashes = @objects.map(&:serializable_hash)
+    object_hashes.each do |h|
+      h["_id"] = h["_id"].to_s
+    end
+
+    render json: {  objects:       object_hashes,
                     total_pages:   @objects.total_pages(),
                     page:          page,
                     per_page:      per_page,
@@ -51,14 +56,15 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def show
     @object = @model_class.find(params[:id])
-    render json: @object    
+    data = @object.serializable_hash.merge(_id: @object.id.to_s)
+    render json: data
   end
 
 
   def new
     @object  = @model_class.new
     render @form_template, layout: false
-  end  
+  end
 
 
   def edit
@@ -68,7 +74,8 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
 
   def create
-    @object = @model_class.create params[@namespace]
+    #TODO calling permit! is insecure, we must get rid of it in future
+    @object = @model_class.create @model_class.permit_params(params[@namespace])
 
     if @object.save
       render json: @object
@@ -80,8 +87,9 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
   def update
     @object = @model_class.find(params[:id])
-    
-    if @object.update_attributes params[@namespace]
+
+    #TODO calling permit! is insecure, we must get rid of it in future
+    if @object.update_attributes @model_class.permit_params(params[@namespace])
       render json: @object
     else
       render @form_template, layout: false
@@ -100,7 +108,7 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     # TODO: need to add reordarable check
     @model_class.reorder(params[:ids])
     render json: 'ok'
-  end  
+  end
 end
 
 
