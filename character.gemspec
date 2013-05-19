@@ -29,9 +29,9 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'font-awesome-sass-rails'
   gem.add_runtime_dependency 'fog'
   gem.add_runtime_dependency 'carrierwave-mongoid'
-  gem.add_runtime_dependency 'lodash-rails', '~> 0.10.0'
+  gem.add_runtime_dependency 'lodash-rails'
   gem.add_runtime_dependency 'underscore-string-rails'
-  
+
   # mongoid
   gem.add_runtime_dependency 'mongoid_slug'
   gem.add_runtime_dependency 'mongoid_search'
@@ -39,10 +39,10 @@ Gem::Specification.new do |gem|
   # browserid auth
   gem.add_runtime_dependency 'browserid-auth-rails'
 
-  # meta tags support
+  # # meta tags support
   gem.add_runtime_dependency 'meta-tags'
 
-  # forms
+  # # forms
   gem.add_runtime_dependency 'simple_form'
   gem.add_runtime_dependency 'nested_form'
 
