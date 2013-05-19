@@ -78,7 +78,8 @@ class Character::Admin::ApiController < Character::Admin::BaseController
     @object = @model_class.create @model_class.admin_permit_params(params[@namespace])
 
     if @object.save
-      render json: @object
+      data = @object.serializable_hash.merge(_id: @object.id.to_s)
+      render json: data
     else
       render @form_template, layout: false
     end
