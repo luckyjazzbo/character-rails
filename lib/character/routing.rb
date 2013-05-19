@@ -2,10 +2,10 @@ module ActionDispatch::Routing
   class Mapper
 
     def mount_character_admin
-      scope '/admin', :module => "Character::Admin" do
-        match '/',        to: 'admin#index'
-        match '/login',   to: 'sessions#create'
-        match '/logout',  to: 'sessions#destroy'
+      scope '/admin', :module => "character/admin" do
+        match '/',        to: 'admin#index', via: :all
+        match '/login',   to: 'sessions#create', via: :all
+        match '/logout',  to: 'sessions#destroy', via: :all
 
         scope 'api' do
           resources :images, only: [:index, :create]
@@ -24,7 +24,7 @@ module ActionDispatch::Routing
 
 
     def mount_character_blog_at(mount_location)
-      scope mount_location, :module => "Character" do
+      scope mount_location, :module => "character" do
         get '/'                 => 'posts#index',    as: :blog_index
         get '/posts/:slug'      => 'posts#show',     as: :blog_post
         get '/categories/:slug' => 'posts#category', as: :blog_category
@@ -34,11 +34,12 @@ module ActionDispatch::Routing
 
 
     def mount_character_pages
-      scope :module => "Character" do
-        match '/',  to: 'pages#root', as: :root
-        match '*a', to: 'pages#show', as: :flat_page
+      scope :module => "character" do
+        # FIXME: get rid of match; as: :root cannot be used as it's reserved
+        match '/',  to: 'pages#root', as: :root_, via: :all
+        match '*a', to: 'pages#show', as: :flat_page, via: :all
       end
     end
-    
+
   end
 end
