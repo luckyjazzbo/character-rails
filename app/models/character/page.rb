@@ -25,6 +25,11 @@ class Character::Page
   scope :hidden,    where(published: false)
 
 
+  def self.admin_permit_params(params)
+    params.permit(:menu, :permalink, :title, :description, :keywords, :published, :html)
+  end
+
+
   def featured_image_url
     featured_image.try(:featured)
   end
