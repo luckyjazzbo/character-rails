@@ -1,12 +1,12 @@
 
 
-#    ########  #######  ########  ##     ## 
-#    ##       ##     ## ##     ## ###   ### 
-#    ##       ##     ## ##     ## #### #### 
-#    ######   ##     ## ########  ## ### ## 
-#    ##       ##     ## ##   ##   ##     ## 
-#    ##       ##     ## ##    ##  ##     ## 
-#    ##        #######  ##     ## ##     ## 
+#    ########  #######  ########  ##     ##
+#    ##       ##     ## ##     ## ###   ###
+#    ##       ##     ## ##     ## #### ####
+#    ######   ##     ## ########  ## ### ##
+#    ##       ##     ## ##   ##   ##     ##
+#    ##       ##     ## ##    ##  ##     ##
+#    ##        #######  ##     ## ##     ##
 
 
 class FormView extends Backbone.View
@@ -21,7 +21,7 @@ class FormView extends Backbone.View
       actions += """<a href='#' title='Delete this document' class='general foundicon-trash' id=delete></a>"""
     actions   += """<a href='#' title='Close form' class='general foundicon-remove' id=close></a>"""
 
-    html = Character.Templates.Panel 
+    html = Character.Templates.Panel
       classes:  'right'
       title:    if @model then "Edit" else "New"
       actions:  actions
@@ -38,7 +38,7 @@ class FormView extends Backbone.View
     else
       if @model
         @model.set(obj)
-        alert 'You changes saved!'
+        alert 'Your changes saved!'
       else
         @options.collection().add(obj)
         @close()
@@ -53,6 +53,8 @@ class FormView extends Backbone.View
 
     $('.datepicker').datepicker
       dateFormat: 'yy-mm-dd'
+
+    $('.wysiwyg').redactor()
 
     $(this.el).find('form').addClass('custom')
     $(this.el).foundation('section', 'resize')
@@ -76,7 +78,7 @@ class FormView extends Backbone.View
   close: (e) ->
     e.preventDefault() if e
     #workspace.current_view.unlock_scroll()
-    
+
     @back_to_index()
     @remove()
 
