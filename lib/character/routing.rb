@@ -16,6 +16,7 @@ module ActionDispatch::Routing
           get     '/:model_slug/:id(.:format)',     to: 'api#show'
           get     '/:model_slug/:id/edit(.:format)',to: 'api#edit'
           patch   '/:model_slug/:id(.:format)',     to: 'api#update'
+          put     '/:model_slug/:id(.:format)',     to: 'api#update'
           delete  '/:model_slug/:id(.:format)',     to: 'api#destroy'
           post    '/:model_slug/reorder(.:format)', to: 'api#reorder'
         end

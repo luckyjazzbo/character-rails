@@ -11,7 +11,7 @@ class Character::Page
   field :description
   field :keywords
 
-  field :published, type: Boolean, default: true
+  field :published, type: Mongoid::Boolean, default: true
   field :html
 
   # Relations
@@ -26,7 +26,7 @@ class Character::Page
 
 
   def self.admin_permit_params(params)
-    params.permit(:menu, :permalink, :title, :description, :keywords, :published, :html)
+    params.permit(:menu, :permalink, :title, :description, :keywords, :published, :html, :featured_image, :_position)
   end
 
 
