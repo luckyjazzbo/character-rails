@@ -74,7 +74,6 @@ class Character::Admin::ApiController < Character::Admin::BaseController
 
 
   def create
-    #TODO calling permit! is insecure, we must get rid of it in future
     @object = @model_class.create @model_class.admin_permit_params(params[@namespace])
 
     if @object.save
@@ -89,7 +88,6 @@ class Character::Admin::ApiController < Character::Admin::BaseController
   def update
     @object = @model_class.find(params[:id])
 
-    #TODO calling permit! is insecure, we must get rid of it in future
     if @object.update_attributes @model_class.admin_permit_params(params[@namespace])
       data = @object.serializable_hash.merge(_id: @object.id.to_s)
       render json: data
